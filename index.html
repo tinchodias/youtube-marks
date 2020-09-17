@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" ng-app="tareasListApp">
+
+<head>
+  <meta charset="utf-8">
+  <title>Tareas - Routing</title>
+  <link rel="stylesheet" href="css/app.css"/>
+
+  <!-- JQUERY -->
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+  <!-- BOOTSTRAP -->
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <!-- ANGULAR  -->
+  <script src="node_modules/angular/angular.min.js"></script>
+  <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+  <!-- YT library -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="node_modules/angular-youtube-embed/dist/angular-youtube-embed.min.js"></script>
+
+  <!-- Downloading -->
+  <script src="node_modules/angular-download/angular-download.js"></script> 
+
+  <!-- Growl notifications -->
+  <link href="node_modules/angular-growl-v2/build/angular-growl.css" rel="stylesheet">
+  <script src="node_modules/angular-growl-v2/build/angular-growl.js"></script> 
+
+  <!-- Animations for Growl notifications -->
+  <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+
+</head>
+
+<body data-ng-controller="MainController">
+
+<div growl></div>
+
+<div oldclass="container">
+
+  <div class="page-header">
+    <h1>
+      {{session.name}} <small>Annotations</small>
+    </h1>
+  </div>
+
+  <youtube-video
+    class="col-md-7"
+    player-height="'800px'"
+    player-width="'100%'"
+    video-id="session.videoId"
+    player="thePlayer"></youtube-video>
+
+  <div class="col-md-5 well-md">
+    <div ui-view></div>
+  </div>
+
+</div>
+
+<script src="js/services.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/routes.js"></script>
+<script src="js/app.js"></script>
+
+<script src="marks/s1.js"></script>
+
+</body>
+</html>
