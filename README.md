@@ -3,7 +3,7 @@
 This is a simple angularjs web app to annotate Youtube videos.
 
 
-## How to execute
+## How to execute
 
 0. Ensure you have node and npm installed
 
@@ -13,7 +13,7 @@ This is a simple angularjs web app to annotate Youtube videos.
 3. Run `npm start`
 4. Open browser on localhost:8000
 
-## Keybindings
+## Keybindings
 
 Space: toggle start/pause video
 i: Insert mark
