@@ -1,4 +1,5 @@
 
+
 class MainController {
 
   constructor($scope, $state, MarksService, $document) {
@@ -40,7 +41,7 @@ class MainController {
       $scope.$apply()
     })
   }
-
+  
   }
 
 
@@ -54,7 +55,6 @@ class ListMarksController {
     this.download = download
     this.growl = growl
     this.descriptionToEdit = ''
-    this.captureKeys = false
     this.currentMark = null
     this.session = MarksService.session
 
@@ -82,45 +82,23 @@ class ListMarksController {
     this.download.fromData(angular.toJson(this.marksService.session.marks, 2), "application/json", "marks.json");
   }
 
-  toggleCapture() {
-    if(this.captureKeys) {
-      this.stopCapture()
-    } else {
-      this.startCapture()
-    }
-  }
-
-  startCapture() {
-    this.scope.thePlayer.playVideo()
-    //this.scope.thePlayer.seekTo(0, true)
-    this.captureKeys = true
-    this.growl.info("CAPTURE STARTED");
-  }
-
-  stopCapture() {
-    this.scope.thePlayer.pauseVideo()
-    this.captureKeys = false
-    this.growl.info("CAPTURE STOPPED");
-  }
-
   seekTo(timestamp) {
     this.scope.thePlayer.seekTo(timestamp, true)
   }
 
   editMarkAt(timestamp) {
-    this.stopCapture()
+    this.scope.thePlayer.pauseVideo()
     this.state.go("editMarkState", {timestamp: timestamp})
   }
 
   removeMarkAt(timestamp) {
-    if (confirm("¿BORRAR?")) {
+    if (confirm("DELETE?")) {
       let mark = this.marksService.getMarkCorrespondingTo(timestamp)
       this.marksService.removeMark(mark)
     }
   }
 
 }
-
 
 
 class EditMarkController {
