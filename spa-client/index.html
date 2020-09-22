@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" ng-app="tareasListApp">
+<html lang="en" ng-app="marksApp">
 
 <head>
   <meta charset="utf-8">
   <title>Tareas - Routing</title>
-  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="css/app.css" />
 
   <!-- FAVICON (https://favicon.io/emoji-favicons/stopwatch) -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
@@ -28,12 +28,9 @@
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="node_modules/angular-youtube-embed/dist/angular-youtube-embed.min.js"></script>
 
-  <!-- Downloading -->
-  <script src="node_modules/angular-download/angular-download.js"></script> 
-
   <!-- Growl notifications -->
   <link href="node_modules/angular-growl-v2/build/angular-growl.css" rel="stylesheet">
-  <script src="node_modules/angular-growl-v2/build/angular-growl.js"></script> 
+  <script src="node_modules/angular-growl-v2/build/angular-growl.js"></script>
 
   <!-- Animations for Growl notifications -->
   <script src="node_modules/angular-animate/angular-animate.min.js"></script>
@@ -42,35 +39,35 @@
 
 <body data-ng-controller="MainController">
 
-<div growl></div>
+  <div growl></div>
 
-<div oldclass="container">
+  <div class="container">
 
-  <div class="page-header">
-    <h1>
-      {{session.name}} <small>Annotations</small>
-    </h1>
+    <div class="row">
+
+      <label for="videoSelect">Select video:</label>
+      <select id="videoSelect" ng-model="selectedVideo" ng-options="each.title for each in summaryOfAllVideos" ng-change="selectedVideoChanged()">
+      </select>
+
+    </div>
+
+    <div class="row">
+
+      <youtube-video class="col-md-7" player-height="'800px'" player-width="'100%'" player="thePlayer" video-id="123"></youtube-video>
+
+      <div class="col-md-5 well-md">
+        <div ui-view></div>
+      </div>
+
+    </div>
+
   </div>
 
-  <youtube-video
-    class="col-md-7"
-    player-height="'800px'"
-    player-width="'100%'"
-    video-id="session.videoId"
-    player="thePlayer"></youtube-video>
-
-  <div class="col-md-5 well-md">
-    <div ui-view></div>
-  </div>
-
-</div>
-
-<script src="js/services.js"></script>
-<script src="js/controllers.js"></script>
-<script src="js/routes.js"></script>
-<script src="js/app.js"></script>
-
-<script src="marks/s1.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/routes.js"></script>
+  <script src="js/app.js"></script>
 
 </body>
+
 </html>

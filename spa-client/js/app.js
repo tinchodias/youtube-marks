@@ -24,8 +24,8 @@ angular.module('utils.autofocus', [])
   }
 }]);
 
-angular.module('tareasListApp', ['ui.router', 'youtube-embed', 'download', 'angular-growl', 'ngAnimate', 'utils.autofocus'])
-    .service("MarksService", MarksService)
+angular.module('marksApp', ['ui.router', 'youtube-embed', 'angular-growl', 'ngAnimate', 'utils.autofocus'])
+    .service("MarksService", function($http) { return new MarksService($http) })
     .controller('MainController', MainController)
     .controller('ListMarksController', ListMarksController)
     .controller('EditMarkController', EditMarkController)

@@ -1,0 +1,35 @@
+<div>
+  <small>Current mark:</small><br>
+  <h1 class="currentmark">{{listMarksCtrl.currentMarkLabel()}}</h1>
+  <br>
+
+  <div>
+    <a class="btn" ng-click="insertMark()">Insert mark here</a>
+  </div>
+
+  <br>
+
+  <div style="height: 600px; overflow-y: scroll">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-ng-repeat="mark in session.marks | orderBy: '-timestamp' "
+          ng-class="listMarksCtrl.currentMark.timestamp == mark.timestamp ? 'active' : ''">
+          <td><a ng-click="listMarksCtrl.seekTo(mark.timestamp)" class="pointer">{{mark.timestamp | secondsToTime}}</a>
+          </td>
+          <td>{{mark.description}}</td>
+          <td><a ng-click="listMarksCtrl.editMarkAt(mark.timestamp)" class="pointer"><span
+                class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+          <td><a ng-click="listMarksCtrl.removeMarkAt(mark.timestamp)" class="pointer"><span
+                class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
