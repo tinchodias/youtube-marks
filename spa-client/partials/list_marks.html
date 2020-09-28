@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr data-ng-repeat="mark in session.marks | orderBy: '-timestamp' "
+        <tr ng-repeat="mark in currentVideo.marks | orderBy: '-timestamp' "
           ng-class="listMarksCtrl.currentMark.timestamp == mark.timestamp ? 'active' : ''">
           <td><a ng-click="listMarksCtrl.seekTo(mark.timestamp)" class="pointer">{{mark.timestamp | secondsToTime}}</a>
           </td>

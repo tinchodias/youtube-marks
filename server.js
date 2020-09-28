@@ -91,7 +91,7 @@ console.log(videoOrUndefined)
           throw new Error('There is no mark for that timestamp')
         }
 
-        oldMark.desciption = mark.description
+        oldMark.description = mark.description
         console.log("updating", mark, oldMark)
 
         this.db.get('videos')

@@ -28,18 +28,9 @@
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="node_modules/angular-youtube-embed/dist/angular-youtube-embed.min.js"></script>
 
-  <!-- Growl notifications -->
-  <link href="node_modules/angular-growl-v2/build/angular-growl.css" rel="stylesheet">
-  <script src="node_modules/angular-growl-v2/build/angular-growl.js"></script>
-
-  <!-- Animations for Growl notifications -->
-  <script src="node_modules/angular-animate/angular-animate.min.js"></script>
-
 </head>
 
-<body data-ng-controller="MainController">
-
-  <div growl></div>
+<body ng-controller="MainController">
 
   <div class="container">
 
@@ -53,7 +44,7 @@
 
     <div class="row">
 
-      <youtube-video class="col-md-7" player-height="'800px'" player-width="'100%'" player="thePlayer" video-id="123"></youtube-video>
+      <youtube-video class="col-md-7" player-height="'800px'" player-width="'100%'" player="thePlayer" video-id="thePlayerVideoId"></youtube-video>
 
       <div class="col-md-5 well-md">
         <div ui-view></div>

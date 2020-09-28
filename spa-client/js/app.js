@@ -24,20 +24,13 @@ angular.module('utils.autofocus', [])
   }
 }]);
 
-angular.module('marksApp', ['ui.router', 'youtube-embed', 'angular-growl', 'ngAnimate', 'utils.autofocus'])
+angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus'])
     .service("MarksService", function($http) { return new MarksService($http) })
     .controller('MainController', MainController)
     .controller('ListMarksController', ListMarksController)
     .controller('EditMarkController', EditMarkController)
     .config(routes)
-    .config(['growlProvider', function(growlProvider) {
-        growlProvider.onlyUniqueMessages(false)
-        growlProvider.globalTimeToLive(1500)
-        growlProvider.globalDisableCountDown(true)
-        growlProvider.globalDisableIcons(true)
-        growlProvider.globalDisableCloseButton(true)
-        growlProvider.globalPosition('top-center')
-    }])
+
     .filter('secondsToTime', function() {
 
         function padTime(t) {

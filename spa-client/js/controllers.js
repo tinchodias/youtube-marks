@@ -4,37 +4,41 @@ class MainController {
 
   constructor($scope, $state, MarksService, $document) {
   
-    MarksService.summaryOfAllVideos()
-      .then(list => {
-        $scope.summaryOfAllVideos = list
-      })
+    $scope.thePlayerVideoId = "123"
 
-    $scope.selectedVideoChanged = () => {
-      MarksService.videoDetail($scope.selectedVideo.youtubeId).then(video => {
-        $scope.session = video
-        $scope.thePlayer.loadVideoById(video.youtubeId, 0)
-      })
-    }
+    MarksService.summaryOfAllVideos()
+      .then(list => $scope.summaryOfAllVideos = list)
 
     $scope.refreshVideo = () => {
       console.log("refreshing", $scope.selectedVideo.youtubeId)
-      MarksService.videoDetail($scope.selectedVideo.youtubeId).then(video => {
-        $scope.session = video
+      return MarksService.videoDetail($scope.selectedVideo.youtubeId)
+        .then(video => {
+          $scope.currentVideo = video
+          return video
+        })
+    }
+
+    $scope.selectedVideoChanged = () => {
+      $scope.refreshVideo().then(video => {
+        console.log(video)
+        $scope.thePlayerVideoId = video.youtubeId
       })
     }
 
     $scope.insertMark = () => {
       let timestamp = $scope.thePlayer.getCurrentTime()
-      MarksService.addEmptyMark(timestamp, $scope.session.youtubeId)
+      $scope.thePlayer.pauseVideo()
+
+      MarksService.addEmptyMark(timestamp, $scope.currentVideo.youtubeId)
       $scope.refreshVideo()
 
-      $scope.thePlayer.pauseVideo()
       $state.go("editMarkState", {timestamp: timestamp})
     }
 
     $scope.editMark = () => {
       let timestamp = $scope.thePlayer.getCurrentTime()
       $scope.thePlayer.pauseVideo()
+
       $state.go("editMarkState", {timestamp: timestamp})
     }
 
@@ -78,48 +82,50 @@ class MainController {
 
 class ListMarksController {
 
-  constructor(MarksService, $scope, $state, $timeout, growl) {
-    this.marksService = MarksService
-    this.scope = $scope
-    this.state = $state
-    this.timeout = $timeout
-    this.growl = growl
-    this.descriptionToEdit = ''
+  constructor(MarksService, $scope, $state, $timeout) {
+
+    this.MarksService = MarksService
+    this.$scope = $scope
+    this.$state = $state
     this.currentMark = null
 
-    self = this
+    const self = this
 
     var updateRegularly = function() {
       $timeout(function () {
-        self.currentMark = self.getCurrentMark()
+
+        if ($scope.thePlayer && $scope.thePlayer.currentState) {
+          MarksService.getMarkCorrespondingTo($scope.thePlayer.getCurrentTime(), $scope.currentVideo.youtubeId)
+            .then(aMark => self.currentMark = aMark)
+        }
+
         updateRegularly()}, 500)
     } 
     updateRegularly()
   }
 
-  getCurrentMark() {
-    if(!this.scope.thePlayer || !this.scope.thePlayer.currentState) return(null)
-    return(this.marksService.getMarkCorrespondingTo(this.scope.thePlayer.getCurrentTime(), this.scope.session.youtubeId))
-  }
-
   currentMarkLabel() {
-    let current = this.currentMark
-    return current? current.description : 'No current mark'
+    return this.currentMark ?
+      this.currentMark.description :
+      '---'
   }
 
   seekTo(timestamp) {
-    this.scope.thePlayer.seekTo(timestamp, true)
+    this.$scope.thePlayer.seekTo(timestamp, true)
   }
 
   editMarkAt(timestamp) {
-    this.scope.thePlayer.pauseVideo()
-    this.state.go("editMarkState", {timestamp: timestamp})
+    console.log(self.MarksService)
+    this.$scope.thePlayer.pauseVideo()
+    this.$state.go("editMarkState", {timestamp: timestamp})
   }
 
   removeMarkAt(timestamp) {
+    console.log(self.MarksService)
     if (confirm("DELETE?")) {
-      let mark = this.marksService.getMarkCorrespondingTo(timestamp, this.scope.session.youtubeId)
-      this.marksService.removeMark(mark)
+      console.log(self.MarksService)
+      self.MarksService.getMarkCorrespondingTo(timestamp, this.$scope.currentVideo.youtubeId)
+        .then(mark => self.MarksService.removeMark(mark))
     }
   }
 
@@ -130,31 +136,25 @@ class EditMarkController {
 
   constructor($stateParams, $state, $scope, MarksService) {
 
-    if ($scope.session) {
-      this.mark = MarksService.getMarkCorrespondingTo($stateParams.timestamp, $scope.session.youtubeId)
-    }
-    if (!this.mark) {
-      $state.go("listMarksState")
-      console.log("This should not happen")
-      return
-    } 
+    const self = this
 
-    this.state = $state
+    MarksService.getMarkCorrespondingTo($stateParams.timestamp, $scope.currentVideo.youtubeId)
+      .then(aMark => {
+        self.mark = aMark
+        self.descriptionToEdit = self.mark.description   
+      })
+
+    this.$state = $state
     this.$scope = $scope
     this.MarksService = MarksService
-
-    this.descriptionToEdit = this.mark.description   
-
-    console.log("MARK TO EDIT", this.mark)
-
   }
 
   acceptEdit() {
-    console.log("acceptEdit")
+    console.log("acceptEdit", this.mark, this.descriptionToEdit)
     this.mark.description = this.descriptionToEdit
-    this.MarksService.updateMark(this.mark, this.$scope.session.youtubeId)
+    this.MarksService.updateMark(this.mark, this.$scope.currentVideo.youtubeId)
     this.$scope.refreshVideo()
-    this.state.go("listMarksState")
+    this.$state.go("listMarksState")
   }
 
 }
