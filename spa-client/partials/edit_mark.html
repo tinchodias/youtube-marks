@@ -5,13 +5,22 @@
       <h3 class="panel-title">Edit Mark</h3>
     </div>
     <form class="panel-body" ng-submit="editMarkCtrl.acceptEdit()">
+
       <div class="input-group">
-        <span class="input-group-addon" id="sizing-addon2">{{editMarkCtrl.mark.timestamp | secondsToTime}}</span>
-        <input type="text" class="form-control" ng-model="editMarkCtrl.descriptionToEdit"
-               aria-describedby="sizing-addon2" autofocus>
+        <span class="input-group-prepend" id="sizing-addon2">
+          <span class="input-group-text">{{editMarkCtrl.mark.timestamp | secondsToTime}}</span>
+        </span>
+        <input 
+          type="text"
+          class="form-control"
+          ng-model="editMarkCtrl.descriptionToEdit"
+          aria-describedby="sizing-addon2"
+          autofocus>
       </div>
+
       </br>
-      <!-- Split button -->
+
+    <!-- Split button -->
       <div class="btn-group">
         <!-- <button type="button" class="btn btn-primary" type="submit">Aceptar</button> -->
         <button type="button" class="btn btn-primary" ng-click="editMarkCtrl.acceptEdit()">Aceptar</button>

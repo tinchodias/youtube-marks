@@ -6,14 +6,14 @@ function routes($stateProvider, $urlRouterProvider) {
 
         .state('project', {
             url: "/",
-            templateUrl: "partials/project.html"
-//            controller: "ProjectController as projectCtrl"
+            templateUrl: "partials/project.html",
+            controller: "ProjectController as projectCtrl"
         })
 
         .state('video', {
             abstract: true,
-            templateUrl: "partials/video.html"
-//            controller: "VideoController as videoCtrl"
+            templateUrl: "partials/video.html",
+            controller: "VideoController as videoCtrl"
         })
 
         .state('video.listMarks', {

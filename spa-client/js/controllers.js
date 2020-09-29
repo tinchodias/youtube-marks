@@ -1,31 +1,36 @@
 
 
-class MainController {
+class ProjectController {
 
-  constructor($scope, $state, MarksService, $document, $timeout) {
-  
-    $scope.thePlayerVideoId = "123"
+  constructor($state, MarksService) {
+    this.$state = $state
+    const self = this
 
     MarksService.summaryOfAllVideos()
-      .then(list => $scope.summaryOfAllVideos = list)
+      .then(list => self.summaryOfAllVideos = list)
+  }
+
+  selectedVideoChanged(youtubeId) {
+    this.$state.go("video.listMarks", { youtubeId: youtubeId })
+  }
+
+}
+
+
+class VideoController {
+
+  constructor($scope, $state, $stateParams, MarksService, $document, $timeout) {
+
+    $scope.thePlayerVideoId = $stateParams.youtubeId
 
     $scope.refreshVideo = () => {
-      return MarksService.videoDetail($scope.selectedVideoYoutubeId)
+      return MarksService.videoDetail($stateParams.youtubeId)
         .then(video => {
           $scope.currentVideo = video
           return video
         })
     }
-
-    $scope.selectedVideoChanged = (selectedVideoYoutubeId) => {
-      $scope.selectedVideoYoutubeId = selectedVideoYoutubeId
-
-      $scope.refreshVideo().then(video => {
-        $scope.thePlayerVideoId = video.youtubeId
-
-        $state.go("video.listMarks", { youtubeId: video.youtubeId })
-      })
-    }
+    $scope.refreshVideo()
 
     $scope.insertMark = () => {
       let timestamp = $scope.thePlayer.getCurrentTime()
@@ -34,14 +39,20 @@ class MainController {
       MarksService.addEmptyMark(timestamp, $scope.currentVideo.youtubeId)
       $scope.refreshVideo()
 
-      $state.go("video.editMark", { youtubeId: $scope.currentVideo.youtubeId, timestamp: timestamp })
+      $state.go("video.editMark", {
+        youtubeId: $scope.currentVideo.youtubeId,
+        timestamp: timestamp
+      })
     }
 
     $scope.editMark = () => {
       let timestamp = $scope.thePlayer.getCurrentTime()
       $scope.thePlayer.pauseVideo()
 
-      $state.go("video.editMark", { youtubeId: $scope.currentVideo.youtubeId, timestamp: timestamp})
+      $state.go("video.editMark", {
+        youtubeId: $scope.currentVideo.youtubeId,
+        timestamp: timestamp
+      })
     }
 
     $scope.togglePlay = () => {
@@ -88,7 +99,7 @@ class MainController {
       $scope.$apply()
     })
   }
-
+  
 }
 
 
@@ -107,7 +118,10 @@ class ListMarksController {
 
   editMarkAt(mark) {
     this.$scope.thePlayer.pauseVideo()
-    this.$state.go("video.editMark", {youtubeId: this.$stateParams.youtubeId, timestamp: mark.timestamp})
+    this.$state.go("video.editMark", {
+      youtubeId: this.$stateParams.youtubeId,
+      timestamp: mark.timestamp
+    })
   }
 
   removeMarkAt(mark) {

@@ -2,21 +2,26 @@
 
     <div class="row">
 
+        <h1>Project</h1>
+
         <table class="table">
+
             <thead>
-            <tr>
-                <th>Youtube ID</th>
-                <th>Title</th>
-            </tr>
+                <tr>
+                    <th>Youtube ID</th>
+                    <th>Title</th>
+                </tr>
             </thead>
+
             <tbody>
-            <tr ng-repeat="each in summaryOfAllVideos" >
-                <td>
-                    <a ng-click="selectedVideoChanged(each.youtubeId)" class="pointer">{{each.youtubeId}}</a>
-                </td>
-                <td>{{each.title}}</td>
-            </tr>
+                <tr ng-repeat="each in projectCtrl.summaryOfAllVideos" >
+                    <td>
+                        <a ng-click="projectCtrl.selectedVideoChanged(each.youtubeId)" class="pointer">{{each.youtubeId}}</a>
+                    </td>
+                    <td>{{each.title}}</td>
+                </tr>
             </tbody>
+
         </table>
 
     </div>
