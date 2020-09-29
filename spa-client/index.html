@@ -32,7 +32,7 @@
 
 <body ng-controller="MainController">
 
-  <div class="container">
+  <div class="container-fluid">
 
     <div class="row">
 
@@ -44,7 +44,10 @@
 
     <div class="row">
 
-      <youtube-video class="col-md-7" player-height="'800px'" player-width="'100%'" player="thePlayer" video-id="thePlayerVideoId"></youtube-video>
+      <div class="col-md-7">
+        <youtube-video player-height="'800px'" player-width="'100%'" player="thePlayer" video-id="thePlayerVideoId"></youtube-video>
+        <div class="currentmark">{{currentMark.description}}</div>
+      </div>
 
       <div class="col-md-5 well-md">
         <div ui-view></div>

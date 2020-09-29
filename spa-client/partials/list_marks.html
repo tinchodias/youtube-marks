@@ -1,10 +1,8 @@
 <div>
-  <small>Current mark:</small><br>
-  <h1 class="currentmark">{{listMarksCtrl.currentMarkLabel()}}</h1>
-  <br>
-
   <div>
-    <a class="btn" ng-click="insertMark()">Insert mark here</a>
+    <a class="btn btn-default" ng-click="insertMark()">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Insert mark</a>
   </div>
 
   <br>
@@ -19,13 +17,13 @@
       </thead>
       <tbody>
         <tr ng-repeat="mark in currentVideo.marks | orderBy: '-timestamp' "
-          ng-class="listMarksCtrl.currentMark.timestamp == mark.timestamp ? 'active' : ''">
+          ng-class="currentMark.timestamp == mark.timestamp ? 'active' : ''">
           <td><a ng-click="listMarksCtrl.seekTo(mark.timestamp)" class="pointer">{{mark.timestamp | secondsToTime}}</a>
           </td>
           <td>{{mark.description}}</td>
-          <td><a ng-click="listMarksCtrl.editMarkAt(mark.timestamp)" class="pointer"><span
+          <td><a ng-click="listMarksCtrl.editMarkAt(mark)" class="pointer"><span
                 class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-          <td><a ng-click="listMarksCtrl.removeMarkAt(mark.timestamp)" class="pointer"><span
+          <td><a ng-click="listMarksCtrl.removeMarkAt(mark)" class="pointer"><span
                 class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
         </tr>
       </tbody>

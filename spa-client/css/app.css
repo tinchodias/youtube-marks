@@ -4,7 +4,12 @@
 }
 
 .currentmark {
-    margin-top: 0px;
+  position: relative;
+  color: #ffa700;
+  text-align: center;
+  font-weight: bold;
+  font-size: xx-large;
+  bottom: 80px;
 }
 
 

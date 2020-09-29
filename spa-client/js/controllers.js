@@ -2,7 +2,7 @@
 
 class MainController {
 
-  constructor($scope, $state, MarksService, $document) {
+  constructor($scope, $state, MarksService, $document, $timeout) {
   
     $scope.thePlayerVideoId = "123"
 
@@ -10,7 +10,6 @@ class MainController {
       .then(list => $scope.summaryOfAllVideos = list)
 
     $scope.refreshVideo = () => {
-      console.log("refreshing", $scope.selectedVideo.youtubeId)
       return MarksService.videoDetail($scope.selectedVideo.youtubeId)
         .then(video => {
           $scope.currentVideo = video
@@ -20,7 +19,6 @@ class MainController {
 
     $scope.selectedVideoChanged = () => {
       $scope.refreshVideo().then(video => {
-        console.log(video)
         $scope.thePlayerVideoId = video.youtubeId
       })
     }
@@ -51,6 +49,17 @@ class MainController {
       }
     }
 
+    var updateRegularly = function() {
+      $timeout(function () {
+        if ($scope.thePlayer && $scope.thePlayer.currentState && $scope.currentVideo) {
+          MarksService.getMarkCorrespondingTo($scope.thePlayer.getCurrentTime(), $scope.currentVideo.youtubeId)
+            .then(aMark => $scope.currentMark = aMark)
+        }
+        updateRegularly()}, 200)
+    } 
+    updateRegularly()
+
+
     $document.bind('keydown', function (e) {
 
       if ($state.current.name == "editMarkState") {
@@ -70,62 +79,36 @@ class MainController {
       // E key: Edit mark
       if (e.keyCode == 69) {
         $scope.editMark()
-     }
+      }
 
       $scope.$apply()
     })
   }
-
 
 }
 
 
 class ListMarksController {
 
-  constructor(MarksService, $scope, $state, $timeout) {
-
+  constructor(MarksService, $scope, $state) {
     this.MarksService = MarksService
     this.$scope = $scope
     this.$state = $state
-    this.currentMark = null
-
-    const self = this
-
-    var updateRegularly = function() {
-      $timeout(function () {
-
-        if ($scope.thePlayer && $scope.thePlayer.currentState) {
-          MarksService.getMarkCorrespondingTo($scope.thePlayer.getCurrentTime(), $scope.currentVideo.youtubeId)
-            .then(aMark => self.currentMark = aMark)
-        }
-
-        updateRegularly()}, 500)
-    } 
-    updateRegularly()
-  }
-
-  currentMarkLabel() {
-    return this.currentMark ?
-      this.currentMark.description :
-      '---'
   }
 
   seekTo(timestamp) {
     this.$scope.thePlayer.seekTo(timestamp, true)
   }
 
-  editMarkAt(timestamp) {
-    console.log(self.MarksService)
+  editMarkAt(mark) {
     this.$scope.thePlayer.pauseVideo()
-    this.$state.go("editMarkState", {timestamp: timestamp})
+    this.$state.go("editMarkState", {timestamp: mark.timestamp})
   }
 
-  removeMarkAt(timestamp) {
-    console.log(self.MarksService)
+  removeMarkAt(mark) {
     if (confirm("DELETE?")) {
-      console.log(self.MarksService)
-      self.MarksService.getMarkCorrespondingTo(timestamp, this.$scope.currentVideo.youtubeId)
-        .then(mark => self.MarksService.removeMark(mark))
+      this.MarksService.removeMark(mark, this.$scope.currentVideo.youtubeId)
+      this.$scope.refreshVideo()
     }
   }
 
@@ -150,7 +133,6 @@ class EditMarkController {
   }
 
   acceptEdit() {
-    console.log("acceptEdit", this.mark, this.descriptionToEdit)
     this.mark.description = this.descriptionToEdit
     this.MarksService.updateMark(this.mark, this.$scope.currentVideo.youtubeId)
     this.$scope.refreshVideo()
