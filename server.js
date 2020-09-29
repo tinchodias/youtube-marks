@@ -29,8 +29,6 @@ class VideosDB {
     async videoById(id) {
       const videoOrUndefined = this.db.get('videos').find({ youtubeId: id }).value()
 
-console.log(videoOrUndefined)
-
       if (!videoOrUndefined) {
         throw new Error('That youtubeId does not exist')
       }
@@ -92,7 +90,6 @@ console.log(videoOrUndefined)
         }
 
         oldMark.description = mark.description
-        console.log("updating", mark, oldMark)
 
         this.db.get('videos')
           .find({ youtubeId: youtubeId })
