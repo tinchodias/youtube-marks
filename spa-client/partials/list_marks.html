@@ -1,30 +1,31 @@
 <div>
   <div>
-    <a class="btn btn-default" ng-click="insertMark()">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    <a class="btn btn-light" ng-click="insertMark()">
       Insert mark</a>
   </div>
 
   <br>
 
   <div style="height: 600px; overflow-y: scroll">
-    <table class="table">
+    <table class="table table-sm">
       <thead>
         <tr>
           <th>Timestamp</th>
           <th>Description</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="mark in currentVideo.marks | orderBy: '-timestamp' "
-          ng-class="currentMark.timestamp == mark.timestamp ? 'active' : ''">
+          ng-class="currentMark.timestamp == mark.timestamp ? 'table-primary' : ''">
           <td><a ng-click="listMarksCtrl.seekTo(mark.timestamp)" class="pointer">{{mark.timestamp | secondsToTime}}</a>
           </td>
           <td>{{mark.description}}</td>
-          <td><a ng-click="listMarksCtrl.editMarkAt(mark)" class="pointer"><span
-                class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-          <td><a ng-click="listMarksCtrl.removeMarkAt(mark)" class="pointer"><span
-                class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+          <td><a ng-click="listMarksCtrl.editMarkAt(mark)" class="pointer">
+            <img src="/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Edit" >
+          </a><a ng-click="listMarksCtrl.removeMarkAt(mark)" class="pointer">
+            <img src="/node_modules/bootstrap-icons/icons/x-square.svg" alt="Delete" >  
+          </a></td>
         </tr>
       </tbody>
     </table>
