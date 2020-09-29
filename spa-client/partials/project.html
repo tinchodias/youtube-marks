@@ -1,0 +1,24 @@
+<div class="container">
+
+    <div class="row">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Youtube ID</th>
+                <th>Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="each in summaryOfAllVideos" >
+                <td>
+                    <a ng-click="selectedVideoChanged(each.youtubeId)" class="pointer">{{each.youtubeId}}</a>
+                </td>
+                <td>{{each.title}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

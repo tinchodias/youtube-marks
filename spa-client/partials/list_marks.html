@@ -6,26 +6,34 @@
 
   <br>
 
-  <div style="height: 600px; overflow-y: scroll">
+  <div style="height: 750px; overflow-y: scroll">
     <table class="table table-sm">
       <thead>
         <tr>
-          <th>Timestamp</th>
+          <th class="timestampColumn">Timestamp</th>
           <th>Description</th>
-          <th>Actions</th>
+          <th class="actionsColumn">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="mark in currentVideo.marks | orderBy: '-timestamp' "
+        <tr
+          ng-repeat="mark in currentVideo.marks | orderBy: '-timestamp' "
           ng-class="currentMark.timestamp == mark.timestamp ? 'table-primary' : ''">
-          <td><a ng-click="listMarksCtrl.seekTo(mark.timestamp)" class="pointer">{{mark.timestamp | secondsToTime}}</a>
+
+          <td class="timestampColumn">
+            <a ng-click="listMarksCtrl.seekTo(mark.timestamp)" class="pointer">{{mark.timestamp | secondsToTime}}</a>
           </td>
+
           <td>{{mark.description}}</td>
-          <td><a ng-click="listMarksCtrl.editMarkAt(mark)" class="pointer">
-            <img src="/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Edit" >
-          </a><a ng-click="listMarksCtrl.removeMarkAt(mark)" class="pointer">
-            <img src="/node_modules/bootstrap-icons/icons/x-square.svg" alt="Delete" >  
-          </a></td>
+
+          <td class="actionsColumn">
+            <a ng-click="listMarksCtrl.editMarkAt(mark)" class="pointer">
+              <img src="/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Edit" >
+            </a>
+            <a ng-click="listMarksCtrl.removeMarkAt(mark)" class="pointer">
+              <img src="/node_modules/bootstrap-icons/icons/x-square.svg" alt="Delete" >  
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>

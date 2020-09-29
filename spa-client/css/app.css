@@ -11,3 +11,12 @@
   font-size: xx-large;
   bottom: 80px;
 }
+
+.actionsColumn {
+  width: 10ch;
+  text-align: center;
+}
+
+.timestampColumn {
+  width: 10ch;
+}

@@ -1,0 +1,29 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <button type="button" class="btn" ui-sref="project">
+      <img src="/node_modules/bootstrap-icons/icons/arrow-left.svg" alt="Return to project" >
+      Return
+    </button>
+  </div>
+
+  <div class="row">
+
+
+      <div class="col-md-7">
+      <youtube-video 
+        player-height="'800px'"
+        player-width="'100%'"
+        player="thePlayer"
+        video-id="thePlayerVideoId">
+      </youtube-video>
+      <div class="currentmark">{{currentMark.description}}</div>
+    </div>
+
+    <div class="col-md-5">
+      <div ui-view></div>
+    </div>
+
+  </div>
+
+</div>
