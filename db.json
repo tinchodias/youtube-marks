@@ -116,5 +116,12 @@
       "title": "Alexandre",
       "marks": []
     }
+  ],
+  "tags": [
+    {
+      "id": "obs",
+      "description": "General Observation",
+      "insertKeyBinding": "o"
+    }
   ]
 }

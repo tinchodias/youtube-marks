@@ -23,7 +23,7 @@ class VideosDB {
     }
 
     async ready() {
-      return this.db.defaults({ videos: [] }).write()
+      return this.db.defaults({ videos: [], tags: [] }).write()
     }
 
     async videoById(id) {
@@ -35,6 +35,45 @@ class VideosDB {
 
       return videoOrUndefined
     }
+
+
+    /* TAGS */
+
+    async tagById(theId) {
+      const tagOrUndefined = this.db.get('tags').find({ id: theId }).value()
+
+      if (!tagOrUndefined) {
+        throw new Error('There is no tag with that id')
+      }
+      return tagOrUndefined
+    }
+
+    async allTags() {
+      return Promise.resolve(
+        this.db.get('tags').value())
+    }
+
+    async addTag(tag) {
+      return this.tagById(tag.id).then(
+        _ => Promise.reject(new Error('A tag with that id already exists')),
+        _ => Promise.resolve(this.db.get('tags').push(tag).write()))
+    }
+
+    async updateTag(aTag) {
+      return this.db.get('tags')
+          .find({ id: theId })
+          .assign(aTag)
+          .write()
+    }
+
+    async deleteTag(theId) {
+      return this.db.get('tags')
+          .remove({ id: theId })
+          .write()
+    }
+
+
+    /* VIDEOS */
 
     summaryOf(video) {
       return (({ marks, ...other }) => other)(video)
@@ -52,6 +91,9 @@ class VideosDB {
         _ => Promise.reject(new Error('That youtubeId already exists')),
         _ => Promise.resolve(this.db.get('videos').push(video).write()))
     }
+
+
+    /* MARKS */
 
     async markCorrespondingTo(timestamp, youtubeId) {
       const markOrUndefined = await this.videoById(youtubeId).then(video => 
@@ -116,6 +158,34 @@ low(new FileAsync('db.json'))
   .then(db => new VideosDB(db))
   .then(videosDB => {
 
+    /* TAGS */
+
+    app.get('/tags', (req, res) => {
+      videosDB.allTags()
+        .then(list => res.send(list))
+    })
+
+    app.post('/tags', (req, res) => {
+      videosDB.addTag(req.body).then(
+        _ => res.sendStatus(200),
+        error => res.status(400).send(error.message))
+    })
+
+    app.put('/tags', (req, res) => {
+      videosDB.updateTag(req.body).then(
+        _ => res.sendStatus(200),
+        error => res.status(400).send(error.message))
+    })
+
+    app.delete('/tags/:id', (req, res) => {
+      videosDB.deleteTag(req.params.id).then(
+        _ => res.sendStatus(200),
+        error => res.status(404).send(error.message))
+    })
+
+
+    /* VIDEOS */
+
     app.get('/videos', (req, res) => {
       videosDB.summaryOfAllVideos()
         .then(list => res.send(list))
@@ -132,6 +202,9 @@ low(new FileAsync('db.json'))
         video => res.send(video),
         error => res.status(404).send(error.message))
     })
+
+
+    /* MARKS */
 
     app.post('/videos/:youtubeId/marks', (req, res) => {
       videosDB.addMark(req.body, req.params.youtubeId).then(
@@ -153,7 +226,7 @@ low(new FileAsync('db.json'))
 
     app.delete('/videos/:youtubeId/marks/:timestamp', (req, res) => {
       videosDB.deleteMark(req.params.timestamp, req.params.youtubeId).then(
-        mark => res.send(mark),
+        _ => res.sendStatus(200),
         error => res.status(404).send(error.message))
     })
 

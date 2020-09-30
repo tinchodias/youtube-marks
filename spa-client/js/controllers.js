@@ -8,7 +8,10 @@ class ProjectController {
 
     MarksService.summaryOfAllVideos()
       .then(list => self.summaryOfAllVideos = list)
-  }
+
+    MarksService.allTags()
+      .then(list => self.allTags = list)
+    }
 
   selectedVideoChanged(youtubeId) {
     this.$state.go("video.listMarks", { youtubeId: youtubeId })

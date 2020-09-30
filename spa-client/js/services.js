@@ -12,6 +12,10 @@ class MarksService {
     this.$http = $http
   }
 
+  allTags() {
+    return this.$http.get('tags').then(result => result.data)
+  }
+
   summaryOfAllVideos() {
     return this.$http.get('videos').then(result => result.data)
   }

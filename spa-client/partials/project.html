@@ -2,7 +2,7 @@
 
     <div class="row">
 
-        <h1>Project</h1>
+        <h2>Videos</h2>
 
         <table class="table">
 
@@ -19,6 +19,29 @@
                         <a ng-click="projectCtrl.selectedVideoChanged(each.youtubeId)" class="pointer">{{each.youtubeId}}</a>
                     </td>
                     <td>{{each.title}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+        <h2>Tags</h2>
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Description</th>
+                    <th>Insert Key Binding</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="each in projectCtrl.allTags" >
+                    <td>{{each.id}}</td>
+                    <td>{{each.description}}</td>
+                    <td>{{insertKeyBinding}}</td>
                 </tr>
             </tbody>
 
