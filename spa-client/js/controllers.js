@@ -22,7 +22,7 @@ class ProjectController {
   }
 
   insertVideo() {
-    var youtubeId = prompt('Please, enter the YouTube ID (for example: bCFQz5jvR4g')
+    var youtubeId = prompt('Please, enter the YouTube ID (for example: bCFQz5jvR4g)')
     this.MarksService.addVideo(youtubeId, "").then(
       _ => this.selectedVideoChanged(youtubeId)
     )
