@@ -2,50 +2,69 @@
 
     <div class="row">
 
-        <h2>Videos</h2>
+        <div class="col-md-6">
 
-        <table class="table">
+            <h2>Videos</h2>
 
-            <thead>
-                <tr>
-                    <th>Youtube ID</th>
-                    <th>Title</th>
-                </tr>
-            </thead>
+            <table class="table">
 
-            <tbody>
-                <tr ng-repeat="each in projectCtrl.summaryOfAllVideos" >
-                    <td>
-                        <a ng-click="projectCtrl.selectedVideoChanged(each.youtubeId)" class="pointer">{{each.youtubeId}}</a>
-                    </td>
-                    <td>{{each.title}}</td>
-                </tr>
-            </tbody>
+                <thead>
+                    <tr>
+                        <th>Youtube ID</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
 
-        </table>
+                <tbody>
+                    <tr ng-repeat="each in projectCtrl.summaryOfAllVideos">
+                        <td>
+                            <a ng-click="projectCtrl.selectedVideoChanged(each.youtubeId)"
+                                class="pointer">{{each.youtubeId}}</a>
+                        </td>
+
+                        <td>{{each.title}}</td>
+
+                        <td class="actionsColumn">
+                            <a ng-click="projectCtrl.deleteVideo(each)" class="pointer">
+                                <img src="/node_modules/bootstrap-icons/icons/x-square.svg" alt="Delete">
+                            </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <a class="btn btn-light" ng-click="projectCtrl.insertVideo()">Insert</a>
+
+        </div>
 
 
-        <h2>Tags</h2>
+        <div class="col-md-6">
 
-        <table class="table">
+            <h2>Tags</h2>
 
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Description</th>
-                    <th>Insert Key Binding</th>
-                </tr>
-            </thead>
+            <table class="table">
 
-            <tbody>
-                <tr ng-repeat="each in projectCtrl.allTags" >
-                    <td>{{each.id}}</td>
-                    <td>{{each.description}}</td>
-                    <td>{{insertKeyBinding}}</td>
-                </tr>
-            </tbody>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Description</th>
+                        <th>Insert Key Binding</th>
+                    </tr>
+                </thead>
 
-        </table>
+                <tbody>
+                    <tr ng-repeat="each in projectCtrl.allTags">
+                        <td>{{each.id}}</td>
+                        <td>{{each.description}}</td>
+                        <td>{{each.insertKeyBinding}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 

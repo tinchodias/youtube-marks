@@ -6,6 +6,15 @@ class Mark {
 	}
 }
 
+class Video {
+  constructor(youtubeId, title, marks) {
+    this.youtubeId = youtubeId
+    this.title = title
+    this.marks = marks
+  }
+}
+
+
 class MarksService {
 
   constructor($http) {
@@ -20,8 +29,20 @@ class MarksService {
     return this.$http.get('videos').then(result => result.data)
   }
 
+  addVideo(youtubeId, title) {
+    return this.$http.post('videos', new Video(youtubeId, title, []))
+  }
+
+  updateVideo(youtubeId, title) {
+    return this.$http.put('videos', new Video(youtubeId, title))
+  }
+
+  deleteVideo(youtubeId) {
+    return this.$http.delete(`videos/${youtubeId}`)
+  }
+
   videoDetail(youtubeId) {
-    return this.$http.get(`videos/${youtubeId}`).then(result => result.data)
+    return this.$http.get(`videos/${youtubeId}`).then(result => Object.setPrototypeOf(result.data, Video.prototype))
   }
 
   addEmptyMark(timestamp, youtubeId) {
@@ -34,8 +55,7 @@ class MarksService {
 
   getMarkCorrespondingTo(timestamp, youtubeId) {
     return this.$http.get(`videos/${youtubeId}/marks/${timestamp}`).then(
-      result => result.data,
-      _ => null)
+      result => result.data)
   }
 
   removeMark(mark, youtubeId) {

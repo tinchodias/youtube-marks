@@ -4,18 +4,38 @@ class ProjectController {
 
   constructor($state, MarksService) {
     this.$state = $state
-    const self = this
+    this.MarksService = MarksService
 
-    MarksService.summaryOfAllVideos()
-      .then(list => self.summaryOfAllVideos = list)
+    this.refresh()
+  }
 
-    MarksService.allTags()
-      .then(list => self.allTags = list)
-    }
+  refresh() {
+    this.MarksService.summaryOfAllVideos()
+      .then(list => this.summaryOfAllVideos = list)
+
+    this.MarksService.allTags()
+      .then(list => this.allTags = list)
+  }
 
   selectedVideoChanged(youtubeId) {
     this.$state.go("video.listMarks", { youtubeId: youtubeId })
   }
+
+  insertVideo() {
+    var youtubeId = prompt('Please, enter the YouTube ID (for example: bCFQz5jvR4g')
+    this.MarksService.addVideo(youtubeId, "").then(
+      _ => this.selectedVideoChanged(youtubeId)
+    )
+  }
+
+  deleteVideo(aVideo) {
+    if (confirm("DELETE?")) {
+      this.MarksService.deleteVideo(aVideo.youtubeId)
+        .then(_ => this.refresh())
+
+    }
+  }
+
 
 }
 
@@ -67,14 +87,15 @@ class VideoController {
       }
     }
 
-    var updateRegularly = function() {
+    var updateRegularly = function () {
       $timeout(function () {
         if ($scope.thePlayer && $scope.thePlayer.currentState && $scope.currentVideo) {
           MarksService.getMarkCorrespondingTo($scope.thePlayer.getCurrentTime(), $scope.currentVideo.youtubeId)
             .then(aMark => $scope.currentMark = aMark)
         }
-        updateRegularly()}, 200)
-    } 
+        updateRegularly()
+      }, 200)
+    }
     updateRegularly()
 
 
@@ -87,22 +108,25 @@ class VideoController {
       // Space key: Toggle play/stop
       if (e.keyCode == 32) {
         $scope.togglePlay()
+        e.preventDefault();
       }
 
       // I key: Insert mark
       if (e.keyCode == 73) {
         $scope.insertMark()
+        e.preventDefault();
       }
 
       // E key: Edit mark
       if (e.keyCode == 69) {
         $scope.editMark()
+        e.preventDefault()
       }
 
       $scope.$apply()
     })
   }
-  
+
 }
 
 
@@ -146,7 +170,7 @@ class EditMarkController {
     MarksService.getMarkCorrespondingTo($stateParams.timestamp, $stateParams.youtubeId)
       .then(aMark => {
         self.mark = aMark
-        self.descriptionToEdit = self.mark.description   
+        self.descriptionToEdit = self.mark.description
       })
 
     this.$state = $state

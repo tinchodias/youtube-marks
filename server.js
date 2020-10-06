@@ -61,7 +61,7 @@ class VideosDB {
 
     async updateTag(aTag) {
       return this.db.get('tags')
-          .find({ id: theId })
+          .find({ id: aTag.id })
           .assign(aTag)
           .write()
     }
@@ -92,6 +92,20 @@ class VideosDB {
         _ => Promise.resolve(this.db.get('videos').push(video).write()))
     }
 
+    async updateVideo(video) {
+      return this.db.get('videos')
+          .find({ id: video.youtubeId })
+          .assign(video)
+          .write()
+    }
+
+    async deleteVideo(id) {
+      return this.db.get('videos')
+        .remove({ youtubeId: id })
+        .write()
+      
+    }
+
 
     /* MARKS */
 
@@ -102,9 +116,9 @@ class VideosDB {
           .sort((a, b) => b.timestamp - a.timestamp)
           .find(mark => mark.timestamp <= timestamp))
 
-      if (!markOrUndefined) {
-        throw new Error('There is no mark for that timestamp')
-      }
+      // if (!markOrUndefined) {
+      //   throw new Error('There is no mark for that timestamp')
+      // }
 
       return markOrUndefined
     }
@@ -197,12 +211,23 @@ low(new FileAsync('db.json'))
         error => res.status(400).send(error.message))
     })
 
+    app.put('/videos', (req, res) => {
+      videosDB.updateVideo(req.body).then(
+        _ => res.sendStatus(200),
+        error => res.status(400).send(error.message))
+    })
+  
     app.get('/videos/:youtubeId', (req, res) => {
       videosDB.videoById(req.params.youtubeId).then(
         video => res.send(video),
         error => res.status(404).send(error.message))
     })
 
+    app.delete('/videos/:youtubeId', (req, res) => {
+      videosDB.deleteVideo(req.params.youtubeId).then(
+        _ => res.sendStatus(200),
+        error => res.status(404).send(error.message))
+    })
 
     /* MARKS */
 
