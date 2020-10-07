@@ -94,7 +94,7 @@ class VideosDB {
 
     async updateVideo(video) {
       return this.db.get('videos')
-          .find({ id: video.youtubeId })
+          .find({ youtubeId: video.youtubeId })
           .assign(video)
           .write()
     }

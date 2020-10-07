@@ -1,16 +1,17 @@
 {
   "name": "youtube-notes",
   "version": "0.1.0",
-  "description": "",
+  "description": "A tool to annotate Youtube videos",
   "scripts": {
     "start": "node server.js"
   },
   "keywords": [],
   "author": "tinchodias@gmail.com",
-  "license": "",
+  "license": "MIT",
   "dependencies": {
     "angular": "^1.8.0",
     "angular-ui-router": "^1.0.28",
+    "angular-xeditable": "^0.10.2",
     "angular-youtube-embed": "^1.3.1",
     "bootstrap": "^4.5.2",
     "bootstrap-icons": "^1.0.0",

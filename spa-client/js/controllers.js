@@ -32,10 +32,20 @@ class ProjectController {
     if (confirm("DELETE?")) {
       this.MarksService.deleteVideo(aVideo.youtubeId)
         .then(_ => this.refresh())
-
     }
   }
 
+  saveVideo(data, youtubeId) {
+    console.log(youtubeId, data.title)
+
+    this.videoDetail(youtubeId)
+      .then(video => {
+          video.title = title
+          this.MarksService.updateVideo(video)
+        })
+      .then(_ => this.refresh())
+      
+  }
 
 }
 

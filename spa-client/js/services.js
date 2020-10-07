@@ -33,8 +33,8 @@ class MarksService {
     return this.$http.post('videos', new Video(youtubeId, title, []))
   }
 
-  updateVideo(youtubeId, title) {
-    return this.$http.put('videos', new Video(youtubeId, title))
+  updateVideo(video) {
+    this.$http.put('videos', video)
   }
 
   deleteVideo(youtubeId) {

@@ -24,13 +24,16 @@ angular.module('utils.autofocus', [])
   }
 }]);
 
-angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus'])
+angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus', 'xeditable'])
     .service("MarksService", function($http) { return new MarksService($http) })
     .controller('ProjectController', ProjectController)
     .controller('VideoController', VideoController)
     .controller('ListMarksController', ListMarksController)
     .controller('EditMarkController', EditMarkController)
     .config(routes)
+    .run(['editableOptions', function(editableOptions) {
+      editableOptions.theme = 'bs4'
+    }])
 
     .filter('secondsToTime', function() {
 

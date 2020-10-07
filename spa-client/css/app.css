@@ -13,8 +13,14 @@
 }
 
 .actionsColumn {
-  width: 7ch;
+  width: 14ch;
   text-align: center;
+}
+
+.actionsColumnButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .timestampColumn {

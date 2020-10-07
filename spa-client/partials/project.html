@@ -18,18 +18,47 @@
 
                 <tbody>
                     <tr ng-repeat="each in projectCtrl.summaryOfAllVideos">
-                        <td>
+
+                        <td class="align-middle">
                             <a ng-click="projectCtrl.selectedVideoChanged(each.youtubeId)"
-                                class="pointer">{{each.youtubeId}}</a>
-                        </td>
-
-                        <td>{{each.title}}</td>
-
-                        <td class="actionsColumn">
-                            <a ng-click="projectCtrl.deleteVideo(each)" class="pointer">
-                                <img src="/node_modules/bootstrap-icons/icons/x-square.svg" alt="Delete">
+                                class="pointer">{{ each.youtubeId || 'Empty' }}
                             </a>
                         </td>
+
+                        <td class="align-middle" editable-text="each.title" e-name="title" e-form="videoRowForm">
+                            {{ each.title || 'Untitled' }}
+                        </td>
+
+                        <td>
+                            <form editable-form 
+                                name="videoRowForm"
+                                ng-show="videoRowForm.$visible"
+                                onbeforesave="projectCtrl.saveVideo($data, each.youtubeId)"
+                                class="form-buttons form-inline actionsColumnButtons"
+                                shown="inserted == each">
+
+                                <div >
+                                    <button type="submit" class="btn btn-sm" ng-disabled="videoRowForm.$waiting" title="Accept" >
+                                        <img src="/node_modules/bootstrap-icons/icons/check-square.svg" alt="Accept">
+                                    </button>
+    
+                                    <button type="button" class="btn btn-sm" ng-disabled="videoRowForm.$waiting" ng-click="videoRowForm.$cancel()">
+                                         <img src="/node_modules/bootstrap-icons/icons/x-square.svg" alt="Cancel">
+                                    </button>
+                                </div>
+
+                            </form>
+
+                            <div class="actionsColumnButtons" ng-show="!videoRowForm.$visible">
+                                <button class="btn btn-sm" ng-click="videoRowForm.$show()" title="Edit row">
+                                    <img src="/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Inline Edit">
+                                </button>
+                                <button class="btn btn-sm" ng-click="projectCtrl.deleteVideo(each)">
+                                    <img src="/node_modules/bootstrap-icons/icons/trash.svg" alt="Delete">
+                                </button>
+                            </div>
+                        </td>
+
                     </tr>
 
                 </tbody>
