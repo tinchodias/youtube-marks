@@ -43,10 +43,8 @@ class ProjectController {
   }
 
   saveVideo(data, youtubeId) {
-    console.log(data, youtubeId)
     this.MarksService.videoDetail(youtubeId)
       .then(video => {
-          console.log(video)
           video.title = data.title
           this.MarksService.updateVideo(video)
         })

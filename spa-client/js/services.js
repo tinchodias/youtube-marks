@@ -55,7 +55,6 @@ class MarksService {
   }
 
   updateVideo(video) {
-    console.log(video)
     return this.$http.put('videos', video)
   }
 
