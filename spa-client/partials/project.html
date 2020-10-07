@@ -12,6 +12,7 @@
                     <tr>
                         <th>Youtube ID</th>
                         <th>Title</th>
+                        <th class="actionsColumn">Actions</th>
                     </tr>
                 </thead>
 
@@ -50,7 +51,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Description</th>
-                        <th>Insert Key Binding</th>
+                        <th class="actionsColumn">Key</th>
                     </tr>
                 </thead>
 
@@ -58,7 +59,7 @@
                     <tr ng-repeat="each in projectCtrl.allTags">
                         <td>{{each.id}}</td>
                         <td>{{each.description}}</td>
-                        <td>{{each.insertKeyBinding}}</td>
+                        <td class="actionsColumn">{{each.insertKeyBinding}}</td>
                     </tr>
                 </tbody>
 
