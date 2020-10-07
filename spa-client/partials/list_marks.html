@@ -1,7 +1,7 @@
 <div>
   <div>
-    <a class="btn btn-light" ng-click="insertMark()">
-      Insert mark</a>
+    <a class="btn btn-light" ng-click="addMark()">
+      Add mark</a>
   </div>
 
   <br>
@@ -30,7 +30,7 @@
             <a ng-click="listMarksCtrl.editMarkAt(mark)" class="pointer">
               <img src="/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Edit" >
             </a>
-            <a ng-click="listMarksCtrl.removeMarkAt(mark)" class="pointer">
+            <a ng-click="listMarksCtrl.deleteMarkAt(mark)" class="pointer">
               <img src="/node_modules/bootstrap-icons/icons/trash.svg" alt="Delete" >  
             </a>
           </td>

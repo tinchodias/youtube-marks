@@ -21,11 +21,18 @@ class ProjectController {
     this.$state.go("video.listMarks", { youtubeId: youtubeId })
   }
 
-  insertVideo() {
+  
+  /* Video CRUD */
+
+  addEmptyVideo() {
     var youtubeId = prompt('Please, enter the YouTube ID (for example: bCFQz5jvR4g)')
-    this.MarksService.addVideo(youtubeId, "").then(
-      _ => this.selectedVideoChanged(youtubeId)
-    )
+    if (youtubeId && youtubeId.length > 0) {
+      this.MarksService.addEmptyVideo(youtubeId).then(
+        _ => this.refresh()
+      )
+    } else {
+      alert("Invalid Youtube ID")
+    }
   }
 
   deleteVideo(aVideo) {
@@ -36,15 +43,41 @@ class ProjectController {
   }
 
   saveVideo(data, youtubeId) {
-    console.log(youtubeId, data.title)
-
-    this.videoDetail(youtubeId)
+    console.log(data, youtubeId)
+    this.MarksService.videoDetail(youtubeId)
       .then(video => {
-          video.title = title
+          console.log(video)
+          video.title = data.title
           this.MarksService.updateVideo(video)
         })
       .then(_ => this.refresh())
-      
+  }
+
+
+  /* Tag CRUD */
+
+  addEmptyTag() {
+    var id = prompt('Please, enter an ID for the new tag (for example: t1)')
+    if (id && id.length > 0) {
+      this.MarksService.addEmptyTag(id).then(
+        _ => this.refresh()
+      )
+    } else {
+      alert("Invalid ID")
+    }
+  }
+
+  deleteTag(aTag) {
+    if (confirm("DELETE?")) {
+      this.MarksService.deleteTag(aTag.id)
+        .then(_ => this.refresh())
+    }
+  }
+
+  saveTag(data, id) {
+    data.id = id
+    this.MarksService.updateTag(data)
+      .then(_ => this.refresh())
   }
 
 }
@@ -65,7 +98,7 @@ class VideoController {
     }
     $scope.refreshVideo()
 
-    $scope.insertMark = () => {
+    $scope.addMark = () => {
       let timestamp = $scope.thePlayer.getCurrentTime()
       $scope.thePlayer.pauseVideo()
 
@@ -121,9 +154,9 @@ class VideoController {
         e.preventDefault();
       }
 
-      // I key: Insert mark
+      // I key: Add mark
       if (e.keyCode == 73) {
-        $scope.insertMark()
+        $scope.addMark()
         e.preventDefault();
       }
 
@@ -161,9 +194,9 @@ class ListMarksController {
     })
   }
 
-  removeMarkAt(mark) {
+  deleteMarkAt(mark) {
     if (confirm("DELETE?")) {
-      this.MarksService.removeMark(mark, this.$stateParams.youtubeId)
+      this.MarksService.deleteMark(mark, this.$stateParams.youtubeId)
       this.$scope.refreshVideo()
     }
   }

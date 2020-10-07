@@ -6,6 +6,14 @@ class Mark {
 	}
 }
 
+class Tag {
+	constructor(id, description, keyBinding) {
+		this.id = id
+    this.description = description
+    this.keyBinding = keyBinding
+	}
+}
+
 class Video {
   constructor(youtubeId, title, marks) {
     this.youtubeId = youtubeId
@@ -25,16 +33,30 @@ class MarksService {
     return this.$http.get('tags').then(result => result.data)
   }
 
+  addEmptyTag(id) {
+    return this.$http.post('tags', new Tag(id, "", ""))
+  }
+
+  deleteTag(id) {
+    return this.$http.delete(`tags/${id}`)
+  }
+
+  updateTag(aTag) {
+    return this.$http.put('tags', aTag)
+  }
+
+
   summaryOfAllVideos() {
     return this.$http.get('videos').then(result => result.data)
   }
 
-  addVideo(youtubeId, title) {
-    return this.$http.post('videos', new Video(youtubeId, title, []))
+  addEmptyVideo(youtubeId) {
+    return this.$http.post('videos', new Video(youtubeId, "", []))
   }
 
   updateVideo(video) {
-    this.$http.put('videos', video)
+    console.log(video)
+    return this.$http.put('videos', video)
   }
 
   deleteVideo(youtubeId) {
@@ -58,7 +80,7 @@ class MarksService {
       result => result.data)
   }
 
-  removeMark(mark, youtubeId) {
+  deleteMark(mark, youtubeId) {
     return this.$http.delete(`videos/${youtubeId}/marks/${mark.timestamp}`)
   }
 

@@ -3,6 +3,14 @@
     cursor: pointer;
 }
 
+.tableCellsAlignMiddle td {
+  vertical-align: middle !important;
+}
+
+.projectTitle {
+  margin-top: 4rem;
+}
+
 .currentmark {
   position: relative;
   color: #ffa700;
@@ -10,6 +18,15 @@
   font-weight: bold;
   font-size: xx-large;
   bottom: 80px;
+}
+
+.timestampColumn {
+  width: 10ch;
+}
+
+.keyBindingColumn {
+  width: 6ch;
+  text-align: center;
 }
 
 .actionsColumn {
@@ -23,6 +40,3 @@
   justify-content: center;
 }
 
-.timestampColumn {
-  width: 10ch;
-}

@@ -125,7 +125,12 @@
     {
       "id": "obs",
       "description": "General Observation",
-      "insertKeyBinding": "o"
+      "keyBinding": "o"
+    },
+    {
+      "id": "t2",
+      "description": "Went to visualization",
+      "keyBinding": "v"
     }
   ]
 }

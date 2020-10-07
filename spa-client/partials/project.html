@@ -2,11 +2,17 @@
 
     <div class="row">
 
+
+
+
+
+
+
         <div class="col-md-6">
 
-            <h2>Videos</h2>
+            <h2 class="projectTitle display-4">Videos</h2>
 
-            <table class="table">
+            <table class="table tableCellsAlignMiddle">
 
                 <thead>
                     <tr>
@@ -17,43 +23,47 @@
                 </thead>
 
                 <tbody>
-                    <tr ng-repeat="each in projectCtrl.summaryOfAllVideos">
+                    <tr ng-repeat="aVideo in projectCtrl.summaryOfAllVideos">
 
-                        <td class="align-middle">
-                            <a ng-click="projectCtrl.selectedVideoChanged(each.youtubeId)"
-                                class="pointer">{{ each.youtubeId || 'Empty' }}
+                        <td>
+                            <a ng-click="projectCtrl.selectedVideoChanged(aVideo.youtubeId)" class="pointer">
+                                <span>
+                                    {{ aVideo.youtubeId }}
+                                </span>
                             </a>
                         </td>
 
-                        <td class="align-middle" editable-text="each.title" e-name="title" e-form="videoRowForm">
-                            {{ each.title || 'Untitled' }}
+                        <td>
+                            <span editable-text="aVideo.title" e-name="title" e-form="videoRowForm">
+                                {{ aVideo.title || 'Untitled' }}
+                            </span>
                         </td>
 
                         <td>
                             <form editable-form 
                                 name="videoRowForm"
                                 ng-show="videoRowForm.$visible"
-                                onbeforesave="projectCtrl.saveVideo($data, each.youtubeId)"
+                                onbeforesave="projectCtrl.saveVideo($data, aVideo.youtubeId)"
                                 class="form-buttons form-inline actionsColumnButtons"
-                                shown="inserted == each">
+                                shown="inserted == aVideo">
 
                                 <div >
-                                    <button type="submit" class="btn btn-sm" ng-disabled="videoRowForm.$waiting" title="Accept" >
-                                        <img src="/node_modules/bootstrap-icons/icons/check-square.svg" alt="Accept">
+                                    <button type="submit" class="btn btn-sm btn-success" ng-disabled="videoRowForm.$waiting" title="Accept" >
+                                        <img src="/node_modules/bootstrap-icons/icons/check.svg" alt="Accept">
                                     </button>
     
-                                    <button type="button" class="btn btn-sm" ng-disabled="videoRowForm.$waiting" ng-click="videoRowForm.$cancel()">
-                                         <img src="/node_modules/bootstrap-icons/icons/x-square.svg" alt="Cancel">
+                                    <button type="button" class="btn btn-sm btn-danger" ng-disabled="videoRowForm.$waiting" ng-click="videoRowForm.$cancel()">
+                                         <img src="/node_modules/bootstrap-icons/icons/x.svg" alt="Cancel">
                                     </button>
                                 </div>
 
                             </form>
 
                             <div class="actionsColumnButtons" ng-show="!videoRowForm.$visible">
-                                <button class="btn btn-sm" ng-click="videoRowForm.$show()" title="Edit row">
+                                <button class="btn btn-sm" ng-click="videoRowForm.$show()" title="Edit video">
                                     <img src="/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Inline Edit">
                                 </button>
-                                <button class="btn btn-sm" ng-click="projectCtrl.deleteVideo(each)">
+                                <button class="btn btn-sm" ng-click="projectCtrl.deleteVideo(aVideo)" title="Delete video">
                                     <img src="/node_modules/bootstrap-icons/icons/trash.svg" alt="Delete">
                                 </button>
                             </div>
@@ -65,37 +75,99 @@
 
             </table>
 
-            <a class="btn btn-light" ng-click="projectCtrl.insertVideo()">Insert</a>
+            <a class="btn btn-light" ng-click="projectCtrl.addEmptyVideo()">Add Video</a>
 
         </div>
 
 
+
+
+
+
         <div class="col-md-6">
 
-            <h2>Tags</h2>
+            <h2 class="projectTitle display-4">Tags</h2>
 
-            <table class="table">
+            <table class="table tableCellsAlignMiddle">
 
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Description</th>
-                        <th class="actionsColumn">Key</th>
+                        <th class="keyBindingColumn">Key</th>
+                        <th class="actionsColumn">Actions</th>
                     </tr>
                 </thead>
-
+    
                 <tbody>
-                    <tr ng-repeat="each in projectCtrl.allTags">
-                        <td>{{each.id}}</td>
-                        <td>{{each.description}}</td>
-                        <td class="actionsColumn">{{each.insertKeyBinding}}</td>
-                    </tr>
-                </tbody>
+                    <tr ng-repeat="aTag in projectCtrl.allTags">
+    
+                        <td >
+                            <span>
+                                {{ aTag.id }}
+                            </span>
+                        </td>
+    
+                        <td >
+                            <span editable-text="aTag.description" e-name="description" e-form="tagRowForm">
+                                {{ aTag.description || 'Empty' }}
+                            </span>
+                        </td>
+    
+                        <td class="keyBindingColumn">
+                            <span editable-text="aTag.keyBinding" e-name="keyBinding" e-form="tagRowForm">
+                                {{ aTag.keyBinding || 'None' }}
+                            </span>
+                        </td>
 
+                        <td class="actionsColumn">
+                            <form editable-form 
+                                name="tagRowForm"
+                                ng-show="tagRowForm.$visible"
+                                onbeforesave="projectCtrl.saveTag($data, aTag.id)"
+                                class="form-buttons form-inline actionsColumnButtons"
+                                shown="inserted == aTag">
+    
+                                <div >
+                                    <button type="submit" class="btn btn-sm btn-success" ng-disabled="tagRowForm.$waiting" title="Accept" >
+                                        <img src="/node_modules/bootstrap-icons/icons/check.svg" alt="Accept">
+                                    </button>
+    
+                                    <button type="button" class="btn btn-sm btn-danger" ng-disabled="tagRowForm.$waiting" ng-click="tagRowForm.$cancel()">
+                                         <img src="/node_modules/bootstrap-icons/icons/x.svg" alt="Cancel">
+                                    </button>
+                                </div>
+    
+                            </form>
+    
+                            <div class="actionsColumnButtons" ng-show="!tagRowForm.$visible">
+                                <button class="btn btn-sm" ng-click="tagRowForm.$show()" title="Edit tag">
+                                    <img src="/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Inline Edit">
+                                </button>
+                                <button class="btn btn-sm" ng-click="projectCtrl.deleteTag(aTag)" title="Delete tag">
+                                    <img src="/node_modules/bootstrap-icons/icons/trash.svg" alt="Delete">
+                                </button>
+                            </div>
+                        </td>
+    
+                    </tr>
+    
+                </tbody>
+    
             </table>
+    
+            <a class="btn btn-light" ng-click="projectCtrl.addEmptyTag()">Add Tag</a>
 
         </div>
 
+
+
+
+
+
+
+
     </div>
+
 
 </div>
