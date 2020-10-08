@@ -128,9 +128,9 @@
       "keyBinding": "o"
     },
     {
-      "id": "t2",
-      "description": "Went to visualization",
-      "keyBinding": "v"
+      "id": "tor",
+      "description": "Went to Torch",
+      "keyBinding": "t"
     }
   ]
 }
