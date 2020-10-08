@@ -1,8 +1,9 @@
 
 class Mark {
-	constructor(timestamp, description) {
+	constructor(timestamp, description, tagId) {
 		this.timestamp = timestamp
-		this.description = description
+    this.description = description
+    this.tagId = tagId
 	}
 }
 
@@ -66,8 +67,8 @@ class MarksService {
     return this.$http.get(`videos/${youtubeId}`).then(result => Object.setPrototypeOf(result.data, Video.prototype))
   }
 
-  addEmptyMark(timestamp, youtubeId) {
-    return this.$http.post(`videos/${youtubeId}/marks`, new Mark(timestamp, ""))
+  addEmptyMark(timestamp, youtubeId, tagId) {
+    return this.$http.post(`videos/${youtubeId}/marks`, new Mark(timestamp, "", tagId))
   }
 
   updateMark(mark, youtubeId) {

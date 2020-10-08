@@ -7,11 +7,12 @@
   <br>
 
   <div style="height: 750px; overflow-y: scroll">
-    <table class="table table-sm">
+    <table class="table table-sm tableCellsAlignMiddle tableCellsSmaller">
       <thead>
         <tr>
-          <th class="timestampColumn">Timestamp</th>
-          <th>Description</th>
+          <th class="timestampColumn">Time</th>
+          <th>Comment</th>
+          <th class="tagColumn">Tag</th>
           <th class="actionsColumn">Actions</th>
         </tr>
       </thead>
@@ -24,16 +25,53 @@
             <a ng-click="listMarksCtrl.seekTo(mark.timestamp)" class="pointer">{{mark.timestamp | secondsToTime}}</a>
           </td>
 
-          <td>{{mark.description}}</td>
+          <td>
+            <span editable-text="mark.description" e-name="description" e-form="markRowForm">
+              {{ mark.description || 'None' }}
+            </span>
+          </td>
+
+          <td class="tagColumn">
+            <span editable-select="mark.tagId" e-name="tagId" e-form="markRowForm" e-ng-options="each.id as each.id for each in listMarksCtrl.allTags">
+              {{ listMarksCtrl.tagDescriptionFor(mark.tagId) }}
+            </span>
+          </td>
 
           <td class="actionsColumn">
-            <a ng-click="listMarksCtrl.editMarkAt(mark)" class="pointer">
-              <img src="/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Edit" >
-            </a>
-            <a ng-click="listMarksCtrl.deleteMarkAt(mark)" class="pointer">
-              <img src="/node_modules/bootstrap-icons/icons/trash.svg" alt="Delete" >  
-            </a>
+            <form
+              editable-form 
+              name="markRowForm"
+              ng-show="markRowForm.$visible"
+              onbeforesave="projectCtrl.saveMark($data, mark.id)"
+              class="form-buttons form-inline actionsColumnButtons"
+              shown="inserted == mark">
+
+              <div >
+                <button type="submit" class="btn btn-sm btn-success" ng-disabled="markRowForm.$waiting" title="Accept">
+                  <img src="/node_modules/bootstrap-icons/icons/check.svg" alt="Accept">
+                </button>
+
+                <button type="button" class="btn btn-sm btn-danger" ng-disabled="markRowForm.$waiting" ng-click="markRowForm.$cancel()">
+                  <img src="/node_modules/bootstrap-icons/icons/x.svg" alt="Cancel">
+                </button>
+              </div>
+
+            </form>
+
+            <div class="actionsColumnButtons" ng-show="!markRowForm.$visible">
+              <button class="btn btn-sm" ng-click="markRowForm.$show()" title="Edit mark">
+                <img src="/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Inline Edit">
+              </button>
+              <button class="btn btn-sm" ng-click="listMarksCtrl.deleteMarkAt(mark)" title="Delete mark">
+                <img src="/node_modules/bootstrap-icons/icons/trash.svg" alt="Delete">
+              </button>
+            </div>
           </td>
+
+
+
+
+
         </tr>
       </tbody>
     </table>

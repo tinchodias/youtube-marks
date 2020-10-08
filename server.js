@@ -146,6 +146,7 @@ class VideosDB {
         }
 
         oldMark.description = mark.description
+        oldMark.tagId = mark.tagId
 
         this.db.get('videos')
           .find({ youtubeId: youtubeId })

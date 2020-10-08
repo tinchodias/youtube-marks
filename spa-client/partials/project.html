@@ -16,7 +16,7 @@
 
                 <thead>
                     <tr>
-                        <th>Youtube ID</th>
+                        <th class="youtubeIdColumn">Youtube ID</th>
                         <th>Title</th>
                         <th class="actionsColumn">Actions</th>
                     </tr>
@@ -25,7 +25,7 @@
                 <tbody>
                     <tr ng-repeat="aVideo in projectCtrl.summaryOfAllVideos">
 
-                        <td>
+                        <td class="youtubeIdColumn">
                             <a ng-click="projectCtrl.selectedVideoChanged(aVideo.youtubeId)" class="pointer">
                                 <span>
                                     {{ aVideo.youtubeId }}
@@ -102,13 +102,13 @@
                 <tbody>
                     <tr ng-repeat="aTag in projectCtrl.allTags">
     
-                        <td >
+                        <td>
                             <span>
                                 {{ aTag.id }}
                             </span>
                         </td>
     
-                        <td >
+                        <td>
                             <span editable-text="aTag.description" e-name="description" e-form="tagRowForm">
                                 {{ aTag.description || 'Empty' }}
                             </span>

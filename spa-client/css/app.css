@@ -5,6 +5,14 @@
 
 .tableCellsAlignMiddle td {
   vertical-align: middle !important;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tableCellsSmaller td {
+  font-size: smaller;
 }
 
 .projectTitle {
@@ -21,7 +29,7 @@
 }
 
 .timestampColumn {
-  width: 10ch;
+  width: 8ch;
 }
 
 .keyBindingColumn {
@@ -29,8 +37,17 @@
   text-align: center;
 }
 
+.tagColumn {
+  width: 12ch;
+  text-align: center;
+}
+
+.youtubeIdColumn {
+  width: 12ch;
+}
+
 .actionsColumn {
-  width: 14ch;
+  width: 9ch;
   text-align: center;
 }
 

@@ -22,10 +22,5 @@ function routes($stateProvider, $urlRouterProvider) {
             controller: "ListMarksController as listMarksCtrl"
         })
 
-        .state('video.editMark', {
-            url: "/video/:youtubeId/mark/:timestamp",
-            templateUrl: "partials/edit_mark.html",
-            controller: "EditMarkController as editMarkCtrl"
-        })
 
 }

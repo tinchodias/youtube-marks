@@ -29,7 +29,6 @@ angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus', 'xe
     .controller('ProjectController', ProjectController)
     .controller('VideoController', VideoController)
     .controller('ListMarksController', ListMarksController)
-    .controller('EditMarkController', EditMarkController)
     .config(routes)
     .run(['editableOptions', function(editableOptions) {
       editableOptions.theme = 'bs4'

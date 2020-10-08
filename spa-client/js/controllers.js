@@ -96,27 +96,12 @@ class VideoController {
     }
     $scope.refreshVideo()
 
-    $scope.addMark = () => {
+    $scope.addMark = (tag) => {
       let timestamp = $scope.thePlayer.getCurrentTime()
       $scope.thePlayer.pauseVideo()
 
-      MarksService.addEmptyMark(timestamp, $scope.currentVideo.youtubeId)
+      MarksService.addEmptyMark(timestamp, $scope.currentVideo.youtubeId, tag.id)
       $scope.refreshVideo()
-
-      $state.go("video.editMark", {
-        youtubeId: $scope.currentVideo.youtubeId,
-        timestamp: timestamp
-      })
-    }
-
-    $scope.editMark = () => {
-      let timestamp = $scope.thePlayer.getCurrentTime()
-      $scope.thePlayer.pauseVideo()
-
-      $state.go("video.editMark", {
-        youtubeId: $scope.currentVideo.youtubeId,
-        timestamp: timestamp
-      })
     }
 
     $scope.togglePlay = () => {
@@ -140,28 +125,39 @@ class VideoController {
     updateRegularly()
 
 
-    $document.bind('keydown', function (e) {
+    var self = this
+    MarksService.allTags()
+      .then(list => {
+        self.allTags = list
+      })
 
-      if ($state.current.name == "video.editMark") {
+    $document.bind('keypress', function (e) {
+
+      if ($scope.markRowForm) {
+        console.log("Ignore key, it's editing mode.", $scope.markRowForm.$visible)
         return
       }
 
-      // Space key: Toggle play/stop
-      if (e.keyCode == 32) {
+      // Toggle play/stop
+      if (e.key == " ") {
         $scope.togglePlay()
         e.preventDefault();
       }
 
-      // I key: Add mark
-      if (e.keyCode == 73) {
+      // Add mark without tag
+      if (e.key == 'i') {
         $scope.addMark()
         e.preventDefault();
       }
 
-      // E key: Edit mark
-      if (e.keyCode == 69) {
-        $scope.editMark()
-        e.preventDefault()
+      // Add mark with a tag, if matches
+      if (self.allTags) {
+        const found = self.allTags.find(each => each.keyBinding == e.key)
+        if (found) {
+          $scope.addMark(found)
+        }
+      } else {
+        console.log("allTags empty")
       }
 
       $scope.$apply()
@@ -173,11 +169,15 @@ class VideoController {
 
 class ListMarksController {
 
-  constructor(MarksService, $scope, $state, $stateParams) {
+  constructor(MarksService, $scope, $state, $stateParams, $filter) {
     this.MarksService = MarksService
     this.$scope = $scope
     this.$state = $state
     this.$stateParams = $stateParams
+    this.$filter = $filter
+
+    this.MarksService.allTags()
+      .then(list => this.allTags = list)
   }
 
   seekTo(timestamp) {
@@ -199,36 +199,16 @@ class ListMarksController {
     }
   }
 
-}
-
-
-class EditMarkController {
-
-  constructor($stateParams, $state, $scope, MarksService) {
-
-    const self = this
-
-    MarksService.getMarkCorrespondingTo($stateParams.timestamp, $stateParams.youtubeId)
-      .then(aMark => {
-        self.mark = aMark
-        self.descriptionToEdit = self.mark.description
-      })
-
-    this.$state = $state
-    this.$stateParams = $stateParams
-    this.$scope = $scope
-    this.MarksService = MarksService
-  }
-
-  acceptEdit() {
-    this.mark.description = this.descriptionToEdit
-    this.MarksService.updateMark(this.mark, this.$stateParams.youtubeId)
-    this.$scope.refreshVideo()
-    this.$state.go("video.listMarks", { youtubeId: this.$stateParams.youtubeId })
-  }
-
-  cancelEdit() {
-    this.$state.go("video.listMarks", { youtubeId: this.$stateParams.youtubeId })
+  tagDescriptionFor(id) {
+    return id
+    // if (id && this.allTags && this.allTags.length) {
+    //   var selected = this.$filter('filter')(this.allTags, {id: id})
+    //   //console.log(selected)
+    //   return selected.length ? selected[0].description : '?'
+    // } else {
+    //   return '-';
+    // }
   }
 
 }
+
