@@ -24,31 +24,36 @@ angular.module('utils.autofocus', [])
   }
 }]);
 
-angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus', 'xeditable'])
+
+function secondsToTime() {
+
+  function padTime(t) {
+      return t < 10 ? "0"+t : t;
+  }
+
+  return function(_seconds) {
+      if (typeof _seconds !== "number" || _seconds < 0)
+          return "00:00:00"
+
+      let hours = Math.floor(_seconds / 3600),
+          minutes = Math.floor((_seconds % 3600) / 60),
+          seconds = Math.floor(_seconds % 60),
+          ms = Math.floor((_seconds % 1) * 100)
+
+      return padTime(hours) + ":" + padTime(minutes) + ":" + padTime(seconds) + '.' + padTime(ms)
+  }
+}
+
+
+angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus', 'xeditable', 'download'])
     .service("MarksService", function($http) { return new MarksService($http) })
     .controller('ProjectController', ProjectController)
     .controller('VideoController', VideoController)
     .controller('ListMarksController', ListMarksController)
+    .controller('ImportMarksController', ImportMarksController)
     .config(routes)
     .run(['editableOptions', function(editableOptions) {
       editableOptions.theme = 'bs4'
     }])
 
-    .filter('secondsToTime', function() {
-
-        function padTime(t) {
-            return t < 10 ? "0"+t : t;
-        }
-    
-        return function(_seconds) {
-            if (typeof _seconds !== "number" || _seconds < 0)
-                return "00:00:00"
-
-            let hours = Math.floor(_seconds / 3600),
-                minutes = Math.floor((_seconds % 3600) / 60),
-                seconds = Math.floor(_seconds % 60),
-                ms = Math.floor((_seconds % 1) * 100)
-    
-            return padTime(hours) + ":" + padTime(minutes) + ":" + padTime(seconds) + '.' + padTime(ms)
-        }
-    })
+    .filter('secondsToTime', secondsToTime)
