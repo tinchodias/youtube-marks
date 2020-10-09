@@ -25,7 +25,7 @@ class ProjectController {
   /* Video CRUD */
 
   addEmptyVideo() {
-    var youtubeId = prompt('Please, enter the YouTube ID (for example: bCFQz5jvR4g)')
+    var youtubeId = prompt("Please, enter the YouTube ID (for example: 'bCFQz5jvR4g'). Note: It won't be possible to edit this value from the tool.")
     if (youtubeId && youtubeId.length > 0) {
       this.MarksService.addEmptyVideo(youtubeId).then(
         _ => this.refresh()
@@ -55,7 +55,7 @@ class ProjectController {
   /* Tag CRUD */
 
   addEmptyTag() {
-    var id = prompt('Please, enter an ID for the new tag (for example: "obs")')
+    var id = prompt("Please, enter a short identifier for the new tag. Note: It won't be possible to edit this value from the tool.")
     if (id && id.length > 0) {
       this.MarksService.addEmptyTag(id).then(
         _ => this.refresh()
