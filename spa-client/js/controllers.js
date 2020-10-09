@@ -21,7 +21,7 @@ class ProjectController {
     this.$state.go("video.listMarks", { youtubeId: youtubeId })
   }
 
-  
+
   /* Video CRUD */
 
   addEmptyVideo() {
@@ -45,9 +45,9 @@ class ProjectController {
   saveVideo(data, youtubeId) {
     this.MarksService.videoDetail(youtubeId)
       .then(video => {
-          video.title = data.title
-          this.MarksService.updateVideo(video)
-        })
+        video.title = data.title
+        this.MarksService.updateVideo(video)
+      })
       .then(_ => this.refresh())
   }
 
@@ -100,7 +100,9 @@ class VideoController {
       let timestamp = $scope.thePlayer.getCurrentTime()
       $scope.thePlayer.pauseVideo()
 
-      MarksService.addEmptyMark(timestamp, $scope.currentVideo.youtubeId, tag.id)
+      const tagId = tag ? tag.id : null
+
+      MarksService.addEmptyMark(timestamp, $scope.currentVideo.youtubeId, tagId)
       $scope.refreshVideo()
     }
 
@@ -169,27 +171,40 @@ class VideoController {
 
 class ListMarksController {
 
-  constructor(MarksService, $scope, $state, $stateParams, $filter) {
+  constructor(MarksService, $scope, $state, $stateParams, $filter, download) {
     this.MarksService = MarksService
     this.$scope = $scope
     this.$state = $state
     this.$stateParams = $stateParams
     this.$filter = $filter
+    this.download = download
 
     this.MarksService.allTags()
       .then(list => this.allTags = list)
   }
 
-  seekTo(timestamp) {
-    this.$scope.thePlayer.seekTo(timestamp, true)
+  downloadCSV() {
+    this.$scope.refreshVideo().then(json => {
+      const csvContents = Papa.unparse(json.marks)
+      this.download.fromData(csvContents, "text/csv", `marks-${this.$stateParams.youtubeId}.csv`)
+    })
   }
 
-  editMarkAt(mark) {
-    this.$scope.thePlayer.pauseVideo()
-    this.$state.go("video.editMark", {
-      youtubeId: this.$stateParams.youtubeId,
-      timestamp: mark.timestamp
+  downloadJson() {
+    this.$scope.refreshVideo().then(json => {
+      this.download.fromData(angular.toJson(json.marks, 2), "application/json", `marks-${this.$stateParams.youtubeId}.json`)
     })
+  }
+
+  goToImportMarks() {
+    this.$scope.thePlayer.pauseVideo()
+    this.$state.go("video.importMarks", {
+      youtubeId: this.$stateParams.youtubeId
+    })
+  }
+
+  seekTo(timestamp) {
+    this.$scope.thePlayer.seekTo(timestamp, true)
   }
 
   deleteMarkAt(mark) {
@@ -212,3 +227,65 @@ class ListMarksController {
 
 }
 
+class ImportMarksController {
+  constructor(MarksService, $scope, $state, $stateParams) {
+    this.MarksService = MarksService
+    this.$scope = $scope
+    this.$state = $state
+    this.$stateParams = $stateParams
+  }
+
+  importedMarksStatus() {
+    if (this.importedMarks) {
+      return `Found ${this.importedMarks.length} marks`
+    } else {
+      if (this.hasChoosenFile()) {
+        return this.choosenFile().name
+      } else {
+        return "Choose a JSON or CSV file"
+      }
+    }
+  }
+
+  doImportRemovingCurrenttMarks(mustReplaceCurrentMarks) {
+    this.MarksService.videoDetail(this.$stateParams.youtubeId)
+      .then(video => {
+        video.marks = mustReplaceCurrentMarks?
+          this.importedMarks :
+          video.marks.concat(this.importedMarks)
+
+        this.MarksService.updateVideo(video)
+        this.$scope.refreshVideo()
+        this.goToListMarks()
+      })
+  }
+
+  hasChoosenFile() {
+    return document.getElementById('fileImport').files.length > 0
+  }
+
+  choosenFile() {
+    return document.getElementById('fileImport').files[0]
+  }
+
+  processFile() {
+    const file = this.choosenFile()
+    const reader = new FileReader()
+
+    var self = this
+    reader.onloadend = e => {
+      console.log(e)
+      var raw = e.target.result
+      self.importedMarks = angular.fromJson(raw)
+    }
+
+    reader.readAsText(file)
+  }
+
+  goToListMarks() {
+    this.$state.go("video.listMarks", {
+      youtubeId: this.$stateParams.youtubeId
+    })
+  }
+
+}

@@ -22,5 +22,12 @@ function routes($stateProvider, $urlRouterProvider) {
             controller: "ListMarksController as listMarksCtrl"
         })
 
+        .state('video.importMarks', {
+            url: "/video/:youtubeId/import",
+            templateUrl: "partials/import_marks.html",
+            controller: "ImportMarksController as importMarksCtrl"
+        })
+
+        
 
 }

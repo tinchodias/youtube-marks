@@ -1,0 +1,32 @@
+<form>
+
+    <h2>Import Marks</h2>
+
+    <div class="input-group">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="fileImport" name="fileImport" accept=".csv,.json">
+            <label class="custom-file-label" for="fileImport">{{ importMarksCtrl.importedMarksStatus() }}</label>
+        </div>
+        <div class="input-group-append">
+            <button type="button"
+                class="btn btn-primary"
+                ng-click="importMarksCtrl.processFile()"
+                ng-disabled="!importMarksCtrl.hasChoosenFile()">Process</button>
+        </div>
+    </div>
+
+    </br>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary" ng-click="importMarksCtrl.doImportRemovingCurrenttMarks(true)"
+            ng-disabled="!importMarksCtrl.importedMarks" title="Delete current marks and add imported ones">Replace marks</button>
+    </div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-warning" ng-click="importMarksCtrl.doImportRemovingCurrenttMarks(false)"
+            ng-disabled="!importMarksCtrl.importedMarks" title="Preserve current marks and add imported ones">Add marks</button>
+    </div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-secondary" ng-click="importMarksCtrl.goToListMarks()">Cancel</button>
+    </div>
+
+</form>
