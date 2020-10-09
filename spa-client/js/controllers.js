@@ -42,7 +42,7 @@ class ProjectController {
     }
   }
 
-  saveVideo(data, youtubeId) {
+  updateVideo(data, youtubeId) {
     this.MarksService.videoDetail(youtubeId)
       .then(video => {
         video.description = data.description
@@ -230,9 +230,9 @@ class ListMarksController {
   tagColorFor(mark) {
     if (mark.tagId && this.allTags && this.allTags.length) {
       var selected = this.$filter('filter')(this.allTags, {id: mark.tagId})
-      return selected.length ? selected[0].color : 'white'
+      return selected.length ? selected[0].color : ''
     } else {
-      return 'white';
+      return '';
     }
   }
 

@@ -43,7 +43,7 @@
                             <form editable-form 
                                 name="videoRowForm"
                                 ng-show="videoRowForm.$visible"
-                                onbeforesave="projectCtrl.saveVideo($data, aVideo.youtubeId)"
+                                onbeforesave="projectCtrl.updateVideo($data, aVideo.youtubeId)"
                                 class="form-buttons form-inline actionsColumnButtons"
                                 shown="inserted == aVideo">
 
@@ -135,7 +135,7 @@
                                 class="form-buttons form-inline actionsColumnButtons"
                                 shown="inserted == aTag">
     
-                                <div >
+                                <div>
                                     <button type="submit" class="btn btn-sm btn-success" ng-disabled="tagRowForm.$waiting" title="Accept" >
                                         <img src="/node_modules/bootstrap-icons/icons/check.svg" alt="Accept">
                                     </button>

@@ -22,7 +22,7 @@
         {
           "timestamp": 2354.9359092174377,
           "description": "",
-          "tagId": "obs"
+          "tagId": "no"
         },
         {
           "timestamp": 2206.16588893515,
@@ -49,22 +49,22 @@
   ],
   "tags": [
     {
-      "id": "obs",
-      "description": "General Observation",
-      "keyBinding": "o",
-      "color": "#de0dcc"
+      "id": "no",
+      "description": "Not tagged",
+      "keyBinding": "n",
+      "color": "#ffffff"
     },
     {
       "id": "code",
       "description": "Made a question about comprehension of a code entity",
       "keyBinding": "c",
-      "color": "#4c4a73"
+      "color": "#6961ff"
     },
     {
       "id": "diff",
       "description": "Made a question about a code diff",
       "keyBinding": "d",
-      "color": "#0b85ef"
+      "color": "#52ff66"
     }
   ]
 }

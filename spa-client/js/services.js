@@ -8,10 +8,11 @@ class Mark {
 }
 
 class Tag {
-	constructor(id, description, keyBinding) {
+	constructor(id, description, keyBinding, color) {
 		this.id = id
     this.description = description
     this.keyBinding = keyBinding
+    this.color = color
 	}
 }
 
@@ -35,7 +36,7 @@ class MarksService {
   }
 
   addEmptyTag(id) {
-    return this.$http.post('tags', new Tag(id, "", ""))
+    return this.$http.post('tags', new Tag(id, "", "", "#0000ff"))
   }
 
   deleteTag(id) {
