@@ -48,10 +48,12 @@
           </td>
 
           <td class="tagColumn">
-            <span editable-select="mark.tagId" e-name="tagId" e-form="markRowForm" e-ng-options="each.id as each.id for each in listMarksCtrl.allTags">
-              <img ng-style="{'background-color': listMarksCtrl.tagColorFor(mark)}" src="/node_modules/bootstrap-icons/icons/square.svg" alt="Color">
-              {{ listMarksCtrl.tagStringFor(mark) }}
-            </span>
+            <div editable-select="mark.tagId" e-name="tagId" e-form="markRowForm" e-ng-options="each.id as each.id for each in listMarksCtrl.allTags">
+              <img 
+                ng-style="{'background-color': listMarksCtrl.tagColorFor(mark), 'vertical-align': 'text-bottom'}" 
+                src="/node_modules/bootstrap-icons/icons/square.svg" alt="Color">
+              <span>{{ listMarksCtrl.tagStringFor(mark) }}</span>
+            </div>
           </td>
 
           <td>
