@@ -100,9 +100,7 @@ class VideoController {
       let timestamp = $scope.thePlayer.getCurrentTime()
       $scope.thePlayer.pauseVideo()
 
-      const tagId = tag ? tag.id : null
-
-      MarksService.addEmptyMark(timestamp, $scope.currentVideo.youtubeId, tagId)
+      MarksService.addEmptyMark(timestamp, $scope.currentVideo.youtubeId, tag.id)
       $scope.refreshVideo()
     }
 
@@ -143,23 +141,16 @@ class VideoController {
       // Toggle play/stop
       if (e.key == " ") {
         $scope.togglePlay()
-        e.preventDefault();
+        e.preventDefault()
       }
 
-      // Add mark without tag
-      if (e.key == 'i') {
-        $scope.addMark()
-        e.preventDefault();
-      }
-
-      // Add mark with a tag, if matches
+      // Add mark with a tag, if key matches
       if (self.allTags) {
         const found = self.allTags.find(each => each.keyBinding == e.key)
         if (found) {
           $scope.addMark(found)
+          e.preventDefault()
         }
-      } else {
-        console.log("allTags empty")
       }
 
       $scope.$apply()
