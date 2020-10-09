@@ -2,12 +2,12 @@
   "videos": [
     {
       "youtubeId": "1gKC7u_rbAI",
-      "title": "Milton (only Torch)",
+      "description": "Milton (only Torch)",
       "marks": [
         {
           "timestamp": 2454.9359092174377,
           "description": "",
-          "tagId": "obs"
+          "tagId": "diff"
         },
         {
           "timestamp": 2406.16588893515,
@@ -32,18 +32,18 @@
         {
           "timestamp": 2500.16588893515,
           "description": "",
-          "tagId": "diff"
+          "tagId": "code"
         }
       ]
     },
     {
       "youtubeId": "oeABTYIXW-M",
-      "title": "Milton (only GH)",
+      "description": "Milton (only GH)",
       "marks": []
     },
     {
       "youtubeId": "G8KlMzNNcSg",
-      "title": "Alexandre",
+      "description": "Alexandre",
       "marks": []
     }
   ],

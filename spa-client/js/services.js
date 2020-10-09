@@ -16,9 +16,9 @@ class Tag {
 }
 
 class Video {
-  constructor(youtubeId, title, marks) {
+  constructor(youtubeId, description, marks) {
     this.youtubeId = youtubeId
-    this.title = title
+    this.description = description
     this.marks = marks
   }
 }

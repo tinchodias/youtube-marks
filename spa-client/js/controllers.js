@@ -45,7 +45,7 @@ class ProjectController {
   saveVideo(data, youtubeId) {
     this.MarksService.videoDetail(youtubeId)
       .then(video => {
-        video.title = data.title
+        video.description = data.description
         this.MarksService.updateVideo(video)
       })
       .then(_ => this.refresh())
@@ -184,7 +184,6 @@ class ListMarksController {
   }
 
   updateMark(data, timestamp) {
-    console.log(data, timestamp)
     const youtubeId = this.$scope.currentVideo.youtubeId
     this.MarksService.getMarkCorrespondingTo(timestamp, youtubeId)
       .then(aMark => {
