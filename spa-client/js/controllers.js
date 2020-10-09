@@ -55,7 +55,7 @@ class ProjectController {
   /* Tag CRUD */
 
   addEmptyTag() {
-    var id = prompt('Please, enter an ID for the new tag (for example: t1)')
+    var id = prompt('Please, enter an ID for the new tag (for example: "obs")')
     if (id && id.length > 0) {
       this.MarksService.addEmptyTag(id).then(
         _ => this.refresh()
@@ -224,15 +224,17 @@ class ListMarksController {
     }
   }
 
-  tagDescriptionFor(id) {
-    return id
-    // if (id && this.allTags && this.allTags.length) {
-    //   var selected = this.$filter('filter')(this.allTags, {id: id})
-    //   //console.log(selected)
-    //   return selected.length ? selected[0].description : '?'
-    // } else {
-    //   return '-';
-    // }
+  tagStringFor(mark) {
+    return mark.tagId
+  }
+
+  tagColorFor(mark) {
+    if (mark.tagId && this.allTags && this.allTags.length) {
+      var selected = this.$filter('filter')(this.allTags, {id: mark.tagId})
+      return selected.length ? selected[0].color : 'white'
+    } else {
+      return 'white';
+    }
   }
 
 }

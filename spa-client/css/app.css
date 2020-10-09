@@ -29,7 +29,7 @@
 }
 
 .timestampColumn {
-  width: 8ch;
+  width: 9ch;
 }
 
 .keyBindingColumn {
@@ -39,7 +39,6 @@
 
 .tagColumn {
   width: 12ch;
-  text-align: center;
 }
 
 .youtubeIdColumn {

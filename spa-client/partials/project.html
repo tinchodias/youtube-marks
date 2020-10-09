@@ -95,6 +95,7 @@
                         <th>Id</th>
                         <th>Description</th>
                         <th class="keyBindingColumn">Key</th>
+                        <th class="keyBindingColumn">Color</th>
                         <th class="actionsColumn">Actions</th>
                     </tr>
                 </thead>
@@ -117,6 +118,12 @@
                         <td class="keyBindingColumn">
                             <span editable-text="aTag.keyBinding" e-name="keyBinding" e-form="tagRowForm">
                                 {{ aTag.keyBinding || 'None' }}
+                            </span>
+                        </td>
+
+                        <td class="keyBindingColumn">
+                            <span editable-color="aTag.color" e-name="color" e-form="tagRowForm">
+                                <img ng-style="{'background-color': aTag.color}" src="/node_modules/bootstrap-icons/icons/square.svg" alt="Color">
                             </span>
                         </td>
 

@@ -49,13 +49,14 @@
 
           <td class="tagColumn">
             <span editable-select="mark.tagId" e-name="tagId" e-form="markRowForm" e-ng-options="each.id as each.id for each in listMarksCtrl.allTags">
-              {{ listMarksCtrl.tagDescriptionFor(mark.tagId) }}
+              <img ng-style="{'background-color': listMarksCtrl.tagColorFor(mark)}" src="/node_modules/bootstrap-icons/icons/square.svg" alt="Color">
+              {{ listMarksCtrl.tagStringFor(mark) }}
             </span>
           </td>
 
           <td>
             <span editable-text="mark.description" e-name="description" e-form="markRowForm">
-              {{ mark.description || 'None' }}
+              {{ mark.description }}
             </span>
           </td>
 
@@ -68,7 +69,7 @@
               class="form-buttons form-inline actionsColumnButtons"
               shown="inserted == mark">
 
-              <div >
+              <div>
                 <button type="submit" class="btn btn-sm btn-success" ng-disabled="markRowForm.$waiting" title="Accept">
                   <img src="/node_modules/bootstrap-icons/icons/check.svg" alt="Accept">
                 </button>

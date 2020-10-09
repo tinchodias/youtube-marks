@@ -5,108 +5,34 @@
       "title": "Milton (only Torch)",
       "marks": [
         {
-          "timestamp": 308.56366605340577,
-          "description": "Ahí pasó algo"
+          "timestamp": 2454.9359092174377,
+          "description": "",
+          "tagId": "obs"
         },
         {
-          "timestamp": 316.02204100572203,
-          "description": "Acá se rompió algo"
+          "timestamp": 2406.16588893515,
+          "description": "",
+          "tagId": "code"
         },
         {
-          "timestamp": 322.20581088365174,
-          "description": "Comento algo más"
+          "timestamp": 2400.16588893515,
+          "description": "",
+          "tagId": "diff"
         },
         {
-          "timestamp": 433.84187292752074,
-          "description": "Interesante"
+          "timestamp": 2354.9359092174377,
+          "description": "",
+          "tagId": "obs"
         },
         {
-          "timestamp": 1308.5636660534058,
-          "description": "Ahí pasó algo"
+          "timestamp": 2206.16588893515,
+          "description": "",
+          "tagId": "code"
         },
         {
-          "timestamp": 1316.022041005722,
-          "description": "Acá se rompió algo"
-        },
-        {
-          "timestamp": 1322.2058108836518,
-          "description": "Comento algo más"
-        },
-        {
-          "timestamp": 1433.8418729275209,
-          "description": "Interesante"
-        },
-        {
-          "timestamp": 2308.563666053406,
-          "description": "Ahí pasó algo"
-        },
-        {
-          "timestamp": 2316.022041005722,
-          "description": "Acá se rompió algo"
-        },
-        {
-          "timestamp": 2322.205810883652,
-          "description": "Comento algo más"
-        },
-        {
-          "timestamp": 2300.841872927521,
-          "description": "Interesante"
-        },
-        {
-          "timestamp": 2301.563666053406,
-          "description": "Ahí pasó algo"
-        },
-        {
-          "timestamp": 2302.022041005722,
-          "description": "Acá se rompió algo"
-        },
-        {
-          "timestamp": 2303.205810883652,
-          "description": "Comento algo más"
-        },
-        {
-          "timestamp": 2400,
-          "description": "Interesante"
-        },
-        {
-          "timestamp": 2402,
-          "description": "Interesante"
-        },
-        {
-          "timestamp": 2403,
-          "description": "Interesante"
-        },
-        {
-          "timestamp": 2404,
-          "description": "Roto"
-        },
-        {
-          "timestamp": 2405,
-          "description": "Interesante"
-        },
-        {
-          "timestamp": 2406,
-          "description": "Doble click"
-        },
-        {
-          "timestamp": 2407,
-          "description": "Interesante"
-        },
-        {
-          "timestamp": 2408,
-          "description": "Hace click"
-        },
-        {
-          "timestamp": 2409,
-          "description": "Interesante"
-        },
-        {
-          "timestamp": 2410,
-          "description": "Interesante"
-        },
-        {
-          "timestamp": 2354.257747879837,
-          "description": "Comenta"
+          "timestamp": 2500.16588893515,
+          "description": "",
+          "tagId": "diff"
         }
       ]
     },
@@ -125,12 +51,20 @@
     {
       "id": "obs",
       "description": "General Observation",
-      "keyBinding": "o"
+      "keyBinding": "o",
+      "color": "#de0dcc"
     },
     {
-      "id": "tor",
-      "description": "Went to Torch",
-      "keyBinding": "t"
+      "id": "code",
+      "description": "Made a question about comprehension of a code entity",
+      "keyBinding": "c",
+      "color": "#4c4a73"
+    },
+    {
+      "id": "diff",
+      "description": "Made a question about a code diff",
+      "keyBinding": "d",
+      "color": "#0b85ef"
     }
   ]
 }
