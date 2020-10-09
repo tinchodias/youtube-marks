@@ -272,14 +272,33 @@ class ImportMarksController {
     const file = this.choosenFile()
     const reader = new FileReader()
 
-    var self = this
     reader.onloadend = e => {
-      console.log(e)
       var raw = e.target.result
-      self.importedMarks = angular.fromJson(raw)
-    }
 
+      if (file.name.endsWith(".json")) {
+        this.processJson(raw)
+      } else {
+        this.processCSV(raw)
+      }  
+    }
     reader.readAsText(file)
+  }
+
+  processJson(string) {
+    console.log("Processing JSON")
+    
+    this.importedMarks = angular.fromJson(string)
+  }
+
+  processCSV(string) {
+    console.log("Processing CSV")
+
+    const results = Papa.parse(string, {
+      dynamicTyping: true,
+      header: true
+    })
+
+    this.importedMarks = results.data
   }
 
   goToListMarks() {
