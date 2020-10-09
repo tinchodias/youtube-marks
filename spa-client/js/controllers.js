@@ -83,7 +83,7 @@ class ProjectController {
 
 class VideoController {
 
-  constructor($scope, $state, $stateParams, MarksService, $document, $timeout) {
+  constructor($scope, $stateParams, MarksService, $document, $timeout) {
 
     $scope.thePlayerVideoId = $stateParams.youtubeId
 
@@ -181,6 +181,16 @@ class ListMarksController {
 
     this.MarksService.allTags()
       .then(list => this.allTags = list)
+  }
+
+  updateMark(data, timestamp) {
+    console.log(data, timestamp)
+    const youtubeId = this.$scope.currentVideo.youtubeId
+    this.MarksService.getMarkCorrespondingTo(timestamp, youtubeId)
+      .then(aMark => {
+        Object.assign(aMark, data)
+        this.MarksService.updateMark(aMark, youtubeId)
+      })
   }
 
   downloadCSV() {

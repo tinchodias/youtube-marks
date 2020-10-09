@@ -64,7 +64,7 @@
               editable-form 
               name="markRowForm"
               ng-show="markRowForm.$visible"
-              onbeforesave="projectCtrl.saveMark($data, mark.id)"
+              onbeforesave="listMarksCtrl.updateMark($data, mark.timestamp)"
               class="form-buttons form-inline actionsColumnButtons"
               shown="inserted == mark">
 
