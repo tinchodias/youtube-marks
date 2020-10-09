@@ -72,7 +72,7 @@ class ProjectController {
     }
   }
 
-  saveTag(data, id) {
+  updateTag(data, id) {
     data.id = id
     this.MarksService.updateTag(data)
       .then(_ => this.refresh())
