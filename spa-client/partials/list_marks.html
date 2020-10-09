@@ -1,18 +1,40 @@
 <div>
-  <div>
-    <a class="btn btn-light" ng-click="addMark()">
-      Add mark</a>
-  </div>
 
-  <br>
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="btn btn-light" ng-click="addMark()">
+          Add mark
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-light" ng-click="listMarksCtrl.goToImportMarks()">
+          Import marks
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Export marks
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" ng-click="listMarksCtrl.downloadCSV()">CSV</a>
+            <a class="dropdown-item" ng-click="listMarksCtrl.downloadJson()">Json</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <br/>
 
   <div style="height: 750px; overflow-y: scroll">
     <table class="table table-sm tableCellsAlignMiddle tableCellsSmaller">
       <thead>
         <tr>
           <th class="timestampColumn">Time</th>
-          <th>Comment</th>
           <th class="tagColumn">Tag</th>
+          <th>Comment</th>
           <th class="actionsColumn">Actions</th>
         </tr>
       </thead>
@@ -25,15 +47,15 @@
             <a ng-click="listMarksCtrl.seekTo(mark.timestamp)" class="pointer">{{mark.timestamp | secondsToTime}}</a>
           </td>
 
-          <td>
-            <span editable-text="mark.description" e-name="description" e-form="markRowForm">
-              {{ mark.description || 'None' }}
-            </span>
-          </td>
-
           <td class="tagColumn">
             <span editable-select="mark.tagId" e-name="tagId" e-form="markRowForm" e-ng-options="each.id as each.id for each in listMarksCtrl.allTags">
               {{ listMarksCtrl.tagDescriptionFor(mark.tagId) }}
+            </span>
+          </td>
+
+          <td>
+            <span editable-text="mark.description" e-name="description" e-form="markRowForm">
+              {{ mark.description || 'None' }}
             </span>
           </td>
 
