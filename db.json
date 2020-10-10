@@ -1,69 +1,27 @@
 {
   "videos": [
     {
-      "youtubeId": "1gKC7u_rbAI",
-      "description": "Milton (only Torch)",
+      "youtubeId": "_7jUA-Gqp4M",
+      "description": "Pink panther analysis",
       "marks": [
         {
-          "timestamp": 2454.9359092174377,
-          "description": "",
-          "tagId": "diff"
+          "timestamp": 12.858,
+          "description": "Title appears",
+          "tagId": "scene"
         },
         {
-          "timestamp": 2406.16588893515,
-          "description": "",
-          "tagId": "code"
-        },
-        {
-          "timestamp": 2400.16588893515,
-          "description": "",
-          "tagId": "diff"
-        },
-        {
-          "timestamp": 2354.9359092174377,
-          "description": "",
-          "tagId": "no"
-        },
-        {
-          "timestamp": 2206.16588893515,
-          "description": "",
-          "tagId": "code"
-        },
-        {
-          "timestamp": 2500.16588893515,
-          "description": "",
-          "tagId": "code"
+          "timestamp": 31.980984000000014,
+          "description": "Start",
+          "tagId": "scene"
         }
       ]
-    },
-    {
-      "youtubeId": "oeABTYIXW-M",
-      "description": "Milton (only GH)",
-      "marks": []
-    },
-    {
-      "youtubeId": "G8KlMzNNcSg",
-      "description": "Alexandre",
-      "marks": []
     }
   ],
   "tags": [
     {
-      "id": "no",
-      "description": "Not tagged",
-      "keyBinding": "n",
-      "color": "#ffffff"
-    },
-    {
-      "id": "code",
-      "description": "Made a question about comprehension of a code entity",
-      "keyBinding": "c",
-      "color": "#6961ff"
-    },
-    {
-      "id": "diff",
-      "description": "Made a question about a code diff",
-      "keyBinding": "d",
+      "id": "scene",
+      "description": "Comment about the scene",
+      "keyBinding": "s",
       "color": "#52ff66"
     }
   ]
