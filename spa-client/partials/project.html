@@ -34,7 +34,7 @@
                         </td>
 
                         <td>
-                            <span editable-text="aVideo.description" e-name="description" e-form="videoRowForm">
+                            <span editable-text="aVideo.description" e-name="description" e-form="videoRowForm" e-ng-keydown="projectCtrl.hackySubmit($event,videoRowForm)">
                                 {{ aVideo.description }}
                             </span>
                         </td>
@@ -110,13 +110,13 @@
                         </td>
     
                         <td>
-                            <span editable-text="aTag.description" e-name="description" e-form="tagRowForm">
+                            <span editable-text="aTag.description" e-name="description" e-form="tagRowForm" e-ng-keydown="projectCtrl.hackySubmit($event,tagRowForm)">
                                 {{ aTag.description || 'Empty' }}
                             </span>
                         </td>
     
                         <td class="keyBindingColumn">
-                            <span editable-text="aTag.keyBinding" e-name="keyBinding" e-form="tagRowForm">
+                            <span editable-text="aTag.keyBinding" e-name="keyBinding" e-form="tagRowForm" e-ng-keydown="projectCtrl.hackySubmit($event,tagRowForm)">
                                 {{ aTag.keyBinding || 'None' }}
                             </span>
                         </td>

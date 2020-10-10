@@ -21,6 +21,14 @@ class ProjectController {
     this.$state.go("video.listMarks", { youtubeId: youtubeId })
   }
 
+  hackySubmit(event, form) {
+    if (event.keyCode == 13) {
+      form.$submit() // Enter Key Processing
+    } else if (event.keyCode == 27) {
+      form.$cancel() // Escape key processing
+    }
+  }
+
 
   /* Video CRUD */
 
@@ -182,6 +190,14 @@ class ListMarksController {
 
     this.MarksService.allTags()
       .then(list => this.allTags = list)
+  }
+
+  hackySubmit(event, form) {
+    if (event.keyCode == 13) {
+      form.$submit() // Enter Key Processing
+    } else if (event.keyCode == 27) {
+      form.$cancel() // Escape key processing
+    }
   }
 
   updateMark(data, timestamp) {
