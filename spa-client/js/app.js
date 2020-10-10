@@ -57,3 +57,10 @@ angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus', 'xe
     }])
 
     .filter('secondsToTime', secondsToTime)
+    .directive('seekDeltaButton', function() {
+      return {
+        restrict: 'E',
+        replace: true,
+        template: (elem, attr) => `<a type="button" class="btn btn-outline-secondary" ng-click="seekDelta(${attr.delta})">${attr.delta}s</a>`
+      }
+    })

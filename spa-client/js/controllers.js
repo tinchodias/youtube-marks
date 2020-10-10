@@ -113,6 +113,11 @@ class VideoController {
       }
     }
 
+    $scope.seekDelta = (delta) => {
+      const current = $scope.thePlayer.getCurrentTime()
+      $scope.thePlayer.seekTo(current + delta, true)
+    }
+
     var updateRegularly = function () {
       $timeout(function () {
         if ($scope.thePlayer && $scope.thePlayer.currentState && $scope.currentVideo) {
@@ -156,6 +161,11 @@ class VideoController {
       $scope.$apply()
     })
   }
+
+  seekDelta2(delta) {
+    console.log(delta)
+  }
+
 
 }
 
