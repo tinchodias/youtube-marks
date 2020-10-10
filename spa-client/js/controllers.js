@@ -97,10 +97,10 @@ class VideoController {
     $scope.refreshVideo()
 
     $scope.addMark = (tag) => {
-      let timestamp = $scope.thePlayer.getCurrentTime()
-      $scope.thePlayer.pauseVideo()
-
-      MarksService.addEmptyMark(timestamp, $scope.currentVideo.youtubeId, tag.id)
+      MarksService.addEmptyMark(
+        $scope.thePlayer.getCurrentTime(),
+        $scope.currentVideo.youtubeId,
+        tag.id)
       $scope.refreshVideo()
     }
 
