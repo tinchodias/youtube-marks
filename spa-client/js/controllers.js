@@ -1,3 +1,41 @@
+/**
+ * Notes:
+ * 
+ * - This controller is the only that's always present because it's loaded from body element.
+ * 
+ * - the inline xeditable form element disables key bindings and 
+ * may not re-enable them (for example, if user presses in import and project button).
+ */
+class BodyController {
+  constructor($scope, $transitions, $document) {
+
+    $scope.listMarksControllerHackyList = []
+
+    var tearDownListMarksController = function() {
+      $scope.listMarksControllerHackyList.forEach(element => {
+        console.log(element)
+        element.tearDownThis()
+      })
+      $scope.listMarksControllerHackyList = []
+    }
+
+    $scope.enableVideoKeyBindings = (aBoolean) => {
+      console.log("enableVideoKeyBindings", aBoolean)
+      $scope.videoKeyBindingsEnabled = aBoolean
+    }
+
+    $transitions.onEnter({entering: "video.listMarks"}, function($transition){
+      // console.log($transition)
+      $scope.enableVideoKeyBindings(true)
+    })
+
+    $transitions.onExit({exiting: "video.listMarks"}, function(){
+      tearDownListMarksController()
+    })
+
+  }
+}
+
 
 
 class ProjectController {
@@ -91,7 +129,7 @@ class ProjectController {
 
 class VideoController {
 
-  constructor($scope, $stateParams, MarksService, $document, $timeout) {
+  constructor($scope, $stateParams, MarksService) {
 
     $scope.thePlayerVideoId = $stateParams.youtubeId
 
@@ -104,12 +142,47 @@ class VideoController {
     }
     $scope.refreshVideo()
 
+    $scope.seekDelta = (delta) => {
+      const current = $scope.thePlayer.getCurrentTime()
+      $scope.thePlayer.seekTo(current + delta, true)
+    }
+
+  }
+
+}
+
+
+class ListMarksController {
+
+  constructor(MarksService, $scope, $state, $stateParams, $filter, download, $timeout, $document) {
+    this.MarksService = MarksService
+    this.$scope = $scope
+    this.$state = $state
+    this.$stateParams = $stateParams
+    this.$filter = $filter
+    this.download = download
+    this.$document = $document
+
+    // Hacky: we assume that tags don't change while this controller lives
+    this.MarksService.allTags().then(list => this.allTags = list)
+
     $scope.addMark = (tag) => {
-      MarksService.addEmptyMark(
-        $scope.thePlayer.getCurrentTime(),
-        $scope.currentVideo.youtubeId,
-        tag.id)
-      $scope.refreshVideo()
+      const currentTime = $scope.thePlayer.getCurrentTime()
+      const youtubeId = $scope.currentVideo.youtubeId
+
+      MarksService.getMarkCorrespondingTo(currentTime, youtubeId)
+        .then(existingMark => {
+          // Especially when video is paused, unintended keypress repetitions produce 
+          // multiple marks with the same timestamp and tag, which we will avoid here
+          if (existingMark.timestamp != currentTime || existingMark.tagId != tag.id) {
+            MarksService.addEmptyMark(
+              currentTime,
+              youtubeId,
+              tag.id)
+            $scope.refreshVideo()
+          }
+        })
+
     }
 
     $scope.togglePlay = () => {
@@ -121,33 +194,29 @@ class VideoController {
       }
     }
 
-    $scope.seekDelta = (delta) => {
-      const current = $scope.thePlayer.getCurrentTime()
-      $scope.thePlayer.seekTo(current + delta, true)
-    }
-
+    this.tearDown = false
+    var self = this
     var updateRegularly = function () {
       $timeout(function () {
         if ($scope.thePlayer && $scope.thePlayer.currentState && $scope.currentVideo) {
           MarksService.getMarkCorrespondingTo($scope.thePlayer.getCurrentTime(), $scope.currentVideo.youtubeId)
             .then(aMark => $scope.currentMark = aMark)
         }
-        updateRegularly()
+        // console.log("updateRegularly")
+        if (!self.tearDown) {
+          updateRegularly()
+        } else {
+          // console.log("Stop updateRegularly")
+        }
       }, 200)
     }
     updateRegularly()
 
+    const keyHandler = (e) => {
+//      console.log(e.key, $scope.thePlayer)
 
-    var self = this
-    MarksService.allTags()
-      .then(list => {
-        self.allTags = list
-      })
-
-    $document.bind('keypress', function (e) {
-
-      if ($scope.markRowForm) {
-        console.log("Ignore key, it's editing mode.", $scope.markRowForm.$visible)
+      // Ignore key, it's editing mode.
+      if (!$scope.videoKeyBindingsEnabled) {
         return
       }
 
@@ -167,29 +236,18 @@ class VideoController {
       }
 
       $scope.$apply()
-    })
+    }
+    $document.bind('keypress', keyHandler)
+
+    $scope.listMarksControllerHackyList.push(this)
+
   }
 
-  seekDelta2(delta) {
-    console.log(delta)
-  }
-
-
-}
-
-
-class ListMarksController {
-
-  constructor(MarksService, $scope, $state, $stateParams, $filter, download) {
-    this.MarksService = MarksService
-    this.$scope = $scope
-    this.$state = $state
-    this.$stateParams = $stateParams
-    this.$filter = $filter
-    this.download = download
-
-    this.MarksService.allTags()
-      .then(list => this.allTags = list)
+  tearDownThis() {
+    // Remove all current listeners (dangerous)
+    // to avoid multiple bind due to router transitions
+    this.$document.unbind('keypress')
+    this.tearDown = true
   }
 
   hackySubmit(event, form) {

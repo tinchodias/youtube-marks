@@ -33,7 +33,7 @@ function secondsToTime() {
 
   return function(_seconds) {
       if (typeof _seconds !== "number" || _seconds < 0)
-          return "00:00:00"
+          return "invalid"
 
       let hours = Math.floor(_seconds / 3600),
           minutes = Math.floor((_seconds % 3600) / 60),
@@ -47,11 +47,11 @@ function secondsToTime() {
 
 angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus', 'xeditable', 'download'])
     .service("MarksService", function($http) { return new MarksService($http) })
+    .controller('BodyController', BodyController)
     .controller('ProjectController', ProjectController)
     .controller('VideoController', VideoController)
     .controller('ListMarksController', ListMarksController)
     .controller('ImportMarksController', ImportMarksController)
-    .config(routes)
     .run(['editableOptions', function(editableOptions) {
       editableOptions.theme = 'bs4'
     }])
@@ -65,3 +65,6 @@ angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus', 'xe
         template: (elem, attr) => `<a type="button" class="btn btn-outline-secondary" ng-click="seekDelta(${attr.delta})">${attr.delta}s</a>`
       }
     })
+
+
+    .config(routes)

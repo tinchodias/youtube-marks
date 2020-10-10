@@ -61,7 +61,9 @@
           </td>
 
           <td>
-            <span editable-text="mark.description" e-name="description" e-form="markRowForm" e-ng-keydown="listMarksCtrl.hackySubmit($event,markRowForm)">
+            <span editable-text="mark.description" e-name="description" e-form="markRowForm"
+              e-ng-keydown="listMarksCtrl.hackySubmit($event,markRowForm)"
+              onhide="enableVideoKeyBindings(true)" onshow="enableVideoKeyBindings(false)" >
               {{ mark.description }}
             </span>
           </td>
