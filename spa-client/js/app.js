@@ -57,6 +57,7 @@ angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus', 'xe
     }])
 
     .filter('secondsToTime', secondsToTime)
+    
     .directive('seekDeltaButton', function() {
       return {
         restrict: 'E',
