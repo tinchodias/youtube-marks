@@ -13,14 +13,14 @@ class BodyController {
 
     var tearDownListMarksController = function() {
       $scope.listMarksControllerHackyList.forEach(element => {
-        console.log(element)
+        // console.log(element)
         element.tearDownThis()
       })
       $scope.listMarksControllerHackyList = []
     }
 
     $scope.enableVideoKeyBindings = (aBoolean) => {
-      console.log("enableVideoKeyBindings", aBoolean)
+      // console.log("enableVideoKeyBindings", aBoolean)
       $scope.videoKeyBindingsEnabled = aBoolean
     }
 
