@@ -1,16 +1,35 @@
 # Youtube Notes
 
-This is a simple angularjs web app to annotate Youtube videos.
+This is a simple angularjs web app to mark (annotate) Youtube videos.
 
+## Intro
 
-## How to execute
+The scenario for this tool is a user that wants to work on the analisis of videos.
+To do that, this tool can help by supporting this use case:
+* The user registers one or more **videos** in the **project** page. The videos must be loaded in Youtube previously.
+* The user also registers one or more **tags** which are kinds of marks to are forseen to be added in the videos (it is enough to register just one, for example, a "default" tag). The tags can have an associated **Key binding** which must be a single letter (case-sensitive) to ease insertion of .
+* The user clicks on a video and then can control playback by pressing play, pause (the space key is a key binding for that), moving the dot in the bar, or use the top-right button bar for high-precision seek.
+* When the user needs to mark the video, there are two main possibilities: 
+  - via the "Add mark" dropdown, and 
+  - via using the key binding of a tag previously defined.
+* To add a textual comment, click on the pencil button that's present on each row, and edit it (press the small accept button to save the changes).
 
-0. Ensure you have node and npm installed and you had run `npm install`
-1. Run `npm start`
-2. Open browser on localhost:8080
+It may be convenient/practical for the user to export the marks on a video. This can be done to: 
+  - CSV, and edit the marks in a spreadsheets office tool, or 
+  - JSON, and edit the marks in a text editor or programatically by any language.
+  
+The whole project (videos, tags, and marks) are persisted in the [db.json] file at the root of this repository. In fact, the user might manually edit this file and (rs)start the server with `npm start` to browse the new state.
 
-## Keybindings
+It is convenient to regularly version the [db.json] file to some git repository to keep track of your analisis.
 
-* Space: toggle start/pause video
-* i: Insert mark
-* e: Edit mark
+## How to install
+
+1. Ensure you have [nodejs](https://nodejs.org/)
+2. Clone this repository
+3. Open a terminal, change directory to root (where this README.md file is) and run `npm install`.
+
+## How to launch
+
+1. Open a terminal, change directory to root, and run `npm start`.
+2. Open browser on [localhost:8080].
+
