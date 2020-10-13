@@ -18,9 +18,9 @@ It may be convenient/practical for the user to export the marks on a video. This
   - CSV, and edit the marks in a spreadsheets office tool, or 
   - JSON, and edit the marks in a text editor or programatically by any language.
   
-The whole project (videos, tags, and marks) are persisted in the [db.json] file at the root of this repository. In fact, the user might manually edit this file and (rs)start the server with `npm start` to browse the new state.
+The whole project (videos, tags, and marks) are persisted in the `db.json` file at the root of this repository. In fact, the user might manually edit this file and (rs)start the server with `npm start` to browse the new state.
 
-It is convenient to regularly version the [db.json] file to some git repository to keep track of your analisis.
+It is convenient to regularly version the `db.json` file to some git repository to keep track of your analisis.
 
 ## How to install
 
