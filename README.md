@@ -14,14 +14,17 @@ To do that, this tool can help by supporting this use case:
   - via using the key binding of a tag previously defined.
 5. To add a textual comment, click on the pencil button that's present on each row, and edit it (press the small accept button to save the changes).
 
-### Export/Import
+#### Export/Import
 It may be convenient/practical for the user to export the marks on a video. This can be done to: 
   - CSV, and edit the marks in a spreadsheets office tool, or 
   - JSON, and edit the marks in a text editor or programatically by any language.
-The files and be imported into the project.
+  
+Those files can be imported back into the project.
 
-### Persistance/Versioning
-The whole project (videos, tags, and marks) are persisted in the `db.json` file at the root of this repository. In fact, the user might manually edit this file and (re)start the server with `ctrl+c + npm start` to browse the new state.
+#### Persistance/Versioning
+The whole project (videos, tags, and marks) are persisted in the `db.json` file at the root of this repository. 
+
+In fact, the user might manually edit this file and (re)start the server with `ctrl+c + npm start` to browse the new state.
 
 It is convenient to regularly version the `db.json` file to some git repository to keep track of your analisis.
 
