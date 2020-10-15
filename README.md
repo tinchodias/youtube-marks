@@ -8,16 +8,16 @@ Annotate YouTube videos with this simple tool.
 
 The scenario for this tool is a user that wants to work on the analisis of videos.
 To do that, this tool can help by supporting this use case:
-1. The user registers one or more **videos** in the **project** page. The videos must be loaded in Youtube previously.
-2. The user also registers one or more **tags** which are kinds of marks to are forseen to be added in the videos (it is enough to register just one, for example, a "default" tag). The tags can have an associated **Key binding** which must be a single letter (case-sensitive) to ease insertion of .
-3. The user clicks on a video and then can control playback by pressing play, pause (the space key is a key binding for that), moving the dot in the bar, or use the top-right button bar for high-precision seek.
-4. When the user needs to mark the video, there are two main possibilities:
+1. Register one or more **videos** in the **project** page. Note the videos must be previously loaded in Youtube. For example, if the video URL is https://youtu.be/_7jUA-Gqp4M, the ID to register is "_7jUA-Gqp4M". 
+2. Register one or more **tags** which are kinds of marks to are forseen to be added in the videos (it is enough to register just one, for example, a "default" tag). The tags can have an associated **Key binding** which must be a single letter (case-sensitive) to ease insertion during playback. Tags can also have a distinctive color.
+3. Click on a video and control the playback by pressing play, pause (the space key is a key binding for toggling), moving the dot in the bar, or use the top-right button bar for high-precision seek.
+4. To mark the video, there are two main possibilities:
    - via the "Add mark" dropdown, and 
    - via using the key binding of a tag previously defined.
 5. To add a textual comment, click on the pencil button that's present on each row, and edit it (press the small accept button to save the changes).
 
 #### Why YouTube?
-The tool could become independent of YouTube, or at least be just an option. Maybe in the future. However, in our experience it was quite practical like this. We had 16 HD videos of more than an 1 hour long; We uploaded them all together one night and the day after the URLs were ready to be added to this tool.
+The tool could become independent of YouTube, or at least be just an option. Maybe in the future. In our experience, it was quite practical like this. We had 16 HD videos of more than an 1 hour long; we uploaded them all one night and the day after the URLs were ready to be added to this tool.
 
 *Tip*: We selected the YouTube's **Unlisted** visibility for the videos. It differs from the **Public** visibility in that nobody will find them with a YouTube search, and differs from **Private** visibility in that anybody with the video URL can view it.
 
