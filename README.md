@@ -17,12 +17,12 @@ To do that, this tool can help by supporting this use case:
 5. To add a textual comment, click on the pencil button that's present on each row, and edit it (press the small accept button to save the changes).
 
 #### Why YouTube?
-The tool could be implemented independently of YouTube. It's on my To Do list. For the moment, this is what we have.
+The tool could become independent of YouTube, or at least be just an option. Maybe in the future. However, in our experience it was quite practical like this. We had 16 HD videos of more than an 1 hour long; We uploaded them all together one night and the day after the URLs were ready to be added to this tool.
 
-In our experience, it was very practical liike this: We had 16 HD videos of more than an 1 hour long that we uploaded one night with **Unlisted** visibility (which is different from **Public** visibility (nobody will find them with a YouTube search), and different from **Private** visibility (anybody with the video URL can viiew it).
+*Tip*: We selected the YouTube's **Unlisted** visibility for the videos. It differs from the **Public** visibility in that nobody will find them with a YouTube search, and differs from **Private** visibility in that anybody with the video URL can view it.
 
 #### Export/Import
-It may be convenient/practical for the user to export the marks on a video. This can be done to: 
+It may be convenient for the user to export the marks on a video. This can be done to: 
   - CSV, and edit the marks in a spreadsheets office tool, or 
   - JSON, and edit the marks in a text editor or programatically by any language.
   
