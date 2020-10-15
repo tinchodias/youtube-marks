@@ -1,6 +1,8 @@
-# Youtube Notes
+# Youtube Marks
 
-This is a simple angularjs web app to mark (annotate) Youtube videos.
+Annotate YouTube videos with this simple tool.
+
+![Screenshot](shot_800.png)
 
 ## Intro
 
@@ -9,10 +11,15 @@ To do that, this tool can help by supporting this use case:
 1. The user registers one or more **videos** in the **project** page. The videos must be loaded in Youtube previously.
 2. The user also registers one or more **tags** which are kinds of marks to are forseen to be added in the videos (it is enough to register just one, for example, a "default" tag). The tags can have an associated **Key binding** which must be a single letter (case-sensitive) to ease insertion of .
 3. The user clicks on a video and then can control playback by pressing play, pause (the space key is a key binding for that), moving the dot in the bar, or use the top-right button bar for high-precision seek.
-4. When the user needs to mark the video, there are two main possibilities: 
-  - via the "Add mark" dropdown, and 
-  - via using the key binding of a tag previously defined.
+4. When the user needs to mark the video, there are two main possibilities:
+   - via the "Add mark" dropdown, and 
+   - via using the key binding of a tag previously defined.
 5. To add a textual comment, click on the pencil button that's present on each row, and edit it (press the small accept button to save the changes).
+
+#### Why YouTube?
+The tool could be implemented independently of YouTube. It's on my To Do list. For the moment, this is what we have.
+
+In our experience, it was very practical liike this: We had 16 HD videos of more than an 1 hour long that we uploaded one night with **Unlisted** visibility (which is different from **Public** visibility (nobody will find them with a YouTube search), and different from **Private** visibility (anybody with the video URL can viiew it).
 
 #### Export/Import
 It may be convenient/practical for the user to export the marks on a video. This can be done to: 
