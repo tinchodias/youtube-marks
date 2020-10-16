@@ -29,19 +29,29 @@ It may be convenient for the user to export the marks on a video. This can be do
 Those files can be imported back into the project.
 
 #### Persistance/Versioning
-The whole project (videos, tags, and marks) are persisted in the `db.json` file at the root of this repository. 
+The whole project (videos, tags, and marks) is read and written in a `json` file. By default, it's `db.json` at the root of this repository. 
 
 In fact, the user might manually edit this file and (re)start the server with `ctrl+c + npm start` to browse the new state.
 
-It is convenient to regularly version the `db.json` file to some git repository to keep track of your analisis.
+It is convenient to regularly version the `json` file to some git repository to keep track of your work.
 
-## How to install
+#### Custom configuration
+
+You can create a `.env` file at the root directory with custom parameters. Example:
+```
+DB_PATH="../myDb.json"
+SERVER_PORT=3000
+```
+
+---
+
+## How to Install
 
 1. Ensure you have [nodejs](https://nodejs.org/).
 2. Clone this repository.
-3. Open a terminal, change directory to root (where this README.md file is) and run `npm install`.
+3. Open a terminal, change directory to root (where this README file is) and run `npm install`.
 
-## How to launch
+## How to Launch
 
 1. Open a terminal, change directory to root, and run `npm start`.
 2. Open browser on http://localhost:8080.
