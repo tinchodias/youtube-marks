@@ -37,7 +37,7 @@ It is convenient to regularly version the `json` file to some git repository to 
 
 #### Custom configuration
 
-You can create a `.env` file at the root directory with custom parameters. Example:
+There are some customizable parameters for the HTTP server. To do it, you must create a `.env` file at the root of this repository. Example:
 ```
 DB_PATH="../myDb.json"
 SERVER_PORT=3000
