@@ -1,11 +1,15 @@
+require('dotenv').config()
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const low = require('lowdb')
 const FileAsync = require('lowdb/adapters/FileAsync')
-var _ = require('lodash');
+var _ = require('lodash')
 var cors = require('cors')
 
-const port = 8080
+const port = process.env.SERVER_PORT || 8080
+const dbPath = process.env.DB_PATH || 'db.json'
+
 
 const app = express()
 app.use(bodyParser.json())
@@ -169,7 +173,7 @@ class VideosDB {
   }
 
 // Create database instance and start server
-low(new FileAsync('db.json'))
+low(new FileAsync(dbPath))
   .then(db => new VideosDB(db))
   .then(videosDB => {
 
@@ -259,7 +263,7 @@ low(new FileAsync('db.json'))
     return videosDB.ready()
   })
   .then(() => {
-    app.listen(port, () => console.log(`listening on http://localhost:${port}/`))
+    app.listen(port, () => console.log(`db path: ${dbPath}; listening on http://localhost:${port}/`))
   })
 
 
