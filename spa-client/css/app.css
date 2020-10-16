@@ -3,12 +3,16 @@
     cursor: pointer;
 }
 
-.tableCellsAlignMiddle td {
+.crudTable td {
   vertical-align: middle !important;
   max-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.crudTable td span {
+  width: 100%;
 }
 
 .tableCellsSmaller td {
