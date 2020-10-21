@@ -1,6 +1,7 @@
 
 # ToDo
 
+- Really slow with 1600 imported marks.
 - Non-punctual marks (that start and finish)
 - Timestamps
   - Show nicely (hours with 00 is too much)
