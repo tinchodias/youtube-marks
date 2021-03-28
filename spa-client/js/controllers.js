@@ -133,6 +133,11 @@ class VideoController {
 
     $scope.thePlayerVideoId = $stateParams.youtubeId
 
+    // Fixes a cross-origin issue (https://developers.google.com/youtube/player_parameters)
+    $scope.thePlayerVars = {
+      origin: 'http://localhost:8080'
+    }
+
     $scope.refreshVideo = () => {
       return MarksService.videoDetail($stateParams.youtubeId)
         .then(video => {
