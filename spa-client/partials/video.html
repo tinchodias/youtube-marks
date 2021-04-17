@@ -22,13 +22,15 @@
         </div>
       </div>
 
-      <youtube-video 
-        player-height="'800px'"
-        player-width="'100%'"
-        player="thePlayer"
-        video-id="thePlayerVideoId"
-        player-vars="thePlayerVars">
-      </youtube-video>
+      <ng-youtube-embed
+        videoid="thePlayer"
+        video="thePlayerVideoId"
+        height="800px"
+        width="100%"
+        enablejsapi="true"
+        origin="http://localhost:8080/"
+        >
+      </ng-youtube-embed>
       <div class="currentmark">{{currentMark.description}}</div>
     </div>
 

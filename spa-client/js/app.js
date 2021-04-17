@@ -45,7 +45,7 @@ function secondsToTime() {
 }
 
 
-angular.module('marksApp', ['ui.router', 'youtube-embed', 'utils.autofocus', 'xeditable', 'download'])
+angular.module('marksApp', ['ui.router', 'ngYoutubeEmbed', 'utils.autofocus', 'xeditable', 'download'])
     .service("MarksService", function($http) { return new MarksService($http) })
     .controller('BodyController', BodyController)
     .controller('ProjectController', ProjectController)

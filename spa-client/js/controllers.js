@@ -7,25 +7,24 @@
  * may not re-enable them (for example, if user presses in import and project button).
  */
 class BodyController {
-  constructor($scope, $transitions, $document) {
+  constructor($scope, $transitions, ngYoutubeEmbedService) {
+
+    $scope.player = () => ngYoutubeEmbedService.getPlayerById('thePlayer')
 
     $scope.listMarksControllerHackyList = []
 
     var tearDownListMarksController = function() {
       $scope.listMarksControllerHackyList.forEach(element => {
-        // console.log(element)
         element.tearDownThis()
       })
       $scope.listMarksControllerHackyList = []
     }
 
     $scope.enableVideoKeyBindings = (aBoolean) => {
-      // console.log("enableVideoKeyBindings", aBoolean)
       $scope.videoKeyBindingsEnabled = aBoolean
     }
 
-    $transitions.onEnter({entering: "video.listMarks"}, function($transition){
-      // console.log($transition)
+    $transitions.onEnter({entering: "video.listMarks"}, function(){
       $scope.enableVideoKeyBindings(true)
     })
 
@@ -129,14 +128,13 @@ class ProjectController {
 
 class VideoController {
 
-  constructor($scope, $stateParams, MarksService) {
+  constructor($scope, $stateParams, MarksService, ngYoutubeEmbedService) {
 
     $scope.thePlayerVideoId = $stateParams.youtubeId
 
-    // Fixes a cross-origin issue (https://developers.google.com/youtube/player_parameters)
-    $scope.thePlayerVars = {
-      origin: 'http://localhost:8080'
-    }
+//    var player = ngYoutubeEmbedService.getPlayerById('thePlayer')
+//    console.log(ngYoutubeEmbedService)
+//    console.log($scope.thePlayer)
 
     $scope.refreshVideo = () => {
       return MarksService.videoDetail($stateParams.youtubeId)
@@ -148,8 +146,8 @@ class VideoController {
     $scope.refreshVideo()
 
     $scope.seekDelta = (delta) => {
-      const current = $scope.thePlayer.getCurrentTime()
-      $scope.thePlayer.seekTo(current + delta, true)
+      const current = $scope.player().getCurrentTime()
+      $scope.player().seekTo(current + delta, true)
     }
 
   }
@@ -159,7 +157,7 @@ class VideoController {
 
 class ListMarksController {
 
-  constructor(MarksService, $scope, $state, $stateParams, $filter, download, $timeout, $document) {
+  constructor(MarksService, $scope, $state, $stateParams, $filter, download, $timeout, $document, ngYoutubeEmbedService) {
     this.MarksService = MarksService
     this.$scope = $scope
     this.$state = $state
@@ -167,6 +165,7 @@ class ListMarksController {
     this.$filter = $filter
     this.download = download
     this.$document = $document
+    this.ngYoutubeEmbedService = ngYoutubeEmbedService
 
     // Hacky: we assume that tags don't change while this controller lives
     this.MarksService.allTags().then(list => this.allTags = list)
@@ -293,7 +292,10 @@ class ListMarksController {
   }
 
   seekTo(timestamp) {
-    this.$scope.thePlayer.seekTo(timestamp, true)
+    const player = this.ngYoutubeEmbedService.getPlayerById('thePlayer')
+    console.log(player)
+
+    player.seekTo(timestamp, true)
   }
 
   deleteMarkAt(mark) {
