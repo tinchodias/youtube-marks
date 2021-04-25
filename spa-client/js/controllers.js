@@ -129,13 +129,15 @@ class ProjectController {
 
 class VideoController {
 
-  constructor($scope, $stateParams, MarksService) {
+  constructor($scope, $stateParams, MarksService, $window) {
 
     $scope.thePlayerVideoId = $stateParams.youtubeId
 
     // Fixes a cross-origin issue (https://developers.google.com/youtube/player_parameters)
     $scope.thePlayerVars = {
-      origin: 'http://localhost:8080'
+      enablejsapi: 1,
+      origin: $window.location.origin,
+      rel: 0
     }
 
     $scope.refreshVideo = () => {
