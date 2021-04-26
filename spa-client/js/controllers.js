@@ -9,8 +9,6 @@
 class BodyController {
   constructor($scope, $transitions, ngYoutubeEmbedService) {
 
-    $scope.player = () => ngYoutubeEmbedService.getPlayerById('thePlayer')
-
     $scope.listMarksControllerHackyList = []
 
     var tearDownListMarksController = function() {
@@ -39,7 +37,7 @@ class BodyController {
 
 class ProjectController {
 
-  constructor($state, MarksService) {
+  constructor($state, $scope, MarksService) {
     this.$state = $state
     this.MarksService = MarksService
 
@@ -130,11 +128,13 @@ class VideoController {
 
   constructor($scope, $stateParams, MarksService, ngYoutubeEmbedService) {
 
-    $scope.thePlayerVideoId = $stateParams.youtubeId
+    $scope.thePlayerReady = function(event) {
+      console.log("video ready", event)
+      $scope.player = ngYoutubeEmbedService.getPlayerById('thePlayer')
+    }
 
-//    var player = ngYoutubeEmbedService.getPlayerById('thePlayer')
-//    console.log(ngYoutubeEmbedService)
-//    console.log($scope.thePlayer)
+
+    $scope.thePlayerVideoId = $stateParams.youtubeId
 
     $scope.refreshVideo = () => {
       return MarksService.videoDetail($stateParams.youtubeId)
@@ -146,8 +146,8 @@ class VideoController {
     $scope.refreshVideo()
 
     $scope.seekDelta = (delta) => {
-      const current = $scope.player().getCurrentTime()
-      $scope.player().seekTo(current + delta, true)
+      const current = $scope.thePlayer.getCurrentTime()
+      $scope.thePlayer.seekTo(current + delta, true)
     }
 
   }
@@ -293,7 +293,7 @@ class ListMarksController {
 
   seekTo(timestamp) {
     const player = this.ngYoutubeEmbedService.getPlayerById('thePlayer')
-    console.log(player)
+    console.log(getMethods(player))
 
     player.seekTo(timestamp, true)
   }
