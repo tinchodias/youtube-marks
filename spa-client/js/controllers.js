@@ -7,7 +7,7 @@
  * may not re-enable them (for example, if user presses in import and project button).
  */
 class BodyController {
-  constructor($scope, $transitions, ngYoutubeEmbedService) {
+  constructor($scope, $transitions) {
 
     $scope.listMarksControllerHackyList = []
 
@@ -37,7 +37,7 @@ class BodyController {
 
 class ProjectController {
 
-  constructor($state, $scope, MarksService) {
+  constructor($state, MarksService) {
     this.$state = $state
     this.MarksService = MarksService
 
@@ -126,15 +126,25 @@ class ProjectController {
 
 class VideoController {
 
-  constructor($scope, $stateParams, MarksService, ngYoutubeEmbedService) {
-
-    $scope.thePlayerReady = function(event) {
-      console.log("video ready", event)
-      $scope.player = ngYoutubeEmbedService.getPlayerById('thePlayer')
-    }
+  constructor($scope, $stateParams, MarksService, youtubeEmbedAPI) {
 
 
-    $scope.thePlayerVideoId = $stateParams.youtubeId
+    
+    // Create an <iframe> (and YouTube player)
+    $scope.thePlayer = new YT.Player('ytPlayer', {
+        height: '800',
+        width: '100%',
+        videoId: $stateParams.youtubeId,
+        playerVars: {
+          rel: 0,
+          modestbranding: 1
+        }
+      })
+
+
+
+
+
 
     $scope.refreshVideo = () => {
       return MarksService.videoDetail($stateParams.youtubeId)
@@ -157,7 +167,7 @@ class VideoController {
 
 class ListMarksController {
 
-  constructor(MarksService, $scope, $state, $stateParams, $filter, download, $timeout, $document, ngYoutubeEmbedService) {
+  constructor(MarksService, $scope, $state, $stateParams, $filter, download, $timeout, $document) {
     this.MarksService = MarksService
     this.$scope = $scope
     this.$state = $state
@@ -165,7 +175,6 @@ class ListMarksController {
     this.$filter = $filter
     this.download = download
     this.$document = $document
-    this.ngYoutubeEmbedService = ngYoutubeEmbedService
 
     // Hacky: we assume that tags don't change while this controller lives
     this.MarksService.allTags().then(list => this.allTags = list)
@@ -292,10 +301,7 @@ class ListMarksController {
   }
 
   seekTo(timestamp) {
-    const player = this.ngYoutubeEmbedService.getPlayerById('thePlayer')
-    console.log(getMethods(player))
-
-    player.seekTo(timestamp, true)
+    this.$scope.thePlayer.seekTo(timestamp, true)
   }
 
   deleteMarkAt(mark) {

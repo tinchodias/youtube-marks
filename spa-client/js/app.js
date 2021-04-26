@@ -25,17 +25,6 @@ angular.module('utils.autofocus', [])
 }]);
 
 
-// Source: https://flaviocopes.com/how-to-list-object-methods-javascript/
-const getMethods = (obj) => {
-  let properties = new Set()
-  let currentObj = obj
-  do {
-    Object.getOwnPropertyNames(currentObj).map(item => properties.add(item))
-  } while ((currentObj = Object.getPrototypeOf(currentObj)))
-  return [...properties.keys()].filter(item => typeof obj[item] === 'function')
-}
-
-
 function secondsToTime() {
 
   function padTime(t) {
@@ -56,7 +45,7 @@ function secondsToTime() {
 }
 
 
-angular.module('marksApp', ['ui.router', 'ngYoutubeEmbed', 'utils.autofocus', 'xeditable', 'download'])
+angular.module('marksApp', ['ui.router', 'utils.autofocus', 'xeditable', 'download'])
     .service("MarksService", function($http) { return new MarksService($http) })
     .controller('BodyController', BodyController)
     .controller('ProjectController', ProjectController)

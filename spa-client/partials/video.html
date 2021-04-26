@@ -22,17 +22,8 @@
         </div>
       </div>
 
-      <ng-youtube-embed
-        videoid="thePlayer"
-        video="thePlayerVideoId"
-        height="800px"
-        width="100%"
-        enablejsapi="true"
-        origin="http://localhost:8080/"
-        rel="false"
-        onerror="thePlayerReady"
-        modestbranding="true">
-      </ng-youtube-embed>
+      <div id="ytPlayer"></div>
+
       <div class="currentmark">{{currentMark.description}}</div>
     </div>
 
