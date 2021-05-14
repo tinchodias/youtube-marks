@@ -143,9 +143,6 @@ class VideoController {
 
 
 
-
-
-
     $scope.refreshVideo = () => {
       return MarksService.videoDetail($stateParams.youtubeId)
         .then(video => {
