@@ -7,25 +7,22 @@
  * may not re-enable them (for example, if user presses in import and project button).
  */
 class BodyController {
-  constructor($scope, $transitions, $document) {
+  constructor($scope, $transitions) {
 
     $scope.listMarksControllerHackyList = []
 
     var tearDownListMarksController = function() {
       $scope.listMarksControllerHackyList.forEach(element => {
-        // console.log(element)
         element.tearDownThis()
       })
       $scope.listMarksControllerHackyList = []
     }
 
     $scope.enableVideoKeyBindings = (aBoolean) => {
-      // console.log("enableVideoKeyBindings", aBoolean)
       $scope.videoKeyBindingsEnabled = aBoolean
     }
 
-    $transitions.onEnter({entering: "video.listMarks"}, function($transition){
-      // console.log($transition)
+    $transitions.onEnter({entering: "video.listMarks"}, function(){
       $scope.enableVideoKeyBindings(true)
     })
 
@@ -129,16 +126,22 @@ class ProjectController {
 
 class VideoController {
 
-  constructor($scope, $stateParams, MarksService, $window) {
+  constructor($scope, $stateParams, MarksService, youtubeEmbedAPI) {
 
-    $scope.thePlayerVideoId = $stateParams.youtubeId
 
-    // Fixes a cross-origin issue (https://developers.google.com/youtube/player_parameters)
-    $scope.thePlayerVars = {
-      enablejsapi: 1,
-      origin: $window.location.origin,
-      rel: 0
-    }
+    
+    // Create an <iframe> (and YouTube player)
+    $scope.thePlayer = new YT.Player('ytPlayer', {
+        height: '800',
+        width: '100%',
+        videoId: $stateParams.youtubeId,
+        playerVars: {
+          rel: 0,
+          modestbranding: 1
+        }
+      })
+
+
 
     $scope.refreshVideo = () => {
       return MarksService.videoDetail($stateParams.youtubeId)
