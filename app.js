@@ -1,7 +1,6 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-var _ = require('lodash')
 var cors = require('cors')
 
 const app = express()
