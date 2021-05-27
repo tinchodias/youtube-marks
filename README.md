@@ -55,3 +55,8 @@ SERVER_PORT=3000
 
 1. Open a terminal, change directory to root, and run `npm start`.
 2. Open browser on http://localhost:8080.
+
+
+## License
+
+This code is licensed under the [MIT license](./LICENSE).
