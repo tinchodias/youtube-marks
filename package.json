@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "A tool to annotate Youtube videos",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js",
+    "test": "export DB_PATH=test_db.js app_PORT=8888 && mocha && rm $DB_PATH"
   },
   "keywords": [],
   "author": "tinchodias@gmail.com",
@@ -23,5 +24,10 @@
     "loadash": "^1.0.0",
     "lowdb": "^1.0.0",
     "papaparse": "^5.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.4.0"
   }
 }
