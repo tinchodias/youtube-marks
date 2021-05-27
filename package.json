@@ -4,7 +4,7 @@
   "description": "A tool to annotate Youtube videos",
   "scripts": {
     "start": "node index.js",
-    "test": "export DB_PATH=test_db.js app_PORT=8888 && mocha && rm $DB_PATH"
+    "test": "export DB_PATH=/tmp/db.json && cp test/data/db.json $DB_PATH && mocha"
   },
   "keywords": [],
   "author": "tinchodias@gmail.com",

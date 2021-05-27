@@ -1,0 +1,14 @@
+[
+  {
+      "id": "ide",
+      "description": "Action in IDE",
+      "keyBinding": "i",
+      "color": "#00ffff"
+  },
+  {
+      "id": "meta",
+      "description": "Meta comment",
+      "keyBinding": "c",
+      "color": "#ffff00"
+  }
+]
