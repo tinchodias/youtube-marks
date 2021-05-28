@@ -84,7 +84,7 @@ class UniformController {
     return this.selectedGroupedMarks.length > 1
   }
 
-  uniformSelection() {
+  mergeSelectedGroupedMarks() {
     console.log(this.selectedGroupedMarks)
     var newDescription = prompt("New description", this.selectedGroupedMarks[0].description)
     if (newDescription && newDescription.length > 0) {
