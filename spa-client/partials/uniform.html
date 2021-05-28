@@ -99,7 +99,7 @@
 
         </table>
 
-        <a class="btn btn-primary" ng-click="uniformCtrl.applyOnSelection()" ng-if="uniformCtrl.selectedGroupedMarks.length > 0">
+        <a class="btn btn-primary" ng-click="uniformCtrl.uniformSelection()" ng-if="uniformCtrl.canUniform()">
           Uniform {{uniformCtrl.selectedGroupedMarks.length}} Mark Groups
         </a>
         <a class="btn btn-secondary" ng-click="uniformCtrl.selectAllGroupedMarks()">Select All</a>

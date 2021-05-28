@@ -1,34 +1,62 @@
-{
-    "Test case created": [
-        {
-            "timestamp": 48.461063,
-            "description": "Test case created",
-            "tagId": "ide",
-            "youtubeId": "ymITEeAOtEA"
+[
+    {
+        "description": "Test case created",
+        "locations": {
+            "occurrencesByYoutubeId": [
+                {
+                    "youtubeId": "ymITEeAOtEA",
+                    "count": 1
+                }
+            ],
+            "total": 1,
+            "marks": [
+                {
+                    "timestamp": 48.461063,
+                    "description": "Test case created",
+                    "tagId": "ide",
+                    "youtubeId": "ymITEeAOtEA"
+                }
+            ]
         }
-    ],
-    "Open debugger": [
-        {
-            "timestamp": 116.669521,
-            "description": "Open debugger",
-            "tagId": "ide",
-            "youtubeId": "ymITEeAOtEA"
+    },
+    {
+        "description": "Open debugger",
+        "locations": {
+            "occurrencesByYoutubeId": [
+                {
+                    "youtubeId": "ymITEeAOtEA",
+                    "count": 1
+                }
+            ],
+            "total": 1,
+            "marks": [
+                {
+                    "timestamp": 116.669521,
+                    "description": "Open debugger",
+                    "tagId": "ide",
+                    "youtubeId": "ymITEeAOtEA"
+                }
+            ]
         }
-    ],
-    "Run test (pass)": [
-        {
-            "timestamp": 143.079521,
-            "description": "Run test (pass)",
-            "tagId": "ide",
-            "youtubeId": "ymITEeAOtEA"
+    },
+    {
+        "description": "Run test (pass)",
+        "locations": {
+            "occurrencesByYoutubeId": [
+                {
+                    "youtubeId": "ymITEeAOtEA",
+                    "count": 1
+                }
+            ],
+            "total": 1,
+            "marks": [
+                {
+                    "timestamp": 143.079521,
+                    "description": "Run test (pass)",
+                    "tagId": "ide",
+                    "youtubeId": "ymITEeAOtEA"
+                }
+            ]
         }
-    ],
-    "New mark": [
-        {
-            "timestamp": 12.34,
-            "description": "New mark",
-            "tagId": "meta",
-            "youtubeId": "ymITEeAOtEA"
-        }
-    ]
-}
+    }
+]

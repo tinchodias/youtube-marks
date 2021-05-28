@@ -80,7 +80,11 @@ class UniformController {
       })
   }
 
-  applyOnSelection() {
+  canUniform() {
+    return this.selectedGroupedMarks.length > 1
+  }
+
+  uniformSelection() {
     console.log(this.selectedGroupedMarks)
     var newDescription = prompt("New description", this.selectedGroupedMarks[0].description)
     if (newDescription && newDescription.length > 0) {

@@ -1,108 +1,192 @@
-{
-  "Test case created": [
-    {
-      "timestamp": 48.461063,
-      "description": "Test case created",
-      "tagId": "ide",
-      "youtubeId": "ymITEeAOtEA"
+[
+  {
+    "description": "Test case created",
+    "locations": {
+      "occurrencesByYoutubeId": [
+        {
+          "youtubeId": "ymITEeAOtEA",
+          "count": 1
+        }
+      ],
+      "total": 1,
+      "marks": [
+        {
+          "timestamp": 48.461063,
+          "description": "Test case created",
+          "tagId": "ide",
+          "youtubeId": "ymITEeAOtEA"
+        }
+      ]
     }
-  ],
-  "Open debugger": [
-    {
-      "timestamp": 116.669521,
-      "description": "Open debugger",
-      "tagId": "ide",
-      "youtubeId": "ymITEeAOtEA"
-    },
-    {
-      "timestamp": 193.55186,
-      "description": "Open debugger",
-      "tagId": "ide",
-      "youtubeId": "aO4iYSNJxY4"
-    },
-    {
-      "timestamp": 209.392891,
-      "description": "Open debugger",
-      "tagId": "ide",
-      "youtubeId": "aO4iYSNJxY4"
+  },
+  {
+    "description": "Open debugger",
+    "locations": {
+      "occurrencesByYoutubeId": [
+        {
+          "youtubeId": "ymITEeAOtEA",
+          "count": 1
+        },
+        {
+          "youtubeId": "aO4iYSNJxY4",
+          "count": 2
+        }
+      ],
+      "total": 3,
+      "marks": [
+        {
+          "timestamp": 116.669521,
+          "description": "Open debugger",
+          "tagId": "ide",
+          "youtubeId": "ymITEeAOtEA"
+        },
+        {
+          "timestamp": 193.55186,
+          "description": "Open debugger",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        },
+        {
+          "timestamp": 209.392891,
+          "description": "Open debugger",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        }
+      ]
     }
-  ],
-  "Run test (pass)": [
-    {
-      "timestamp": 143.079521,
-      "description": "Run test (pass)",
-      "tagId": "ide",
-      "youtubeId": "ymITEeAOtEA"
-    },
-    {
-      "timestamp": 67.12108212302398,
-      "description": "Run test (pass)",
-      "tagId": "ide",
-      "youtubeId": "aO4iYSNJxY4"
-    },
-    {
-      "timestamp": 70.42714499427795,
-      "description": "Run test (pass)",
-      "tagId": "ide",
-      "youtubeId": "aO4iYSNJxY4"
-    },
-    {
-      "timestamp": 131.983445,
-      "description": "Run test (pass)",
-      "tagId": "ide",
-      "youtubeId": "aO4iYSNJxY4"
+  },
+  {
+    "description": "Run test (pass)",
+    "locations": {
+      "occurrencesByYoutubeId": [
+        {
+          "youtubeId": "ymITEeAOtEA",
+          "count": 1
+        },
+        {
+          "youtubeId": "aO4iYSNJxY4",
+          "count": 3
+        }
+      ],
+      "total": 4,
+      "marks": [
+        {
+          "timestamp": 143.079521,
+          "description": "Run test (pass)",
+          "tagId": "ide",
+          "youtubeId": "ymITEeAOtEA"
+        },
+        {
+          "timestamp": 67.12108212302398,
+          "description": "Run test (pass)",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        },
+        {
+          "timestamp": 70.42714499427795,
+          "description": "Run test (pass)",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        },
+        {
+          "timestamp": 131.983445,
+          "description": "Run test (pass)",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        }
+      ]
     }
-  ],
-  "New mark": [
-    {
-      "timestamp": 12.34,
-      "description": "New mark",
-      "tagId": "meta",
-      "youtubeId": "ymITEeAOtEA"
+  },
+  {
+    "description": "Run test (fail)",
+    "locations": {
+      "occurrencesByYoutubeId": [
+        {
+          "youtubeId": "aO4iYSNJxY4",
+          "count": 3
+        }
+      ],
+      "total": 3,
+      "marks": [
+        {
+          "timestamp": 102.6794262861023,
+          "description": "Run test (fail)",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        },
+        {
+          "timestamp": 126.439112,
+          "description": "Run test (fail)",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        },
+        {
+          "timestamp": 189.104517,
+          "description": "Run test (fail)",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        }
+      ]
     }
-  ],
-  "Run test (fail)": [
-    {
-      "timestamp": 102.6794262861023,
-      "description": "Run test (fail)",
-      "tagId": "ide",
-      "youtubeId": "aO4iYSNJxY4"
-    },
-    {
-      "timestamp": 126.439112,
-      "description": "Run test (fail)",
-      "tagId": "ide",
-      "youtubeId": "aO4iYSNJxY4"
-    },
-    {
-      "timestamp": 189.104517,
-      "description": "Run test (fail)",
-      "tagId": "ide",
-      "youtubeId": "aO4iYSNJxY4"
+  },
+  {
+    "description": "Open Debugger",
+    "locations": {
+      "occurrencesByYoutubeId": [
+        {
+          "youtubeId": "aO4iYSNJxY4",
+          "count": 1
+        }
+      ],
+      "total": 1,
+      "marks": [
+        {
+          "timestamp": 110.929395,
+          "description": "Open Debugger",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        }
+      ]
     }
-  ],
-  "Open Debugger": [
-    {
-      "timestamp": 110.929395,
-      "description": "Open Debugger",
-      "tagId": "ide",
-      "youtubeId": "aO4iYSNJxY4"
+  },
+  {
+    "description": "Run tests (pass)",
+    "locations": {
+      "occurrencesByYoutubeId": [
+        {
+          "youtubeId": "aO4iYSNJxY4",
+          "count": 1
+        }
+      ],
+      "total": 1,
+      "marks": [
+        {
+          "timestamp": 224.429891,
+          "description": "Run tests (pass)",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        }
+      ]
     }
-  ],
-  "Run tests (pass)": [
-    {
-      "timestamp": 224.429891,
-      "description": "Run tests (pass)",
-      "tagId": "ide",
-      "youtubeId": "aO4iYSNJxY4"
+  },
+  {
+    "description": "CONTINUE WATCHING HERE",
+    "locations": {
+      "occurrencesByYoutubeId": [
+        {
+          "youtubeId": "aO4iYSNJxY4",
+          "count": 1
+        }
+      ],
+      "total": 1,
+      "marks": [
+        {
+          "timestamp": 241.938641,
+          "description": "CONTINUE WATCHING HERE",
+          "tagId": "meta",
+          "youtubeId": "aO4iYSNJxY4"
+        }
+      ]
     }
-  ],
-  "CONTINUE WATCHING HERE": [
-    {
-      "timestamp": 241.938641,
-      "description": "CONTINUE WATCHING HERE",
-      "tagId": "meta",
-      "youtubeId": "aO4iYSNJxY4"
-    }
-  ]
-}
+  }
+]
