@@ -1,0 +1,116 @@
+<div class="container-fluid">
+
+  <div class="row">
+
+
+    <div class="col-md-12">
+      <div class="d-flex flex-row mb-1 mt-1" role="toolbar" aria-label="Video controls">
+        <button type="button" class="btn btn-sm mr-auto" ui-sref="project">
+          <img src="/node_modules/bootstrap-icons/icons/arrow-left.svg" alt="Go to project" >
+          Project
+        </button>
+      </div>
+    </div>
+
+
+    <div class="col-md-10 offset-md-1">
+
+      <h2 class="projectTitle display-4">Videos to Consider</h2>
+
+      <table class="table table-sm">
+
+        <thead>
+            <tr>
+                <th class="selectionColumn"> </th>
+                <th class="youtubeIdColumn">Youtube ID</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+          <tr ng-repeat="aVideo in uniformCtrl.allVideos">
+
+            <td class="selectionColumn">
+              <input type="checkbox" data-checklist-model="uniformCtrl.selectedVideos" data-checklist-value="aVideo" checklist-change="uniformCtrl.refreshGroupedMarks()">
+            </td>
+
+            <td class="youtubeIdColumn">
+              <span>
+                {{ aVideo.youtubeId }}
+              </span>
+            </td>
+
+            <td>
+              <span>
+                {{ aVideo.description }}
+              </span>
+            </td>
+        
+          </tr>
+            
+        </tbody>
+        
+      </table>
+
+      <a class="btn btn-secondary" ng-click="uniformCtrl.selectAllVideos()">Select All</a>
+      <a class="btn btn-secondary" ng-click="uniformCtrl.selectNoneVideos()">Select None</a>
+
+    </div>
+
+
+
+    <div class="col-md-10 offset-md-1">
+
+        <h2 class="projectTitle display-4">Grouped Marks</h2>
+
+        <table class="table table-sm table-striped">
+
+            <thead>
+                <tr>
+                    <th class="selectionColumn"> </th>
+                    <th>Description (#total)</th>
+                    <th class="locationsColumn">Locations</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="aGroupedMark in uniformCtrl.groupedMarks">
+
+                  <td class="selectionColumn">
+                    <input type="checkbox" data-checklist-model="uniformCtrl.selectedGroupedMarks" data-checklist-value="aGroupedMark">
+                  </td>
+      
+                  <td>
+                    <span>
+                      {{ aGroupedMark.description }} <span class="markCount">({{ aGroupedMark.locations.total }})</span>
+                    </span>
+                  </td>
+
+                  <td>
+                    <div ng-repeat="occurence in aGroupedMark.locations.occurrencesByYoutubeId">
+                      {{occurence.youtubeId}} <span class="markCount">({{occurence.count}})</span>
+                    </div>
+                  </td>
+
+                 </tr>
+
+            </tbody>
+
+        </table>
+
+        <a class="btn btn-primary" ng-click="uniformCtrl.applyOnSelection()" ng-if="uniformCtrl.selectedGroupedMarks.length > 0">
+          Uniform {{uniformCtrl.selectedGroupedMarks.length}} Mark Groups
+        </a>
+        <a class="btn btn-secondary" ng-click="uniformCtrl.selectAllGroupedMarks()">Select All</a>
+        <a class="btn btn-secondary" ng-click="uniformCtrl.selectNoneGroupedMarks()">Select None</a>
+  
+    </div>
+
+
+
+
+
+  </div>
+
+</div>

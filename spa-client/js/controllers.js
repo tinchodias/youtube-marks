@@ -34,6 +34,66 @@ class BodyController {
 }
 
 
+class UniformController {
+  constructor(MarksService) {
+    this.MarksService = MarksService
+
+    this.selectNoneVideos()
+    this.selectNoneGroupedMarks()
+    this.MarksService.summaryOfAllVideos()
+      .then(list => {
+        this.allVideos = list
+        this.selectAllVideos()
+        this.refreshGroupedMarks()
+      })
+  }
+
+  /* for videos */
+  selectNoneVideos() {
+    this.selectedVideos = []
+  }
+
+  selectAllVideos() {
+    this.selectedVideos = angular.copy(this.allVideos)
+  }
+
+  selectedVideoIds() {
+    return this.selectedVideos.map(video => video.youtubeId)
+  }
+
+
+  /* for grouped marks */
+  selectNoneGroupedMarks() {
+    this.selectedGroupedMarks = []
+  }
+
+  selectAllGroupedMarks() {
+    this.selectedGroupedMarks = this.groupedMarks
+  }
+
+  refreshGroupedMarks() {
+    this.selectNoneGroupedMarks()
+    this.MarksService.groupedMarks(this.selectedVideoIds())
+//    .then(list => console.log(list))
+      .then(list => {
+        this.groupedMarks = list
+      })
+  }
+
+  applyOnSelection() {
+    console.log(this.selectedGroupedMarks)
+    var newDescription = prompt("New description", this.selectedGroupedMarks[0].description)
+    if (newDescription && newDescription.length > 0) {
+      this.MarksService.uniformTo(this.selectedGroupedMarks, newDescription).then(
+        _ => this.refreshGroupedMarks()
+      )
+    } else {
+      alert("Invalid description")
+    }
+  }
+
+}
+
 
 class ProjectController {
 

@@ -168,11 +168,32 @@ class VideosDB {
 
       const groups = _.groupBy(marksWithYoutubeId, mark => mark.description)
 
-//      console.log(JSON.stringify(groups))
-      return groups
-      
+      return Object.entries(groups).map(group => { 
+        return {
+          "description": group[0],
+          "locations": {
+            "occurrencesByYoutubeId": this.occurrencesByYoutubeId(group[1]),
+            "total": group[1].length,
+            "marks": group[1]
+          }
+        }
+      })
     }
 
+    occurrencesByYoutubeId(data) {
+      const groups = _.groupBy(data, each => each.youtubeId)
+      return Object.entries(groups).map(group => {
+        return {
+          "youtubeId": group[0],
+          "count": group[1].length
+        }
+      })
+    }
+
+    async uniformMarks(data) {
+      console.log(data)
+      // TODO
+    }
 
 }
 

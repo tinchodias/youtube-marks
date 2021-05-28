@@ -60,3 +60,15 @@
   justify-content: center;
 }
 
+
+.selectionButtons {
+  width: 3ch;
+}
+
+.locationsColumn {
+  width: 50%;
+}
+
+.markCount {
+  font-weight: bold;
+}

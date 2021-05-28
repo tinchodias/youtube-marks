@@ -104,4 +104,11 @@ app.post('/marks', (req, res) => {
 })
 
 
+app.post('/uniform', (req, res) => {
+  app.videosDB.uniformMarks(req.body).then(
+    _ => res.sendStatus(200),
+    error => res.status(404).send(error.message))
+})
+
+
 module.exports = app

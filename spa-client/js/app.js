@@ -45,10 +45,11 @@ function secondsToTime() {
 }
 
 
-angular.module('marksApp', ['ui.router', 'utils.autofocus', 'xeditable', 'download'])
+angular.module('marksApp', ['ui.router', 'utils.autofocus', 'xeditable', 'download', 'checklist-model'])
     .service("MarksService", function($http) { return new MarksService($http) })
     .controller('BodyController', BodyController)
     .controller('ProjectController', ProjectController)
+    .controller('UniformController', UniformController)
     .controller('VideoController', VideoController)
     .controller('ListMarksController', ListMarksController)
     .controller('ImportMarksController', ImportMarksController)
