@@ -150,6 +150,30 @@ class VideosDB {
       })
     }
 
+
+    async groupedMarks(arrayOfYoutubeIds) {
+
+      if (!_.isArray(arrayOfYoutubeIds)) {
+        throw new Error('Argument must be an array of youtubeIds to filter videos')
+      }
+      
+      const filteredVideos = _.filter(this.db.get('videos').value(), video => _.includes(arrayOfYoutubeIds, video.youtubeId) ) 
+      const marksWithYoutubeId = _.flatMap(
+        filteredVideos, 
+        video => _.map(video.marks, mark => {
+          const clone = _.clone(mark)
+          clone.youtubeId = video.youtubeId
+          return clone
+        }))
+
+      const groups = _.groupBy(marksWithYoutubeId, mark => mark.description)
+
+//      console.log(JSON.stringify(groups))
+      return groups
+      
+    }
+
+
 }
 
 module.exports = VideosDB

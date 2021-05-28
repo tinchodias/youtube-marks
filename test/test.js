@@ -148,6 +148,39 @@ describe("Server Integration Tests", () => {
                       })
              })
         })
+        describe("POST", () => {
+            it("should answer all marks of several videos", (done) => {
+                chai.request(server)
+                     .post('/marks')
+                     .send(['ymITEeAOtEA','aO4iYSNJxY4'])
+                     .end((err, res) => {
+                         res.should.have.status(200)
+                         res.should.be.json
+                         res.body.should.deep.equal(require('./data/expected/get_grouped_marks.json'))
+                         done()
+                      })
+             })
+             it("should answer grouped marks of a single video", (done) => {
+                chai.request(server)
+                     .post('/marks')
+                     .send(['ymITEeAOtEA'])
+                     .end((err, res) => {
+                         res.should.have.status(200)
+                         res.should.be.json
+                         res.body.should.deep.equal(require('./data/expected/get_grouped_marks_filtered.json'))
+                         done()
+                      })
+             })
+             it("should fail if boody is not an array", (done) => {
+                chai.request(server)
+                     .post('/marks')
+                     .end((err, res) => {
+                         res.should.have.status(404)
+                         done()
+                      })
+             })
+        })
+
     })
 
 
@@ -167,7 +200,41 @@ describe("Server Integration Tests", () => {
                       })
              })
         })
+        describe("POST", () => {
+            it("should add a tag", (done) => {
+                chai.request(server)
+                    .post(`/tags`)
+                    .send(    {
+                        "id": "newForTest",
+                        "description": "",
+                        "keyBinding": "",
+                        "color": "#00ffff"
+                      })
+                    .end((err, res) => {
+                        res.should.have.status(200)
+                        res.should.be.text
+                        res.text.should.equal('OK')
+                        done()
+                    })
+            })
+            it("should fail adding a tag with existing id", (done) => {
+                chai.request(server)
+                    .post(`/tags`)
+                    .send(    {
+                        "id": "ide",
+                        "description": "",
+                        "keyBinding": "",
+                        "color": "#00ffff"
+                      })
+                    .end((err, res) => {
+                        res.should.have.status(400)
+                        done()
+                    })
+            })
+        })
     })
 
+
+    
 
 })

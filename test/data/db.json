@@ -16,7 +16,7 @@
         },
         {
           "timestamp": 100.951042,
-          "description": "Test run (error)",
+          "description": "Run test (fail)",
           "tagId": "ide"
         },
         {
@@ -31,23 +31,18 @@
       "description": "Simple screencast in Pharo 3",
       "marks": [
         {
-          "timestamp": 27.680456,
-          "description": "",
-          "tagId": "ide"
-        },
-        {
           "timestamp": 67.12108212302398,
-          "description": "Test run (pass)",
+          "description": "Run test (pass)",
           "tagId": "ide"
         },
         {
           "timestamp": 70.42714499427795,
-          "description": "Test run pass",
+          "description": "Run test (pass)",
           "tagId": "ide"
         },
         {
           "timestamp": 102.6794262861023,
-          "description": "Test run (error)",
+          "description": "Run test (fail)",
           "tagId": "ide"
         },
         {
@@ -57,32 +52,32 @@
         },
         {
           "timestamp": 126.439112,
-          "description": "Test run (halt)",
+          "description": "Run test (fail)",
           "tagId": "ide"
         },
         {
           "timestamp": 131.983445,
-          "description": "test Run (green)",
+          "description": "Run test (pass)",
           "tagId": "ide"
         },
         {
           "timestamp": 189.104517,
-          "description": "test run (red)",
+          "description": "Run test (fail)",
           "tagId": "ide"
         },
         {
           "timestamp": 193.55186,
-          "description": "open debugger",
+          "description": "Open debugger",
           "tagId": "ide"
         },
         {
           "timestamp": 209.392891,
-          "description": "open debugger",
+          "description": "Open debugger",
           "tagId": "ide"
         },
         {
           "timestamp": 224.429891,
-          "description": "run tests green",
+          "description": "Run tests (pass)",
           "tagId": "ide"
         },
         {

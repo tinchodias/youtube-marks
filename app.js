@@ -97,6 +97,11 @@ app.delete('/videos/:youtubeId/marks/:timestamp', (req, res) => {
     error => res.status(404).send(error.message))
 })
 
+app.post('/marks', (req, res) => {
+  app.videosDB.groupedMarks(req.body).then(
+    list => res.send(list),
+    error => res.status(404).send(error.message))
+})
 
 
 module.exports = app

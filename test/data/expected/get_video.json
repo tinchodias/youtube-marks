@@ -14,7 +14,7 @@
         },
         {
             "timestamp": 100.951042,
-            "description": "Test run (error)",
+            "description": "Run test (fail)",
             "tagId": "ide"
         },
         {
