@@ -56,6 +56,48 @@
     }
   },
   {
+    "description": "Run test (fail)",
+    "locations": {
+      "occurrencesByYoutubeId": [
+        {
+          "youtubeId": "ymITEeAOtEA",
+          "count": 1
+        },
+        {
+          "youtubeId": "aO4iYSNJxY4",
+          "count": 3
+        }
+      ],
+      "total": 4,
+      "marks": [
+        {
+          "timestamp": 100.951042,
+          "description": "Run test (fail)",
+          "tagId": "ide",
+          "youtubeId": "ymITEeAOtEA"
+        },
+        {
+          "timestamp": 102.6794262861023,
+          "description": "Run test (fail)",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        },
+        {
+          "timestamp": 126.439112,
+          "description": "Run test (fail)",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        },
+        {
+          "timestamp": 189.104517,
+          "description": "Run test (fail)",
+          "tagId": "ide",
+          "youtubeId": "aO4iYSNJxY4"
+        }
+      ]
+    }
+  },
+  {
     "description": "Run test (pass)",
     "locations": {
       "occurrencesByYoutubeId": [
@@ -91,38 +133,6 @@
         {
           "timestamp": 131.983445,
           "description": "Run test (pass)",
-          "tagId": "ide",
-          "youtubeId": "aO4iYSNJxY4"
-        }
-      ]
-    }
-  },
-  {
-    "description": "Run test (fail)",
-    "locations": {
-      "occurrencesByYoutubeId": [
-        {
-          "youtubeId": "aO4iYSNJxY4",
-          "count": 3
-        }
-      ],
-      "total": 3,
-      "marks": [
-        {
-          "timestamp": 102.6794262861023,
-          "description": "Run test (fail)",
-          "tagId": "ide",
-          "youtubeId": "aO4iYSNJxY4"
-        },
-        {
-          "timestamp": 126.439112,
-          "description": "Run test (fail)",
-          "tagId": "ide",
-          "youtubeId": "aO4iYSNJxY4"
-        },
-        {
-          "timestamp": 189.104517,
-          "description": "Run test (fail)",
           "tagId": "ide",
           "youtubeId": "aO4iYSNJxY4"
         }

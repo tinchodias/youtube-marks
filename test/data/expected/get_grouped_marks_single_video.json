@@ -40,6 +40,26 @@
         }
     },
     {
+        "description": "Run test (fail)",
+        "locations": {
+            "occurrencesByYoutubeId": [
+                {
+                    "youtubeId": "ymITEeAOtEA",
+                    "count": 1
+                }
+            ],
+            "total": 1,
+            "marks": [
+                {
+                    "timestamp": 100.951042,
+                    "description": "Run test (fail)",
+                    "tagId": "ide",
+                    "youtubeId": "ymITEeAOtEA"
+                }
+            ]
+        }
+    },
+    {
         "description": "Run test (pass)",
         "locations": {
             "occurrencesByYoutubeId": [
