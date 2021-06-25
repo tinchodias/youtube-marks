@@ -69,8 +69,9 @@
             <thead>
                 <tr>
                     <th class="selectionColumn"> </th>
-                    <th>Description (#total)</th>
-                    <th class="locationsColumn">Locations</th>
+                    <th>Description</th>
+                    <th class="w-25">Locations</th>
+                    <th class="w-25">Tags</th>
                 </tr>
             </thead>
 
@@ -89,13 +90,20 @@
 
                   <td>
                     <div ng-repeat="occurence in aGroupedMark.locations.occurrencesByYoutubeId">
-                      {{occurence.youtubeId}} <span class="markCount">({{occurence.count}})</span>
+                      {{uniformCtrl.videoLabelFor(occurence.youtubeId)}} <span class="markCount">({{occurence.count}})</span>
                     </div>
                   </td>
 
-                 </tr>
+                  <td>
+                    <div ng-repeat="occurence in aGroupedMark.locations.occurrencesByTagId">
+                      <tag-with-color tagcolor="{{uniformCtrl.tagColorFor(occurence.tagId)}}" taglabel="{{uniformCtrl.tagStringFor(occurence.tagId) + ' (' + occurence.count + ')'}}">
+                      </tag-with-color>
+                    </div>
+                   </td>
 
-            </tbody>
+                  </tr>
+
+                </tbody>
 
         </table>
 

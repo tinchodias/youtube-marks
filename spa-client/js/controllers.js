@@ -35,8 +35,9 @@ class BodyController {
 
 
 class UniformController {
-  constructor(MarksService) {
+  constructor(MarksService, $filter) {
     this.MarksService = MarksService
+    this.$filter = $filter
 
     this.selectNoneVideos()
     this.selectNoneGroupedMarks()
@@ -46,6 +47,10 @@ class UniformController {
         this.selectAllVideos()
         this.refreshGroupedMarks()
       })
+
+    this.MarksService.allTags()
+      .then(list => this.allTags = list)
+
   }
 
   /* for videos */
@@ -74,7 +79,6 @@ class UniformController {
   refreshGroupedMarks() {
     this.selectNoneGroupedMarks()
     this.MarksService.groupedMarks(this.selectedVideoIds())
-//    .then(list => console.log(list))
       .then(list => {
         this.groupedMarks = list
       })
@@ -96,6 +100,30 @@ class UniformController {
     }
   }
 
+
+  videoLabelFor(youtubeId) {
+    if (this.allVideos && this.allVideos.length) {
+      var selected = this.$filter('filter')(this.allVideos, {youtubeId: youtubeId})
+      return selected.length ? selected[0].description : ''
+    } else {
+      return youtubeId;
+    }
+  }
+
+  tagStringFor(tagId) {
+    return tagId
+  }
+
+  //TODO
+  // --> cloned from another controller
+  tagColorFor(tagId) {
+    if (tagId && this.allTags && this.allTags.length) {
+      var selected = this.$filter('filter')(this.allTags, {id: tagId})
+      return selected.length ? selected[0].color : ''
+    } else {
+      return '';
+    }
+  }
 }
 
 

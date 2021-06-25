@@ -67,5 +67,18 @@ angular.module('marksApp', ['ui.router', 'utils.autofocus', 'xeditable', 'downlo
       }
     })
 
+    .directive('tagWithColor', function() {
+      return {
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        template: (elem, attr) => `
+          <div>
+            <img style="background-color: ${attr.tagcolor}; vertical-align:text-bottom;" src="/node_modules/bootstrap-icons/icons/square.svg" alt="Tag color">
+            <span alt="Tag label">${attr.taglabel}</span>
+          </div>`
+      } 
+    })
+   
 
     .config(routes)

@@ -173,6 +173,7 @@ class VideosDB {
           "description": group[0],
           "locations": {
             "occurrencesByYoutubeId": this.occurrencesByYoutubeId(group[1]),
+            "occurrencesByTagId": this.occurrencesByTagId(group[1]),
             "total": group[1].length,
             "marks": group[1]
           }
@@ -189,6 +190,16 @@ class VideosDB {
       return Object.entries(groups).map(group => {
         return {
           "youtubeId": group[0],
+          "count": group[1].length
+        }
+      })
+    }
+
+    occurrencesByTagId(data) {
+      const groups = _.groupBy(data, each => each.tagId)
+      return Object.entries(groups).map(group => {
+        return {
+          "tagId": group[0],
           "count": group[1].length
         }
       })
