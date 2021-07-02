@@ -150,6 +150,21 @@ class VideosDB {
       })
     }
 
+    async uniformMarks(data) {
+      data.groupedMarks.forEach(groupedMark => {
+        groupedMark.locations.marks.forEach(mark => {
+          const newMark = {
+            timestamp: mark.timestamp,
+            tagId: mark.tagId,
+            description: data.newDescription
+          }
+          this.updateMark(newMark, mark.youtubeId)
+        })
+      })
+    }
+
+
+    /* QUERY: Grouped marks */
 
     async groupedMarks(arrayOfYoutubeIds) {
 
@@ -166,9 +181,14 @@ class VideosDB {
           return clone
         }))
 
-      const groups = _.groupBy(marksWithYoutubeId, mark => mark.description)
+      const groups = _(marksWithYoutubeId)
+        .groupBy(mark => mark.description)
+        .toPairs()
+        .sortBy(group => group[1].length)
+        .reverse()
+        .value()
 
-      const complexResult = Object.entries(groups).map(group => { 
+      const complexResult = groups.map(group => { 
         return {
           "description": group[0],
           "locations": {
@@ -205,20 +225,35 @@ class VideosDB {
       })
     }
 
-    async uniformMarks(data) {
-//      console.log(data)
 
-      data.groupedMarks.forEach(groupedMark => {
-        groupedMark.locations.marks.forEach(mark => {
-          const newMark = {
-            timestamp: mark.timestamp,
-            tagId: mark.tagId,
-            description: data.newDescription
-          }
-          this.updateMark(newMark, mark.youtubeId)
-        })
-      })
+    /* Statistics 
+
+    Let's assume videos==participant (true on our GH analysis)
+
+    * Number of occurences
+    * Number of participants
+    * Per participant:
+      * average number of occurences
+      * time to answer
+      * maximum time to answer 
+      * minimum time to answer 
+    */
+    async statistics(arrayOfYoutubeIds) {
+
+
+      const groupedMarks = await this.groupedMarks(arrayOfYoutubeIds) 
+
+
+
+      return {
+        "groupedMarks": groupedMarks,
+        "statistics": {
+          "numberOfGroups": groupedMarks.length,
+          "numberOfVideos": arrayOfYoutubeIds.length,
+        }
+      }
     }
+
 
 }
 

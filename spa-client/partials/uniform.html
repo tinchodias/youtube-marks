@@ -15,13 +15,25 @@
 
     <div class="col-md-10 offset-md-1">
 
-      <h2 class="projectTitle display-4">Videos to Consider</h2>
+      <h2 class="projectTitle display-4">Included Videos</h2>
+
+
+      <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+          <input type="search" class="form-control" placeholder="Filter..." ng-model="uniformCtrl.videoFilterText">
+          <a class="btn btn-secondary" ng-click="uniformCtrl.addVisibleVideosToSelection()">Add visible as included</a>
+          <a class="btn btn-secondary" ng-click="uniformCtrl.removeVisibleVideosFromSelection()">Remove visible from included</a>
+          <!-- <a class="btn btn-secondary" ng-click="uniformCtrl.selectAllVideos()">Select All</a> -->
+          <a class="btn btn-secondary" ng-click="uniformCtrl.selectNoneVideos()">Clean included</a>
+        </form>
+      </nav>
+
 
       <table class="table table-sm">
 
         <thead>
             <tr>
-                <th class="selectionColumn"> </th>
+                <th class="selectionColumn">Incl?</th>
                 <th class="youtubeIdColumn">Youtube ID</th>
                 <th>Description</th>
             </tr>
@@ -29,7 +41,7 @@
 
         <tbody>
 
-          <tr ng-repeat="aVideo in uniformCtrl.allVideos">
+          <tr ng-repeat="aVideo in uniformCtrl.visibleVideos()">
 
             <td class="selectionColumn">
               <input type="checkbox" data-checklist-model="uniformCtrl.selectedVideos" data-checklist-value="aVideo" checklist-change="uniformCtrl.refreshGroupedMarks()">
@@ -53,22 +65,48 @@
         
       </table>
 
-      <a class="btn btn-secondary" ng-click="uniformCtrl.selectAllVideos()">Select All</a>
-      <a class="btn btn-secondary" ng-click="uniformCtrl.selectNoneVideos()">Select None</a>
 
     </div>
 
 
 
+
+
     <div class="col-md-10 offset-md-1">
 
-        <h2 class="projectTitle display-4">Grouped Marks</h2>
+      <h2 class="projectTitle display-4">Statistics</h2>
+
+      {{uniformCtrl.statistics}}
+
+    </div>
+
+
+
+
+
+    <div class="col-md-10 offset-md-1">
+
+        <h2 class="projectTitle display-4">Marks to Merge</h2>
+
+        <nav class="navbar navbar-light bg-light">
+          <form class="form-inline">
+            <input type="search" class="form-control" placeholder="Filter..." ng-model="uniformCtrl.groupedMarksFilterText">
+            <a class="btn btn-primary" ng-click="uniformCtrl.mergeSelectedGroupedMarks()" ng-if="uniformCtrl.canUniform()">
+              Merge {{uniformCtrl.selectedGroupedMarks.length}} Mark Groups...
+            </a>
+            <a class="btn btn-secondary" ng-click="uniformCtrl.addVisibleGroupedMarksToSelection()">Add visibles to selection</a>
+            <a class="btn btn-secondary" ng-click="uniformCtrl.removeVisibleGroupedMarksFromSelection()">Remove visibles from selection</a>
+            <!-- <a class="btn btn-secondary" ng-click="uniformCtrl.selectAllGroupedMarks()">Select All</a> -->
+            <a class="btn btn-secondary" ng-click="uniformCtrl.selectNoneGroupedMarks()">Select None</a>
+          </form>
+        </nav>
+        
 
         <table class="table table-sm table-striped">
 
             <thead>
                 <tr>
-                    <th class="selectionColumn"> </th>
+                    <th class="selectionColumn">Merge?</th>
                     <th>Description</th>
                     <th class="w-25">Locations</th>
                     <th class="w-25">Tags</th>
@@ -76,7 +114,7 @@
             </thead>
 
             <tbody>
-                <tr ng-repeat="aGroupedMark in uniformCtrl.groupedMarks">
+                <tr ng-repeat="aGroupedMark in uniformCtrl.visibleGroupedMarks()">
 
                   <td class="selectionColumn">
                     <input type="checkbox" data-checklist-model="uniformCtrl.selectedGroupedMarks" data-checklist-value="aGroupedMark">
@@ -107,11 +145,6 @@
 
         </table>
 
-        <a class="btn btn-primary" ng-click="uniformCtrl.mergeSelectedGroupedMarks()" ng-if="uniformCtrl.canUniform()">
-          Merge {{uniformCtrl.selectedGroupedMarks.length}} Mark Groups...
-        </a>
-        <a class="btn btn-secondary" ng-click="uniformCtrl.selectAllGroupedMarks()">Select All</a>
-        <a class="btn btn-secondary" ng-click="uniformCtrl.selectNoneGroupedMarks()">Select None</a>
   
     </div>
 

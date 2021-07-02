@@ -43,8 +43,9 @@ class UniformController {
     this.selectNoneGroupedMarks()
     this.MarksService.summaryOfAllVideos()
       .then(list => {
+        this.selectNoneVideos()
         this.allVideos = list
-        this.selectAllVideos()
+        //this.selectAllVideos()
         this.refreshGroupedMarks()
       })
 
@@ -54,6 +55,22 @@ class UniformController {
   }
 
   /* for videos */
+  visibleVideos() {
+    return this.$filter('filter')(this.allVideos, this.videoFilterText)
+  }
+
+  addVisibleVideosToSelection() {
+    let tmp = new Set(this.selectedVideos)
+    this.visibleVideos().forEach(item => tmp.add(item))
+    this.selectedVideos = Array.from(tmp)
+  }
+
+  removeVisibleVideosFromSelection() {
+    let tmp = new Set(this.selectedVideos)
+    this.visibleVideos().forEach(item => tmp.delete(item))
+    this.selectedVideos = Array.from(tmp)
+  }
+
   selectNoneVideos() {
     this.selectedVideos = []
   }
@@ -68,6 +85,22 @@ class UniformController {
 
 
   /* for grouped marks */
+  visibleGroupedMarks() {
+    return this.$filter('filter')(this.groupedMarks, this.groupedMarksFilterText)
+  }
+
+  addVisibleGroupedMarksToSelection() {
+    let tmp = new Set(this.selectedGroupedMarks)
+    this.visibleGroupedMarks().forEach(item => tmp.add(item))
+    this.selectedGroupedMarks = Array.from(tmp)
+  }
+
+  removeVisibleGroupedMarksFromSelection() {
+    let tmp = new Set(this.selectedGroupedMarks)
+    this.visibleGroupedMarks().forEach(item => tmp.delete(item))
+    this.selectedGroupedMarks = Array.from(tmp)
+  }
+
   selectNoneGroupedMarks() {
     this.selectedGroupedMarks = []
   }
@@ -78,9 +111,10 @@ class UniformController {
 
   refreshGroupedMarks() {
     this.selectNoneGroupedMarks()
-    this.MarksService.groupedMarks(this.selectedVideoIds())
-      .then(list => {
-        this.groupedMarks = list
+    this.MarksService.statistics(this.selectedVideoIds())
+      .then(result => {
+        this.groupedMarks = result.groupedMarks
+        this.statistics = result.statistics
       })
   }
 

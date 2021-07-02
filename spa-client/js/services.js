@@ -85,8 +85,8 @@ class MarksService {
     return this.$http.delete(`videos/${youtubeId}/marks/${mark.timestamp}`)
   }
 
-  groupedMarks(arrayOfYoutubeIds) {
-    return this.$http.post('marks', arrayOfYoutubeIds).then(result => result.data)
+  statistics(arrayOfYoutubeIds) {
+    return this.$http.post('statistics', arrayOfYoutubeIds).then(result => result.data)
   }
 
   uniformTo(groupedMarks, newDescription) {
