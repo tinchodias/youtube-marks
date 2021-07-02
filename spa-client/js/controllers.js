@@ -45,7 +45,6 @@ class UniformController {
       .then(list => {
         this.selectNoneVideos()
         this.allVideos = list
-        //this.selectAllVideos()
         this.refreshGroupedMarks()
       })
 
@@ -75,10 +74,6 @@ class UniformController {
     this.selectedVideos = []
   }
 
-  selectAllVideos() {
-    this.selectedVideos = angular.copy(this.allVideos)
-  }
-
   selectedVideoIds() {
     return this.selectedVideos.map(video => video.youtubeId)
   }
@@ -103,10 +98,6 @@ class UniformController {
 
   selectNoneGroupedMarks() {
     this.selectedGroupedMarks = []
-  }
-
-  selectAllGroupedMarks() {
-    this.selectedGroupedMarks = this.groupedMarks
   }
 
   refreshGroupedMarks() {
