@@ -7,77 +7,107 @@
         {
           "timestamp": 12.858,
           "description": "Título del capítulo",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 31.980984000000014,
           "description": "Empieza",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 42.934282,
           "description": "Primer aparición de la pantera",
-          "tagId": "char"
+          "tagIds": [
+            "char"
+          ]
         },
         {
           "timestamp": 64.79694399999997,
           "description": "Escalera",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 78.62097799999997,
           "description": "Puerta",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 108.313378,
           "description": "Serrucho esquina",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 132.18614601335145,
           "description": "Esquíes",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 153.14003108201598,
           "description": "Portal",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 182.9647259217987,
           "description": "Achús",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 220.1829058435974,
           "description": "Bola demolición",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 250.07557993515016,
           "description": "Sierra",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 291.9838730286102,
           "description": "Primera vez que ve a la pantera",
-          "tagId": "char"
+          "tagIds": [
+            "char"
+          ]
         },
         {
           "timestamp": 358.044532,
           "description": "Retirada",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 312.8410129999999,
           "description": "Pantera encerrada",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         },
         {
           "timestamp": 321.8817590000005,
           "description": "Reemplazo sigiloso",
-          "tagId": "scene"
+          "tagIds": [
+            "scene"
+          ]
         }
       ]
     }

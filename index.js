@@ -17,6 +17,10 @@ low(new FileAsync(dbPath))
     return videosDB.ready()
   })
   .then(() => {
+
+    //Temporary, to migrate db:
+    //app.videosDB.migrateTagId2TagIds()
+
     const server = app.listen(
         port, 
         () => {

@@ -6,6 +6,23 @@ class VideosDB {
       this.db = db
     }
 
+    async migrateTagId2TagIds() {
+      await this.db.read()
+
+      let allVideos = this.db.get('videos').value()
+      allVideos.forEach(video => {
+        video.marks.forEach(mark => {
+          if (_.has(mark, "tagId")) {
+            mark.tagIds = [ mark.tagId ]
+            _.unset(mark, "tagId")
+          }
+        })
+        this.updateVideo(video)
+      })
+
+      this.db.write()
+    }
+
     async ready() {
       return this.db.defaults({ videos: [], tags: [] }).write()
     }
@@ -130,7 +147,7 @@ class VideosDB {
         }
 
         oldMark.description = mark.description
-        oldMark.tagId = mark.tagId
+        oldMark.tagIds = mark.tagIds
 
         this.db.get('videos')
           .find({ youtubeId: youtubeId })
@@ -155,7 +172,7 @@ class VideosDB {
         groupedMark.locations.marks.forEach(mark => {
           const newMark = {
             timestamp: mark.timestamp,
-            tagId: mark.tagId,
+            tagIds: mark.tagIds,
             description: data.newDescription
           }
           this.updateMark(newMark, mark.youtubeId)
@@ -216,7 +233,7 @@ class VideosDB {
     }
 
     occurrencesByTagId(data) {
-      const groups = _.groupBy(data, each => each.tagId)
+      const groups = _.groupBy(data, each => each.tagIds)
       return Object.entries(groups).map(group => {
         return {
           "tagId": group[0],

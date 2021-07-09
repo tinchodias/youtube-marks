@@ -13,27 +13,26 @@
     </div>
 
 
+
+
     <div class="col-md-10 offset-md-1">
 
       <h2 class="projectTitle display-4">Included Videos</h2>
 
 
       <nav class="navbar navbar-light bg-light">
-        <form class="form-inline">
-          <input type="search" class="form-control" placeholder="Filter by substring (ignoring case)" ng-model="uniformCtrl.videoFilterText">
-        </form>
-
-        <span>Number of included videos: {{uniformCtrl.statistics.numberOfVideos}}</span>
+        <input type="search" class="form-control w-50" placeholder="Filter by substring (ignoring case)" ng-model="uniformCtrl.videoFilterText">
+        <small class="w-50">Number of included videos: {{uniformCtrl.statistics.numberOfVideos}}</small>
           
         <form class="form-inline">
-          <a class="btn btn-link" ng-click="uniformCtrl.addVisibleVideosToSelection()">Add visible as included</a>
-          <a class="btn btn-link" ng-click="uniformCtrl.removeVisibleVideosFromSelection()">Remove visible from included</a>
-          <a class="btn btn-link" ng-click="uniformCtrl.selectNoneVideos()">Clean included</a>
+          <a class="btn btn-sm btn-link" ng-click="uniformCtrl.addVisibleVideosToSelection()">Add visible as included</a>
+          <a class="btn btn-sm btn-link" ng-click="uniformCtrl.removeVisibleVideosFromSelection()">Remove visible from included</a>
+          <a class="btn btn-sm btn-link" ng-click="uniformCtrl.selectNoneVideos()">Clean included</a>
         </form>
       </nav>
 
 
-      <table class="table table-sm">
+      <table class="table table-sm table-striped">
 
         <thead>
             <tr>
@@ -84,19 +83,16 @@
 
 
         <nav class="navbar navbar-light bg-light">
-          <form class="form-inline">
-            <input type="search" class="form-control" placeholder="Filter by substring (ignoring case)" ng-model="uniformCtrl.groupedMarksFilterText">
-          </form>
-          
-          <span>Number of mark groups: {{uniformCtrl.statistics.numberOfGroups}}</span>
+          <input type="search" class="form-control w-50" placeholder="Filter by substring (ignoring case)" ng-model="uniformCtrl.groupedMarksFilterText">
+          <small class="w-50">Number of mark groups: {{uniformCtrl.statistics.numberOfGroups}}</small>
                     
           <form class="form-inline">
-            <a class="btn btn-link" ng-click="uniformCtrl.mergeSelectedGroupedMarks()" ng-if="uniformCtrl.canUniform()">
+            <a class="btn btn-sm btn-link" ng-click="uniformCtrl.mergeSelectedGroupedMarks()" ng-if="uniformCtrl.canUniform()">
               Merge {{uniformCtrl.selectedGroupedMarks.length}} Mark Groups...
             </a>
-            <a class="btn btn-link" ng-click="uniformCtrl.addVisibleGroupedMarksToSelection()">Add visible to selection</a>
-            <a class="btn btn-link" ng-click="uniformCtrl.removeVisibleGroupedMarksFromSelection()">Remove visible from selection</a>
-            <a class="btn btn-link" ng-click="uniformCtrl.selectNoneGroupedMarks()">Clean selection</a>
+            <a class="btn btn-sm btn-link" ng-click="uniformCtrl.addVisibleGroupedMarksToSelection()">Add visible to selection</a>
+            <a class="btn btn-sm btn-link" ng-click="uniformCtrl.removeVisibleGroupedMarksFromSelection()">Remove visible from selection</a>
+            <a class="btn btn-sm btn-link" ng-click="uniformCtrl.selectNoneGroupedMarks()">Clean selection</a>
           </form>
         </nav>
 

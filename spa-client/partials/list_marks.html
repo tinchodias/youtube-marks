@@ -37,7 +37,7 @@
       <thead>
         <tr>
           <th class="timestampColumn">Time</th>
-          <th class="tagColumn">Tag</th>
+          <th class="tagsColumn">Tags</th>
           <th>Description</th>
           <th class="actionsColumn">Actions</th>
         </tr>
@@ -51,9 +51,11 @@
             <a ng-click="listMarksCtrl.seekTo(mark.timestamp)" class="pointer">{{mark.timestamp | secondsToTime}}</a>
           </td>
 
-          <td class="tagColumn">
-            <div editable-select="mark.tagId" e-name="tagId" e-form="markRowForm" e-ng-options="each.id as each.id for each in listMarksCtrl.allTags">
-              <tag-with-color tagcolor="{{listMarksCtrl.tagColorFor(mark)}}" taglabel="{{listMarksCtrl.tagStringFor(mark)}}"></tag-with-color>
+          <td class="tagsColumn">
+            <div editable-select="mark.tagIds" e-name="tagIds" e-form="markRowForm" e-multiple e-ng-options="each.id as each.id for each in listMarksCtrl.allTags">
+              <div ng-repeat="tagId in mark.tagIds">
+                <tag-with-color tagcolor="{{listMarksCtrl.tagColorFor(tagId)}}" taglabel="{{listMarksCtrl.tagStringFor(tagId)}}"></tag-with-color>
+              </div>
             </div>
           </td>
 

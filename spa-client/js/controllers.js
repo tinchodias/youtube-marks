@@ -301,7 +301,7 @@ class ListMarksController {
         .then(existingMark => {
           // Especially when video is paused, unintended keypress repetitions produce 
           // multiple marks with the same timestamp and tag, which we will avoid here
-          if (existingMark.timestamp != currentTime || existingMark.tagId != tag.id) {
+          if (existingMark.timestamp != currentTime || !existingMark.tagIds.find(e => e.tagId == tag.id)) {
             MarksService.addEmptyMark(
               currentTime,
               youtubeId,
@@ -425,13 +425,13 @@ class ListMarksController {
     }
   }
 
-  tagStringFor(mark) {
-    return mark.tagId
+  tagStringFor(tagId) {
+    return tagId
   }
 
-  tagColorFor(mark) {
-    if (mark.tagId && this.allTags && this.allTags.length) {
-      var selected = this.$filter('filter')(this.allTags, {id: mark.tagId})
+  tagColorFor(tagId) {
+    if (tagId && this.allTags && this.allTags.length) {
+      var selected = this.$filter('filter')(this.allTags, {id: tagId})
       return selected.length ? selected[0].color : ''
     } else {
       return '';
