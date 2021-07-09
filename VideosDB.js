@@ -217,7 +217,9 @@ class VideosDB {
         }
       })
 
-      //console.log(JSON.stringify(complexResult))
+      // Useful to extract as expected results of test, when something in the model changed:
+      //
+      // console.log(JSON.stringify(complexResult))
 
       return complexResult
     }

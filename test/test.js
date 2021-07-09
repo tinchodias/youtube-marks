@@ -143,7 +143,7 @@ describe("Server Integration Tests", () => {
                     .send({
                         "timestamp": 12.34,
                         "description": "New mark",
-                        "tagId": "meta"
+                        "tagIds": ["meta"]
                     })
                     .end((err, res) => {
                         res.should.have.status(200)
@@ -159,7 +159,7 @@ describe("Server Integration Tests", () => {
                     .send({
                         "timestamp": existingMarkId,
                         "description": "New mark",
-                        "tagId": "meta"
+                        "tagIds": ["meta"]
                     })
                     .end((err, res) => {
                         res.should.have.status(200)
@@ -237,7 +237,5 @@ describe("Server Integration Tests", () => {
         })
     })
 
-
-    
 
 })
