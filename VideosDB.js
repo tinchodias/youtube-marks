@@ -169,7 +169,7 @@ class VideosDB {
 
     async uniformMarks(data) {
       data.groupedMarks.forEach(groupedMark => {
-        groupedMark.locations.marks.forEach(mark => {
+        groupedMark.marks.forEach(mark => {
           const newMark = {
             timestamp: mark.timestamp,
             tagIds: mark.tagIds,
@@ -208,12 +208,10 @@ class VideosDB {
       const complexResult = groups.map(group => { 
         return {
           "description": group[0],
-          "locations": {
-            "occurrencesByYoutubeId": this.occurrencesByYoutubeId(group[1]),
-            "occurrencesByTagId": this.occurrencesByTagId(group[1]),
-            "total": group[1].length,
-            "marks": group[1]
-          }
+          "occurrencesByYoutubeId": this.occurrencesByYoutubeId(group[1]),
+          "occurrencesByTagId": this.occurrencesByTagId(group[1]),
+          "total": group[1].length,
+          "marks": group[1]
         }
       })
 

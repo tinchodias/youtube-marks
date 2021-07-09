@@ -20,9 +20,9 @@
       <h2 class="projectTitle display-4">Included Videos</h2>
 
 
-      <nav class="navbar navbar-light bg-light">
-        <input type="search" class="form-control w-50" placeholder="Filter by substring (ignoring case)" ng-model="uniformCtrl.videoFilterText">
-        <small class="w-50">Number of included videos: {{uniformCtrl.statistics.numberOfVideos}}</small>
+      <nav class="navbar">
+        <input type="search" class="mx-1 form-control" placeholder="Filter by substring (ignoring case)" ng-model="uniformCtrl.videoFilterText">
+        <small class="mx-2">Included videos: {{uniformCtrl.statistics.numberOfVideos}}</small>
           
         <form class="form-inline">
           <a class="btn btn-sm btn-link" ng-click="uniformCtrl.addVisibleVideosToSelection()">Add visible as included</a>
@@ -82,9 +82,9 @@
 
 
 
-        <nav class="navbar navbar-light bg-light">
-          <input type="search" class="form-control w-50" placeholder="Filter by substring (ignoring case)" ng-model="uniformCtrl.groupedMarksFilterText">
-          <small class="w-50">Number of mark groups: {{uniformCtrl.statistics.numberOfGroups}}</small>
+        <nav class="navbar">
+          <input type="search" class="mx-1 form-control" placeholder="Filter by substring (ignoring case)" ng-model="uniformCtrl.groupedMarksFilterText">
+          <small class="mx-2">Number of groups: {{uniformCtrl.statistics.numberOfGroups}}</small>
                     
           <form class="form-inline">
             <a class="btn btn-sm btn-link" ng-click="uniformCtrl.mergeSelectedGroupedMarks()" ng-if="uniformCtrl.canUniform()">
@@ -103,8 +103,8 @@
                 <tr>
                     <th class="selectionColumn">Merge?</th>
                     <th>Description</th>
-                    <th class="w-25">Locations</th>
-                    <th class="w-25">Tags</th>
+                    <th class="w-25">Videos</th>
+                    <th class="tagsColumn">Tags</th>
                 </tr>
             </thead>
 
@@ -117,18 +117,18 @@
       
                   <td>
                     <span>
-                      {{ aGroupedMark.description }} <span class="markCount">({{ aGroupedMark.locations.total }})</span>
+                      {{ aGroupedMark.description }} <span class="markCount">({{ aGroupedMark.total }})</span>
                     </span>
                   </td>
 
                   <td>
-                    <div ng-repeat="occurence in aGroupedMark.locations.occurrencesByYoutubeId">
+                    <div ng-repeat="occurence in aGroupedMark.occurrencesByYoutubeId">
                       {{uniformCtrl.videoLabelFor(occurence.youtubeId)}} <span class="markCount">({{occurence.count}})</span>
                     </div>
                   </td>
 
                   <td>
-                    <div ng-repeat="occurence in aGroupedMark.locations.occurrencesByTagId">
+                    <div ng-repeat="occurence in aGroupedMark.occurrencesByTagId">
                       <tag-with-color tagcolor="{{uniformCtrl.tagColorFor(occurence.tagId)}}" taglabel="{{uniformCtrl.tagStringFor(occurence.tagId) + ' (' + occurence.count + ')'}}">
                       </tag-with-color>
                     </div>
