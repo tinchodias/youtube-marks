@@ -210,7 +210,6 @@ class VideosDB {
           "description": group[0],
           "occurrencesByYoutubeId": this.occurrencesByYoutubeId(group[1]),
           "occurrencesByTagId": this.occurrencesByTagId(group[1]),
-          "total": group[1].length,
           "marks": group[1]
         }
       })
