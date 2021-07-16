@@ -10,6 +10,12 @@ function routes($stateProvider, $urlRouterProvider) {
             controller: "ProjectController as projectCtrl"
         })
 
+        .state('uniform', {
+            url: "/uniform",
+            templateUrl: "partials/uniform.html",
+            controller: "UniformController as uniformCtrl"
+        })
+
         .state('video', {
             abstract: true,
             templateUrl: "partials/video.html",

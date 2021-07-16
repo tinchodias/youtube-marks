@@ -1,0 +1,152 @@
+<div class="container-fluid">
+
+  <div class="row">
+
+
+    <div class="col-md-12">
+      <div class="d-flex flex-row mb-1 mt-1" role="toolbar" aria-label="Video controls">
+        <button type="button" class="btn btn-sm mr-auto" ui-sref="project">
+          <img src="/node_modules/bootstrap-icons/icons/arrow-left.svg" alt="Go to project" >
+          Project
+        </button>
+      </div>
+    </div>
+
+
+
+
+    <div class="col-md-10 offset-md-1">
+
+      <h2 class="projectTitle display-4">Included Videos</h2>
+
+
+      <nav class="navbar">
+        <input type="search" class="mx-1 form-control" placeholder="Filter by substring (ignoring case)" ng-model="uniformCtrl.videoFilterText">
+        <small class="mx-2">Included videos: {{uniformCtrl.statistics.numberOfVideos}}</small>
+          
+        <form class="form-inline">
+          <a class="btn btn-sm btn-link" ng-click="uniformCtrl.addVisibleVideosToSelection()">Add visible as included</a>
+          <a class="btn btn-sm btn-link" ng-click="uniformCtrl.removeVisibleVideosFromSelection()">Remove visible from included</a>
+          <a class="btn btn-sm btn-link" ng-click="uniformCtrl.selectNoneVideos()">Clean included</a>
+        </form>
+      </nav>
+
+
+      <table class="table table-sm table-striped">
+
+        <thead>
+            <tr>
+                <th class="selectionColumn">Incl?</th>
+                <th class="youtubeIdColumn">Youtube ID</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+          <tr ng-repeat="aVideo in uniformCtrl.visibleVideos()">
+
+            <td class="selectionColumn">
+              <input type="checkbox" data-checklist-model="uniformCtrl.selectedVideos" data-checklist-value="aVideo" checklist-change="uniformCtrl.refreshGroupedMarks()">
+            </td>
+
+            <td class="youtubeIdColumn">
+              <small class="font-monospace">
+                {{ aVideo.youtubeId }}
+              </small>
+            </td>
+
+            <td>
+              <span>
+                {{ aVideo.description }}
+              </span>
+            </td>
+        
+          </tr>
+            
+        </tbody>
+        
+      </table>
+
+
+    </div>
+
+
+
+
+
+
+    <div class="col-md-10 offset-md-1">
+
+        <h2 class="projectTitle display-4">Marks to Merge</h2>
+
+
+
+        <nav class="navbar">
+          <input type="search" class="mx-1 form-control" placeholder="Filter by substring (ignoring case)" ng-model="uniformCtrl.groupedMarksFilterText">
+          <small class="mx-2">Number of groups: {{uniformCtrl.statistics.numberOfGroups}}</small>
+                    
+          <form class="form-inline">
+            <a class="btn btn-sm btn-link" ng-click="uniformCtrl.mergeSelectedGroupedMarks()" ng-if="uniformCtrl.canUniform()">
+              Merge {{uniformCtrl.selectedGroupedMarks.length}} Mark Groups...
+            </a>
+            <a class="btn btn-sm btn-link" ng-click="uniformCtrl.addVisibleGroupedMarksToSelection()">Add visible to selection</a>
+            <a class="btn btn-sm btn-link" ng-click="uniformCtrl.removeVisibleGroupedMarksFromSelection()">Remove visible from selection</a>
+            <a class="btn btn-sm btn-link" ng-click="uniformCtrl.selectNoneGroupedMarks()">Clean selection</a>
+          </form>
+        </nav>
+
+        
+        <table class="table table-sm table-striped">
+
+            <thead>
+                <tr>
+                    <th class="selectionColumn">Merge?</th>
+                    <th>Description</th>
+                    <th class="w-25">Videos</th>
+                    <th class="tagsColumn">Tags</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="aGroupedMark in uniformCtrl.visibleGroupedMarks()">
+
+                  <td class="selectionColumn">
+                    <input type="checkbox" data-checklist-model="uniformCtrl.selectedGroupedMarks" data-checklist-value="aGroupedMark">
+                  </td>
+      
+                  <td>
+                    <span>
+                      {{ aGroupedMark.description }} <span class="markCount">({{aGroupedMark.marks.length}})</span>
+                    </span>
+                  </td>
+
+                  <td>
+                    <div ng-repeat="occurence in aGroupedMark.occurrencesByYoutubeId">
+                      {{uniformCtrl.videoLabelFor(occurence.youtubeId)}} <span class="markCount">({{occurence.count}})</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div ng-repeat="occurence in aGroupedMark.occurrencesByTagId">
+                      <tag-with-color tagcolor="{{uniformCtrl.tagColorFor(occurence.tagId)}}" taglabel="{{uniformCtrl.tagStringFor(occurence.tagId) + ' (' + occurence.count + ')'}}">
+                      </tag-with-color>
+                    </div>
+                   </td>
+
+                  </tr>
+
+                </tbody>
+
+        </table>
+
+  
+    </div>
+
+
+
+
+
+  </div>
+
+</div>

@@ -1,0 +1,102 @@
+[
+    {
+        "description": "Run test (pass)",
+        "occurrencesByYoutubeId": [
+            {
+                "youtubeId": "ymITEeAOtEA",
+                "count": 1
+            }
+        ],
+        "occurrencesByTagId": [
+            {
+                "tagId": "ide",
+                "count": 1
+            }
+        ],
+        "marks": [
+            {
+                "timestamp": 143.079521,
+                "description": "Run test (pass)",
+                "tagIds": [
+                    "ide"
+                ],
+                "youtubeId": "ymITEeAOtEA"
+            }
+        ]
+    },
+    {
+        "description": "Run test (fail)",
+        "occurrencesByYoutubeId": [
+            {
+                "youtubeId": "ymITEeAOtEA",
+                "count": 1
+            }
+        ],
+        "occurrencesByTagId": [
+            {
+                "tagId": "ide",
+                "count": 1
+            }
+        ],
+        "marks": [
+            {
+                "timestamp": 100.951042,
+                "description": "Run test (fail)",
+                "tagIds": [
+                    "ide"
+                ],
+                "youtubeId": "ymITEeAOtEA"
+            }
+        ]
+    },
+    {
+        "description": "Open debugger",
+        "occurrencesByYoutubeId": [
+            {
+                "youtubeId": "ymITEeAOtEA",
+                "count": 1
+            }
+        ],
+        "occurrencesByTagId": [
+            {
+                "tagId": "ide",
+                "count": 1
+            }
+        ],
+        "marks": [
+            {
+                "timestamp": 116.669521,
+                "description": "Open debugger",
+                "tagIds": [
+                    "ide"
+                ],
+                "youtubeId": "ymITEeAOtEA"
+            }
+        ]
+    },
+    {
+        "description": "Test case created",
+        "occurrencesByYoutubeId": [
+            {
+                "youtubeId": "ymITEeAOtEA",
+                "count": 1
+            }
+        ],
+        "occurrencesByTagId": [
+            {
+                "tagId": "ide",
+                "count": 1
+            }
+        ],
+        "marks": [
+            {
+                "timestamp": 48.461063,
+                "description": "Test case created",
+                "tagIds": [
+                    "ide"
+                ],
+                "youtubeId": "ymITEeAOtEA"
+            }
+        ]
+    }
+]

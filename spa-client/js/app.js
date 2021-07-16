@@ -45,10 +45,11 @@ function secondsToTime() {
 }
 
 
-angular.module('marksApp', ['ui.router', 'utils.autofocus', 'xeditable', 'download'])
+angular.module('marksApp', ['ui.router', 'utils.autofocus', 'xeditable', 'download', 'checklist-model'])
     .service("MarksService", function($http) { return new MarksService($http) })
     .controller('BodyController', BodyController)
     .controller('ProjectController', ProjectController)
+    .controller('UniformController', UniformController)
     .controller('VideoController', VideoController)
     .controller('ListMarksController', ListMarksController)
     .controller('ImportMarksController', ImportMarksController)
@@ -66,5 +67,18 @@ angular.module('marksApp', ['ui.router', 'utils.autofocus', 'xeditable', 'downlo
       }
     })
 
+    .directive('tagWithColor', function() {
+      return {
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        template: (elem, attr) => `
+          <div>
+            <img style="background-color: ${attr.tagcolor}; vertical-align:text-bottom;" src="/node_modules/bootstrap-icons/icons/square.svg" alt="Tag color">
+            <span alt="Tag label">${attr.taglabel}</span>
+          </div>`
+      } 
+    })
+   
 
     .config(routes)

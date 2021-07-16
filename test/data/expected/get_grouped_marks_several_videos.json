@@ -1,0 +1,253 @@
+[
+  {
+    "description": "Run test (pass)",
+    "occurrencesByYoutubeId": [
+      {
+        "youtubeId": "ymITEeAOtEA",
+        "count": 1
+      },
+      {
+        "youtubeId": "aO4iYSNJxY4",
+        "count": 3
+      }
+    ],
+    "occurrencesByTagId": [
+      {
+        "tagId": "ide",
+        "count": 4
+      }
+    ],
+    "marks": [
+      {
+        "timestamp": 143.079521,
+        "description": "Run test (pass)",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "ymITEeAOtEA"
+      },
+      {
+        "timestamp": 67.12108212302398,
+        "description": "Run test (pass)",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      },
+      {
+        "timestamp": 70.42714499427795,
+        "description": "Run test (pass)",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      },
+      {
+        "timestamp": 131.983445,
+        "description": "Run test (pass)",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      }
+    ]
+  },
+  {
+    "description": "Run test (fail)",
+    "occurrencesByYoutubeId": [
+      {
+        "youtubeId": "ymITEeAOtEA",
+        "count": 1
+      },
+      {
+        "youtubeId": "aO4iYSNJxY4",
+        "count": 3
+      }
+    ],
+    "occurrencesByTagId": [
+      {
+        "tagId": "ide",
+        "count": 4
+      }
+    ],
+    "marks": [
+      {
+        "timestamp": 100.951042,
+        "description": "Run test (fail)",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "ymITEeAOtEA"
+      },
+      {
+        "timestamp": 102.6794262861023,
+        "description": "Run test (fail)",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      },
+      {
+        "timestamp": 126.439112,
+        "description": "Run test (fail)",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      },
+      {
+        "timestamp": 189.104517,
+        "description": "Run test (fail)",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      }
+    ]
+  },
+  {
+    "description": "Open debugger",
+    "occurrencesByYoutubeId": [
+      {
+        "youtubeId": "ymITEeAOtEA",
+        "count": 1
+      },
+      {
+        "youtubeId": "aO4iYSNJxY4",
+        "count": 2
+      }
+    ],
+    "occurrencesByTagId": [
+      {
+        "tagId": "ide",
+        "count": 3
+      }
+    ],
+    "marks": [
+      {
+        "timestamp": 116.669521,
+        "description": "Open debugger",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "ymITEeAOtEA"
+      },
+      {
+        "timestamp": 193.55186,
+        "description": "Open debugger",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      },
+      {
+        "timestamp": 209.392891,
+        "description": "Open debugger",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      }
+    ]
+  },
+  {
+    "description": "CONTINUE WATCHING HERE",
+    "occurrencesByYoutubeId": [
+      {
+        "youtubeId": "aO4iYSNJxY4",
+        "count": 1
+      }
+    ],
+    "occurrencesByTagId": [
+      {
+        "tagId": "meta",
+        "count": 1
+      }
+    ],
+    "marks": [
+      {
+        "timestamp": 241.938641,
+        "description": "CONTINUE WATCHING HERE",
+        "tagIds": [
+          "meta"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      }
+    ]
+  },
+  {
+    "description": "Run tests (pass)",
+    "occurrencesByYoutubeId": [
+      {
+        "youtubeId": "aO4iYSNJxY4",
+        "count": 1
+      }
+    ],
+    "occurrencesByTagId": [
+      {
+        "tagId": "ide",
+        "count": 1
+      }
+    ],
+    "marks": [
+      {
+        "timestamp": 224.429891,
+        "description": "Run tests (pass)",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      }
+    ]
+  },
+  {
+    "description": "Open Debugger",
+    "occurrencesByYoutubeId": [
+      {
+        "youtubeId": "aO4iYSNJxY4",
+        "count": 1
+      }
+    ],
+    "occurrencesByTagId": [
+      {
+        "tagId": "ide",
+        "count": 1
+      }
+    ],
+    "marks": [
+      {
+        "timestamp": 110.929395,
+        "description": "Open Debugger",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "aO4iYSNJxY4"
+      }
+    ]
+  },
+  {
+    "description": "Test case created",
+    "occurrencesByYoutubeId": [
+      {
+        "youtubeId": "ymITEeAOtEA",
+        "count": 1
+      }
+    ],
+    "occurrencesByTagId": [
+      {
+        "tagId": "ide",
+        "count": 1
+      }
+    ],
+    "marks": [
+      {
+        "timestamp": 48.461063,
+        "description": "Test case created",
+        "tagIds": [
+          "ide"
+        ],
+        "youtubeId": "ymITEeAOtEA"
+      }
+    ]
+  }
+]

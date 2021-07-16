@@ -7,22 +7,30 @@
         {
           "timestamp": 48.461063,
           "description": "Test case created",
-          "tagId": "ide"
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 116.669521,
           "description": "Open debugger",
-          "tagId": "ide"
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 100.951042,
-          "description": "Test run (error)",
-          "tagId": "ide"
+          "description": "Run test (fail)",
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 143.079521,
           "description": "Run test (pass)",
-          "tagId": "ide"
+          "tagIds": [
+            "ide"
+          ]
         }
       ]
     },
@@ -31,64 +39,81 @@
       "description": "Simple screencast in Pharo 3",
       "marks": [
         {
-          "timestamp": 27.680456,
-          "description": "",
-          "tagId": "ide"
-        },
-        {
           "timestamp": 67.12108212302398,
-          "description": "Test run (pass)",
-          "tagId": "ide"
+          "description": "Run test (pass)",
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 70.42714499427795,
-          "description": "Test run pass",
-          "tagId": "ide"
+          "description": "Run test (pass)",
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 102.6794262861023,
-          "description": "Test run (error)",
-          "tagId": "ide"
+          "description": "Run test (fail)",
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 110.929395,
           "description": "Open Debugger",
-          "tagId": "ide"
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 126.439112,
-          "description": "Test run (halt)",
-          "tagId": "ide"
+          "description": "Run test (fail)",
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 131.983445,
-          "description": "test Run (green)",
-          "tagId": "ide"
+          "description": "Run test (pass)",
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 189.104517,
-          "description": "test run (red)",
-          "tagId": "ide"
+          "description": "Run test (fail)",
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 193.55186,
-          "description": "open debugger",
-          "tagId": "ide"
+          "description": "Open debugger",
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 209.392891,
-          "description": "open debugger",
-          "tagId": "ide"
+          "description": "Open debugger",
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 224.429891,
-          "description": "run tests green",
-          "tagId": "ide"
+          "description": "Run tests (pass)",
+          "tagIds": [
+            "ide"
+          ]
         },
         {
           "timestamp": 241.938641,
           "description": "CONTINUE WATCHING HERE",
-          "tagId": "meta"
+          "tagIds": [
+            "meta"
+          ]
         }
       ]
     }

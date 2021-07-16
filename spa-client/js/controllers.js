@@ -34,6 +34,123 @@ class BodyController {
 }
 
 
+class UniformController {
+  constructor(MarksService, $filter) {
+    this.MarksService = MarksService
+    this.$filter = $filter
+
+    this.selectNoneVideos()
+    this.selectNoneGroupedMarks()
+    this.MarksService.summaryOfAllVideos()
+      .then(list => {
+        this.selectNoneVideos()
+        this.allVideos = list
+        this.refreshGroupedMarks()
+      })
+
+    this.MarksService.allTags()
+      .then(list => this.allTags = list)
+
+  }
+
+  /* for videos */
+  visibleVideos() {
+    return this.$filter('filter')(this.allVideos, this.videoFilterText)
+  }
+
+  addVisibleVideosToSelection() {
+    let tmp = new Set(this.selectedVideos)
+    this.visibleVideos().forEach(item => tmp.add(item))
+    this.selectedVideos = Array.from(tmp)
+  }
+
+  removeVisibleVideosFromSelection() {
+    let tmp = new Set(this.selectedVideos)
+    this.visibleVideos().forEach(item => tmp.delete(item))
+    this.selectedVideos = Array.from(tmp)
+  }
+
+  selectNoneVideos() {
+    this.selectedVideos = []
+  }
+
+  selectedVideoIds() {
+    return this.selectedVideos.map(video => video.youtubeId)
+  }
+
+
+  /* for grouped marks */
+  visibleGroupedMarks() {
+    return this.$filter('filter')(this.groupedMarks, this.groupedMarksFilterText)
+  }
+
+  addVisibleGroupedMarksToSelection() {
+    let tmp = new Set(this.selectedGroupedMarks)
+    this.visibleGroupedMarks().forEach(item => tmp.add(item))
+    this.selectedGroupedMarks = Array.from(tmp)
+  }
+
+  removeVisibleGroupedMarksFromSelection() {
+    let tmp = new Set(this.selectedGroupedMarks)
+    this.visibleGroupedMarks().forEach(item => tmp.delete(item))
+    this.selectedGroupedMarks = Array.from(tmp)
+  }
+
+  selectNoneGroupedMarks() {
+    this.selectedGroupedMarks = []
+  }
+
+  refreshGroupedMarks() {
+    this.selectNoneGroupedMarks()
+    this.MarksService.statistics(this.selectedVideoIds())
+      .then(result => {
+        this.groupedMarks = result.groupedMarks
+        this.statistics = result.statistics
+      })
+  }
+
+  canUniform() {
+    return this.selectedGroupedMarks.length > 1
+  }
+
+  mergeSelectedGroupedMarks() {
+    console.log(this.selectedGroupedMarks)
+    var newDescription = prompt("New description", this.selectedGroupedMarks[0].description)
+    if (newDescription && newDescription.length > 0) {
+      this.MarksService.uniformTo(this.selectedGroupedMarks, newDescription).then(
+        _ => this.refreshGroupedMarks()
+      )
+    } else {
+      alert("Invalid description")
+    }
+  }
+
+
+  videoLabelFor(youtubeId) {
+    if (this.allVideos && this.allVideos.length) {
+      var selected = this.$filter('filter')(this.allVideos, {youtubeId: youtubeId})
+      return selected.length ? selected[0].description : ''
+    } else {
+      return youtubeId;
+    }
+  }
+
+  tagStringFor(tagId) {
+    return tagId
+  }
+
+  //TODO
+  // --> cloned from another controller
+  tagColorFor(tagId) {
+    if (tagId && this.allTags && this.allTags.length) {
+      var selected = this.$filter('filter')(this.allTags, {id: tagId})
+      return selected.length ? selected[0].color : ''
+    } else {
+      return '';
+    }
+  }
+}
+
 
 class ProjectController {
 
@@ -184,7 +301,7 @@ class ListMarksController {
         .then(existingMark => {
           // Especially when video is paused, unintended keypress repetitions produce 
           // multiple marks with the same timestamp and tag, which we will avoid here
-          if (existingMark.timestamp != currentTime || existingMark.tagId != tag.id) {
+          if (existingMark.timestamp != currentTime || !existingMark.tagIds.find(e => e.tagId == tag.id)) {
             MarksService.addEmptyMark(
               currentTime,
               youtubeId,
@@ -308,13 +425,13 @@ class ListMarksController {
     }
   }
 
-  tagStringFor(mark) {
-    return mark.tagId
+  tagStringFor(tagId) {
+    return tagId
   }
 
-  tagColorFor(mark) {
-    if (mark.tagId && this.allTags && this.allTags.length) {
-      var selected = this.$filter('filter')(this.allTags, {id: mark.tagId})
+  tagColorFor(tagId) {
+    if (tagId && this.allTags && this.allTags.length) {
+      var selected = this.$filter('filter')(this.allTags, {id: tagId})
       return selected.length ? selected[0].color : ''
     } else {
       return '';

@@ -41,8 +41,8 @@
   text-align: center;
 }
 
-.tagColumn {
-  width: 12ch;
+.tagsColumn {
+  width: 10ch;
 }
 
 .youtubeIdColumn {
@@ -54,9 +54,22 @@
   text-align: center;
 }
 
+.selectionColumn {
+  width: 5ch;
+  text-align: center;
+}
+
 .actionsColumnButtons {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+
+.selectionButtons {
+  width: 3ch;
+}
+
+.markCount {
+  font-weight: bold;
+}

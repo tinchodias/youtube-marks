@@ -27,9 +27,9 @@
 
                         <td class="youtubeIdColumn">
                             <a ng-click="projectCtrl.selectedVideoChanged(aVideo.youtubeId)" class="pointer">
-                                <span>
+                                <small class="font-monospace">
                                     {{ aVideo.youtubeId }}
-                                </span>
+                                </small>
                             </a>
                         </td>
 
@@ -75,7 +75,8 @@
 
             </table>
 
-            <a class="btn btn-light" ng-click="projectCtrl.addEmptyVideo()">Add Video</a>
+            <a class="btn btn-primary" ng-click="projectCtrl.addEmptyVideo()">Add Video</a>
+            <a class="btn btn-secondary" ui-sref="uniform">Homogenize Marks</a>
 
         </div>
 
@@ -163,7 +164,7 @@
     
             </table>
     
-            <a class="btn btn-light" ng-click="projectCtrl.addEmptyTag()">Add Tag</a>
+            <a class="btn btn-primary" ng-click="projectCtrl.addEmptyTag()">Add Tag</a>
 
         </div>
 

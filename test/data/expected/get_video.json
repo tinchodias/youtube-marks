@@ -5,22 +5,30 @@
         {
             "timestamp": 48.461063,
             "description": "Test case created",
-            "tagId": "ide"
+            "tagIds": [
+                "ide"
+            ]
         },
         {
             "timestamp": 116.669521,
             "description": "Open debugger",
-            "tagId": "ide"
+            "tagIds": [
+                "ide"
+            ]
         },
         {
             "timestamp": 100.951042,
-            "description": "Test run (error)",
-            "tagId": "ide"
+            "description": "Run test (fail)",
+            "tagIds": [
+                "ide"
+            ]
         },
         {
             "timestamp": 143.079521,
             "description": "Run test (pass)",
-            "tagId": "ide"
+            "tagIds": [
+                "ide"
+            ]
         }
     ]
 }

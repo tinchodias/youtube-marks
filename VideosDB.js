@@ -6,6 +6,23 @@ class VideosDB {
       this.db = db
     }
 
+    async migrateTagId2TagIds() {
+      await this.db.read()
+
+      let allVideos = this.db.get('videos').value()
+      allVideos.forEach(video => {
+        video.marks.forEach(mark => {
+          if (_.has(mark, "tagId")) {
+            mark.tagIds = [ mark.tagId ]
+            _.unset(mark, "tagId")
+          }
+        })
+        this.updateVideo(video)
+      })
+
+      this.db.write()
+    }
+
     async ready() {
       return this.db.defaults({ videos: [], tags: [] }).write()
     }
@@ -130,7 +147,7 @@ class VideosDB {
         }
 
         oldMark.description = mark.description
-        oldMark.tagId = mark.tagId
+        oldMark.tagIds = mark.tagIds
 
         this.db.get('videos')
           .find({ youtubeId: youtubeId })
@@ -149,6 +166,110 @@ class VideosDB {
           .write()
       })
     }
+
+    async uniformMarks(data) {
+      data.groupedMarks.forEach(groupedMark => {
+        groupedMark.marks.forEach(mark => {
+          const newMark = {
+            timestamp: mark.timestamp,
+            tagIds: mark.tagIds,
+            description: data.newDescription
+          }
+          this.updateMark(newMark, mark.youtubeId)
+        })
+      })
+    }
+
+
+    /* QUERY: Grouped marks */
+
+    async groupedMarks(arrayOfYoutubeIds) {
+
+      if (!_.isArray(arrayOfYoutubeIds)) {
+        throw new Error('Argument must be an array of youtubeIds to filter videos')
+      }
+      
+      const filteredVideos = _.filter(this.db.get('videos').value(), video => _.includes(arrayOfYoutubeIds, video.youtubeId) ) 
+      const marksWithYoutubeId = _.flatMap(
+        filteredVideos, 
+        video => _.map(video.marks, mark => {
+          const clone = _.clone(mark)
+          clone.youtubeId = video.youtubeId
+          return clone
+        }))
+
+      const groups = _(marksWithYoutubeId)
+        .groupBy(mark => mark.description)
+        .toPairs()
+        .sortBy(group => group[1].length)
+        .reverse()
+        .value()
+
+      const complexResult = groups.map(group => { 
+        return {
+          "description": group[0],
+          "occurrencesByYoutubeId": this.occurrencesByYoutubeId(group[1]),
+          "occurrencesByTagId": this.occurrencesByTagId(group[1]),
+          "marks": group[1]
+        }
+      })
+
+      // Useful to extract as expected results of test, when something in the model changed:
+      //
+      // console.log(JSON.stringify(complexResult))
+
+      return complexResult
+    }
+
+    occurrencesByYoutubeId(data) {
+      const groups = _.groupBy(data, each => each.youtubeId)
+      return Object.entries(groups).map(group => {
+        return {
+          "youtubeId": group[0],
+          "count": group[1].length
+        }
+      })
+    }
+
+    occurrencesByTagId(data) {
+      const groups = _.groupBy(data, each => each.tagIds)
+      return Object.entries(groups).map(group => {
+        return {
+          "tagId": group[0],
+          "count": group[1].length
+        }
+      })
+    }
+
+
+    /* Statistics 
+
+    Let's assume videos==participant (true on our GH analysis)
+
+    * Number of occurences
+    * Number of participants
+    * Per participant:
+      * average number of occurences
+      * time to answer
+      * maximum time to answer 
+      * minimum time to answer 
+    */
+    async statistics(arrayOfYoutubeIds) {
+
+
+      const groupedMarks = await this.groupedMarks(arrayOfYoutubeIds) 
+
+
+
+      return {
+        "groupedMarks": groupedMarks,
+        "statistics": {
+          "numberOfGroups": groupedMarks.length,
+          "numberOfVideos": arrayOfYoutubeIds.length,
+        }
+      }
+    }
+
 
 }
 

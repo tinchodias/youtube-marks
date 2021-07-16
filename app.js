@@ -97,6 +97,24 @@ app.delete('/videos/:youtubeId/marks/:timestamp', (req, res) => {
     error => res.status(404).send(error.message))
 })
 
+app.post('/marks', (req, res) => {
+  app.videosDB.groupedMarks(req.body).then(
+    list => res.send(list),
+    error => res.status(404).send(error.message))
+})
+
+app.post('/statistics', (req, res) => {
+  app.videosDB.statistics(req.body).then(
+    list => res.send(list),
+    error => res.status(404).send(error.message))
+})
+
+
+app.post('/uniform', (req, res) => {
+  app.videosDB.uniformMarks(req.body).then(
+    _ => res.sendStatus(200),
+    error => res.status(404).send(error.message))
+})
 
 
 module.exports = app
