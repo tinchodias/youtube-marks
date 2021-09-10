@@ -325,7 +325,7 @@ class ListMarksController {
     var self = this
     var updateRegularly = function () {
       $timeout(function () {
-        if ($scope.thePlayer && $scope.thePlayer.currentState && $scope.currentVideo) {
+        if ($scope.thePlayer && $scope.currentVideo && $scope.thePlayer.getCurrentTime) {
           MarksService.getMarkCorrespondingTo($scope.thePlayer.getCurrentTime(), $scope.currentVideo.youtubeId)
             .then(aMark => $scope.currentMark = aMark)
         }
